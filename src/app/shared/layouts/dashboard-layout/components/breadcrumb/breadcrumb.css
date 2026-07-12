@@ -1,0 +1,29 @@
+.breadcrumb-container{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:18px 30px;
+
+    font-size:14px;
+
+    color:#6b7280;
+
+    background:#f8fafc;
+
+}
+
+.breadcrumb-container strong{
+
+    color:#1f2937;
+
+}
+
+.breadcrumb-container i{
+
+    font-size:12px;
+
+}

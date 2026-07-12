@@ -1,0 +1,38 @@
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h3>DeliveryApp</h3>
+
+    </div>
+
+    <ul>
+
+        @for(item of menu; track item.label){
+
+            <li>
+
+                <a
+                 [routerLink]="item.route"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }">
+
+                    <i class="bi" [ngClass]="item.icon"></i>
+
+                    <span>{{item.label}}</span>
+
+                </a>
+
+            </li>
+
+        }
+
+    </ul>
+
+
+
+<button (click)="logout()">
+  <i class="bi bi-box-arrow-right"></i>
+  Cerrar sesión
+</button>
+</aside>

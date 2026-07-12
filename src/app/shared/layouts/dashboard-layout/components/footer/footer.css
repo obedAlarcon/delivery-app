@@ -1,0 +1,21 @@
+.footer{
+
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    background:white;
+
+    border-top:1px solid #e5e7eb;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}

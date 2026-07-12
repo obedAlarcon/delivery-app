@@ -1,0 +1,37 @@
+.dashboard-header{
+    margin-bottom:30px;
+}
+
+.dashboard-header h2{
+    font-size:30px;
+    color:#1e293b;
+    margin-bottom:6px;
+}
+
+.dashboard-header p{
+    color:#64748b;
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-top:24px;
+}
+.dashboard-bottom{
+    margin-top:24px;
+}
+.dashboard-bottom{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-top:24px;
+}
+
+@media (min-width:992px){
+
+    .dashboard-bottom{
+        grid-template-columns:2fr 1fr;
+    }
+
+}

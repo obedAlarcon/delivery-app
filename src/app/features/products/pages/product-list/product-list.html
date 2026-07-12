@@ -1,0 +1,23 @@
+<h1 class="page-title">
+  Productos
+</h1>
+
+<p class="page-subtitle">
+  Administra todos los productos del sistema.
+</p>
+
+
+<app-product-filters></app-product-filters>
+
+<app-product-table
+  [products]="products">
+</app-product-table>
+<h2>Total: {{ products.length }}</h2>
+
+
+
+<ul>
+  @for (product of products; track product.id) {
+    <li>{{ product.name }}</li>
+  }
+</ul>

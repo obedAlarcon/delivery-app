@@ -1,0 +1,120 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h2 class="mb-4 text-center">
+      Iniciar Sesión
+    </h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <!-- Email -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Correo electrónico
+        </label>
+
+        <input
+          class="form-control"
+          type="email"
+          formControlName="email"
+          placeholder="correo@ejemplo.com">
+
+        @if(loginForm.controls.email.touched &&
+            loginForm.controls.email.invalid){
+
+          <small class="text-danger">
+
+            @if(loginForm.controls.email.errors?.['required']){
+
+              El correo es obligatorio
+
+            }
+
+            @if(loginForm.controls.email.errors?.['email']){
+
+              Debe ingresar un correo válido
+
+            }
+
+          </small>
+
+        }
+
+      </div>
+
+      <!-- Password -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Contraseña
+        </label>
+
+        <input
+          class="form-control"
+          type="password"
+          formControlName="password"
+          placeholder="********">
+
+        @if(loginForm.controls.password.touched &&
+            loginForm.controls.password.invalid){
+
+          <small class="text-danger">
+
+            @if(loginForm.controls.password.errors?.['required']){
+
+              La contraseña es obligatoria
+
+            }
+
+            @if(loginForm.controls.password.errors?.['minlength']){
+
+              Debe tener mínimo 6 caracteres
+
+            }
+
+          </small>
+
+        }
+
+      </div>
+
+      @if(errorMessage){
+
+        <div class="alert alert-danger">
+
+          {{ errorMessage }}
+
+        </div>
+
+      }
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="loginForm.invalid || loading">
+
+        @if(loading){
+
+          <span
+            class="spinner-border spinner-border-sm me-2">
+          </span>
+
+          Ingresando...
+
+        }@else{
+
+          Ingresar
+
+        }
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

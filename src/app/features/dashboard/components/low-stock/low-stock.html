@@ -1,0 +1,19 @@
+<div class="card">
+
+  <h3>Productos por agotarse</h3>
+
+  @for (product of products; track product.name) {
+
+    <div class="item">
+
+      <span>{{ product.name }}</span>
+
+      <span class="badge">
+        {{ product.stock }}
+      </span>
+
+    </div>
+
+  }
+
+</div>
