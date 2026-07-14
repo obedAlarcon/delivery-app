@@ -1,33 +1,25 @@
-
-
-
-
-
-
-export interface Category {
-  id: number;
-  name: string;
-  description: string;
-  createdAt: string;
-}
-
+import { Category } from '../../categories/models/category.model';
 
 export interface Product {
 
-  id:number;
+  id: number;
 
-  name:string;
+  name: string;
 
-  description:string;
+  description: string;
 
-  price:number;
+  price: number;
 
-  stock:number;
+  stock: number;
 
-  imageUrl:string;
+  imageUrl: string;
 
-  categoryId:number;
-   category:Category;
-  isActive:boolean;
+  categoryId: number;
+
+  isActive: boolean;
+
+  createdAt: string;
+
+  category?: Category;
 
 }

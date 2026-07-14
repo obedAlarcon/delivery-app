@@ -1,194 +1,78 @@
-.form-card{
+/* ======================================================
+   Tarjeta principal
+====================================================== */
 
-    max-width:550px;
-       
-    margin:20px auto;
+.product-form{
 
     background:#ffffff;
 
-    padding:35px;
+    padding:30px;
 
     border-radius:18px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.12);
-
-    animation:fadeIn .4s ease;
+    box-shadow:0 10px 25px rgba(15,23,42,.08);
 
 }
 
-.form-card h2{
+/* ======================================================
+   Labels
+====================================================== */
 
-    margin-bottom:30px;
-
-    text-align:center;
-
-    color:#0d6efd;
-
-    font-weight:700;
-
-}
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:20px;
-
-}
-
-.form-group{
-
-    margin-bottom:20px;
-
-}
-
-.form-group label{
-
-    display:block;
-
-    margin-bottom:8px;
+.form-label{
 
     font-weight:600;
 
-    color:#444;
+    color:#334155;
+
+    margin-bottom:.5rem;
 
 }
+
+/* ======================================================
+   Inputs
+====================================================== */
 
 .form-control,
-input,
-textarea,
-select{
+.form-select{
 
-    width:100%;
+    height:48px;
 
-    padding:12px 15px;
+    border-radius:12px;
 
-    border:1px solid #dcdcdc;
+    border:1px solid #dbe4ee;
 
-    border-radius:10px;
+    transition:.25s;
 
-    font-size:15px;
-
-    transition:.3s;
-
-    outline:none;
-
-    background:#fff;
+    font-size:.95rem;
 
 }
+
+textarea.form-control{
+
+    height:140px;
+
+    resize:none;
+
+    padding-top:12px;
+
+}
+
+/* ======================================================
+   Focus
+====================================================== */
 
 .form-control:focus,
-input:focus,
-textarea:focus,
-select:focus{
+.form-select:focus{
 
-    border-color:#0d6efd;
+    border-color:#2563eb;
 
-    box-shadow:0 0 0 .20rem rgba(13,110,253,.15);
+    box-shadow:0 0 0 .20rem rgba(37,99,235,.15);
 
 }
 
-textarea{
-
-    resize:vertical;
-
-    min-height:110px;
-
-}
-
-.form-check{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin:20px 0;
-
-}
-
-.form-check input{
-
-    width:18px;
-
-    height:18px;
-
-}
-
-.buttons{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:15px;
-
-    margin-top:30px;
-
-}
-
-.btn-primary{
-
-    background:#0d6efd;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 28px;
-
-    border-radius:10px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.btn-primary:hover{
-
-    background:#0b5ed7;
-
-    transform:translateY(-2px);
-
-}
-
-.btn-secondary{
-
-    background:#6c757d;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 28px;
-
-    border-radius:10px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.btn-secondary:hover{
-
-    background:#5c636a;
-
-    transform:translateY(-2px);
-
-}
-
-.btn-primary:disabled{
-
-    opacity:.7;
-
-    cursor:not-allowed;
-
-}
+/* ======================================================
+   Validaciones
+====================================================== */
 
 .text-danger{
 
@@ -196,71 +80,112 @@ textarea{
 
     margin-top:6px;
 
-    font-size:.85rem;
+    font-size:.82rem;
+
+    font-weight:500;
 
 }
 
-.preview{
+/* ======================================================
+   Checkbox
+====================================================== */
 
-    margin-top:15px;
+.form-check{
 
-    text-align:center;
+    padding-left:1.8rem;
 
 }
 
-.preview img{
+.form-check-input{
 
-    width:220px;
+    cursor:pointer;
 
-    height:220px;
+}
 
-    object-fit:cover;
+.form-check-label{
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    color:#475569;
+
+}
+
+/* ======================================================
+   Botones
+====================================================== */
+
+.btn{
+
+    min-width:150px;
+
+    height:46px;
 
     border-radius:12px;
 
-    border:1px solid #ddd;
+    font-weight:600;
+
+    transition:.25s;
 
 }
 
-@keyframes fadeIn{
+/* Botón guardar */
 
-    from{
+.btn-primary{
 
-        opacity:0;
+    background:#2563eb;
 
-        transform:translateY(25px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
+    border:none;
 
 }
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(37,99,235,.25);
+
+}
+
+/* Botón cancelar */
+
+.btn-outline-secondary{
+
+    border:1px solid #cbd5e1;
+
+}
+
+.btn-outline-secondary:hover{
+
+    background:#f1f5f9;
+
+}
+
+/* ======================================================
+   Responsive
+====================================================== */
 
 @media(max-width:768px){
 
-    .grid{
+    .product-form{
 
-        grid-template-columns:1fr;
-
-    }
-
-    .buttons{
-
-        flex-direction:column;
+        padding:20px;
 
     }
 
-    .btn-primary,
-    .btn-secondary{
+    .btn{
 
         width:100%;
 
     }
 
+}
+.product-form,
+.row,
+.col-md-6,
+.col-12 {
+    overflow: visible !important;
 }

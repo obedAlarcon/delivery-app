@@ -1,23 +1,37 @@
 <h1 class="page-title">
-  Productos
+
+    Productos
+
 </h1>
 
 <p class="page-subtitle">
-  Administra todos los productos del sistema.
+
+    Administra todos los productos registrados.
+
 </p>
 
+<app-product-filters
 
-<app-product-filters></app-product-filters>
+    [categories]="categories"
+
+    (searchChange)="onSearch($event)"
+
+    (categoryChange)="onCategory($event)"
+
+    (statusChange)="onStatus($event)"
+
+    (clear)="clearFilters()">
+
+</app-product-filters>
 
 <app-product-table
-  [products]="products">
+
+    [products]="products"
+
+    (view)="viewProduct($event)"
+
+    (edit)="editProduct($event)"
+
+    (delete)="deleteProduct($event)">
+
 </app-product-table>
-<h2>Total: {{ products.length }}</h2>
-
-
-
-<ul>
-  @for (product of products; track product.id) {
-    <li>{{ product.name }}</li>
-  }
-</ul>

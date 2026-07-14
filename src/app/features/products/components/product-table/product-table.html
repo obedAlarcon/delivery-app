@@ -1,15 +1,145 @@
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Precio</th>
-  </tr>
+<div class="table-card">
 
-  @for (product of products; track product.id) {
-    <tr>
-      <td>{{ product.id }}</td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
-    </tr>
-  }
-</table>
+  <table class="products-table">
+
+    <thead>
+
+      <tr>
+
+        <th>Imagen</th>
+
+        <th>Producto</th>
+
+        <th>Categoría</th>
+
+        <th>Precio</th>
+
+        <th>Stock</th>
+
+        <th>Estado</th>
+
+        <th class="text-center">Acciones</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      @for (product of products; track product.id) {
+
+      <tr>
+
+        <td>
+
+          <img
+            class="product-image"
+            [src]="product.imageUrl"
+            [alt]="product.name">
+
+        </td>
+
+        <td>
+
+          <div class="product-info">
+
+            <strong>{{ product.name }}</strong>
+
+            <small>{{ product.description }}</small>
+
+          </div>
+
+        </td>
+
+        <td>
+
+          {{ product.category || 'Sin categoría' }}
+
+        </td>
+
+        <td>
+
+          {{ product.price | currency:'COP':'symbol':'1.0-0' }}
+
+        </td>
+
+        <td>
+
+          {{ product.stock }}
+
+        </td>
+
+        <td>
+
+          <span
+            class="status"
+            [class.active]="product.isActive"
+            [class.inactive]="!product.isActive">
+
+            {{ product.isActive ? 'Activo' : 'Inactivo' }}
+
+          </span>
+
+        </td>
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="btn-action btn-view"
+              type="button"
+              title="Ver"
+              (click)="onView(product)">
+
+              <i class="bi bi-eye-fill"></i>
+
+            </button>
+
+            <button
+              class="btn-action btn-edit"
+              type="button"
+              title="Editar"
+              (click)="onEdit(product.id)">
+
+              <i class="bi bi-pencil-square"></i>
+
+            </button>
+
+            <button
+              class="btn-action btn-delete"
+              type="button"
+              title="Eliminar"
+              (click)="onDelete(product)">
+
+              <i class="bi bi-trash-fill"></i>
+
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+      } @empty {
+
+      <tr>
+
+        <td colspan="7" class="empty">
+
+          <i class="bi bi-box-seam fs-2"></i>
+
+          <p>No existen productos registrados.</p>
+
+        </td>
+
+      </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+</div>

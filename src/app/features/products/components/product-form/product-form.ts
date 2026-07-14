@@ -1,99 +1,226 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  inject
+} from '@angular/core';
+
 import { CommonModule } from '@angular/common';
+
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
 
+import { RouterLink } from '@angular/router';
+
+import { Product } from '../../models/product.model';
+import { Category } from '../../../categories/models/category.model';
+
 @Component({
   selector: 'app-product-form',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './product-form.html',
   styleUrl: './product-form.css'
 })
-export class ProductForm {
+export class ProductForm implements OnChanges {
+
+  //=========================================
+  // Inyección de dependencias
+  //=========================================
 
   private fb = inject(FormBuilder);
 
-  @Output() formSubmit = new EventEmitter<any>();
+  //=========================================
+  // Inputs
+  //=========================================
 
-  productForm = this.fb.group({
+  @Input() product: Product | null = null;
 
-    name: ['', Validators.required],
+  @Input() categories: Category[] = [];
 
-    description: ['', Validators.required],
+  //=========================================
+  // Output
+  //=========================================
 
-    price: [0, [Validators.required, Validators.min(1)]],
+  @Output() save = new EventEmitter<{
+    product: any;
+    file: File | null;
+  }>();
 
-    stock: [0, [Validators.required, Validators.min(0)]],
-
-    categoryId: [null, Validators.required],
-
-    imageUrl: [''],
-
-    isActive: [true]
-
-  });
+  //=========================================
+  // Imagen
+  //=========================================
 
   selectedFile: File | null = null;
 
-  previewImage: string | ArrayBuffer | null = null;
+  previewImage: string | null = null;
 
-  onFileSelected(event: Event) {
+  //=========================================
+  // Reactive Form
+  //=========================================
+
+  productForm = this.fb.group({
+
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3)
+      ]
+    ],
+
+    description: [
+      '',
+      Validators.required
+    ],
+
+    price: [
+      0,
+      [
+        Validators.required,
+        Validators.min(1)
+      ]
+    ],
+
+    stock: [
+      0,
+      [
+        Validators.required,
+        Validators.min(0)
+      ]
+    ],
+
+    categoryId: [
+      0,
+      Validators.required
+    ],
+
+    isActive: [
+      true
+    ]
+
+  });
+
+  //=========================================
+  // Editar
+  //=========================================
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (changes['product'] && this.product) {
+
+      this.productForm.patchValue({
+
+        name: this.product.name,
+
+        description: this.product.description,
+
+        price: this.product.price,
+
+        stock: this.product.stock,
+
+        categoryId: this.product.categoryId,
+
+        isActive: this.product.isActive
+
+      });
+
+      this.previewImage = this.product.imageUrl;
+
+    }
+
+  }
+
+  //=========================================
+  // Seleccionar imagen
+  //=========================================
+
+  onFileSelected(event: Event): void {
 
     const input = event.target as HTMLInputElement;
 
     if (!input.files?.length) return;
 
-    this.selectedFile = input.files[0];
+    const file = input.files[0];
+
+    if (!file.type.startsWith('image/')) {
+
+      alert('Seleccione una imagen válida.');
+
+      return;
+
+    }
+
+    this.selectedFile = file;
 
     const reader = new FileReader();
 
     reader.onload = () => {
 
-      this.previewImage = reader.result;
+      this.previewImage = reader.result as string;
 
     };
 
-    reader.readAsDataURL(this.selectedFile);
+    reader.readAsDataURL(file);
 
   }
 
-  save() {
+  //=========================================
+  // Eliminar imagen
+  //=========================================
 
-  console.log('Entró a save');
+  removeImage(): void {
 
-  console.log(this.productForm.valid);
+    this.selectedFile = null;
 
-  console.log(this.selectedFile);
-
-  console.log(this.productForm.value);
-
-  if (this.productForm.invalid || !this.selectedFile) {
-
-    console.log('Formulario inválido o no hay archivo');
-
-    this.productForm.markAllAsTouched();
-
-    return;
+    this.previewImage = null;
 
   }
 
-  console.log('Emitiendo evento');
+  //=========================================
+  // Guardar
+  //=========================================
 
-  this.formSubmit.emit({
+  submit(): void {
 
-    product: this.productForm.value,
+    if (this.productForm.invalid) {
 
-    file: this.selectedFile
+      this.productForm.markAllAsTouched();
 
-  });
+      return;
 
-}
+    }
+
+    this.save.emit({
+
+      product: this.productForm.getRawValue(),
+
+      file: this.selectedFile
+
+    });
+
+  }
+
+  //=========================================
+  // Validaciones
+  //=========================================
+
+  hasError(control: string): boolean {
+
+    const field = this.productForm.get(control);
+
+    return !!field && field.invalid && field.touched;
+
+  }
 
 }

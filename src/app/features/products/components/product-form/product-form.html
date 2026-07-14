@@ -1,93 +1,190 @@
-<div class="form-card">
+<form
+  [formGroup]="productForm"
+  (ngSubmit)="submit()"
+  class="product-form">
 
-  <h2>Nuevo Producto</h2>
+  <div class="row">
 
-  <form
-    [formGroup]="productForm"
-    (ngSubmit)="save()">
+    <!-- Nombre -->
 
-    <div class="form-group">
+    <div class="col-md-6 mb-3">
 
-      <label>Nombre</label>
+      <label class="form-label">
+
+        Nombre del producto
+
+      </label>
 
       <input
         type="text"
         class="form-control"
         formControlName="name">
 
+      @if(hasError('name')){
+
+        <small class="text-danger">
+
+          El nombre es obligatorio.
+
+        </small>
+
+      }
+
     </div>
 
-    <div class="form-group">
+    <!-- Categoría -->
 
-      <label>Descripción</label>
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Categoría
+
+      </label>
+
+ <select
+  class="form-select"
+  formControlName="categoryId">
+
+  <option [ngValue]="0">
+    Seleccione una categoría
+  </option>
+
+  @for (category of categories; track category.id) {
+    <option [ngValue]="category.id">
+      {{ category.name }}
+    </option>
+  }
+
+</select>
+      @if(hasError('categoryId')){
+
+        <small class="text-danger">
+
+          Debe seleccionar una categoría.
+
+        </small>
+
+      }
+
+    </div>
+
+    <!-- Descripción -->
+
+    <div class="col-12 mb-3">
+
+      <label class="form-label">
+
+        Descripción
+
+      </label>
 
       <textarea
-        rows="3"
+        rows="4"
         class="form-control"
         formControlName="description">
+
       </textarea>
 
-    </div>
+      @if(hasError('description')){
 
-    <div class="grid">
+        <small class="text-danger">
 
-      <div class="form-group">
+          La descripción es obligatoria.
 
-        <label>Precio</label>
+        </small>
 
-        <input
-          type="number"
-          class="form-control"
-          formControlName="price">
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Stock</label>
-
-        <input
-          type="number"
-          class="form-control"
-          formControlName="stock">
-
-      </div>
+      }
 
     </div>
 
-    <div class="form-group">
+    <!-- Precio -->
 
-      <label>Categoría</label>
+    <div class="col-md-4 mb-3">
 
-      <select
+      <label class="form-label">
+
+        Precio
+
+      </label>
+
+      <input
+        type="number"
         class="form-control"
-        formControlName="categoryId">
+        formControlName="price">
 
-        <option [ngValue]="null">
+      @if(hasError('price')){
 
-          Seleccione...
+        <small class="text-danger">
 
-        </option>
+          Precio inválido.
 
-        <option [value]="1">
+        </small>
 
-          Computadores
-
-        </option>
-
-        <option [value]="2">
-
-          Celulares
-
-        </option>
-
-      </select>
+      }
 
     </div>
 
-    <div class="form-group">
+    <!-- Stock -->
 
-      <label>Imagen del producto</label>
+    <div class="col-md-4 mb-3">
+
+      <label class="form-label">
+
+        Stock
+
+      </label>
+
+      <input
+        type="number"
+        class="form-control"
+        formControlName="stock">
+
+      @if(hasError('stock')){
+
+        <small class="text-danger">
+
+          Stock inválido.
+
+        </small>
+
+      }
+
+    </div>
+
+    <!-- Estado -->
+
+    <div class="col-md-4 mb-3 d-flex align-items-center">
+
+      <div class="form-check mt-4">
+
+        <input
+          id="activo"
+          type="checkbox"
+          class="form-check-input"
+          formControlName="isActive">
+
+        <label
+          for="activo"
+          class="form-check-label">
+
+          Producto activo
+
+        </label>
+
+      </div>
+
+    </div>
+
+    <!-- Imagen -->
+
+    <div class="col-12 mb-4">
+
+      <label class="form-label">
+
+        Imagen del producto
+
+      </label>
 
       <input
         type="file"
@@ -97,45 +194,58 @@
 
     </div>
 
+    <!-- Vista previa -->
+
     @if(previewImage){
 
-      <div class="preview">
+      <div class="col-12 mb-4">
 
-        <img
-          [src]="previewImage"
-          alt="Vista previa">
+        <div class="image-preview">
+
+          <img
+            [src]="previewImage"
+            alt="Vista previa">
+
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="removeImage()">
+
+            <i class="bi bi-trash"></i>
+
+            Eliminar imagen
+
+          </button>
+
+        </div>
 
       </div>
 
     }
 
-    <div class="form-check mt-4">
+  </div>
 
-      <input
-        class="form-check-input"
-        type="checkbox"
-        formControlName="isActive">
+  <div class="d-flex justify-content-end gap-2">
 
-      <label class="form-check-label">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      routerLink="/products">
 
-        Producto Activo
+      Cancelar
 
-      </label>
+    </button>
 
-    </div>
+    <button
+      type="submit"
+      class="btn btn-primary">
 
-    <div class="buttons">
+      <i class="bi bi-check-circle me-2"></i>
 
-      <button
-        type="submit"
-        class="btn-primary">
+      Guardar producto
 
-        Guardar Producto
+    </button>
 
-      </button>
+  </div>
 
-    </div>
-
-  </form>
-
-</div>
+</form>

@@ -1,0 +1,70 @@
+<form
+  [formGroup]="categoryForm"
+  (ngSubmit)="submit()"
+  class="card-form">
+
+  <div class="form-group">
+
+    <label>
+
+      Nombre
+
+    </label>
+
+    <input
+      type="text"
+      formControlName="name">
+
+    @if(hasError('name')){
+
+      <small>
+
+        El nombre es obligatorio.
+
+      </small>
+
+    }
+
+  </div>
+
+  <div class="form-group">
+
+    <label>
+
+      Descripción
+
+    </label>
+
+    <textarea
+
+      rows="5"
+
+      formControlName="description">
+
+    </textarea>
+
+    @if(hasError('description')){
+
+      <small>
+
+        La descripción es obligatoria.
+
+      </small>
+
+    }
+
+  </div>
+
+  <div class="buttons">
+
+    <button
+      type="submit"
+      class="btn-save">
+
+      Guardar Categoría
+
+    </button>
+
+  </div>
+
+</form>

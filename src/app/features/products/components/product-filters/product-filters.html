@@ -1,25 +1,116 @@
-<div class="filters-card">
+<div class="filter-card">
 
-  <div class="search-box">
-    <input
-      type="text"
-      placeholder="Buscar producto..."
-    />
-  </div>
+    <div class="row g-3 align-items-end">
 
-  <div class="category-box">
-    <select>
-      <option>Todas las categorías</option>
-      <option>Bebidas</option>
-      <option>Lácteos</option>
-      <option>Aseo</option>
-    </select>
-  </div>
+        <div class="col-lg-4">
 
-  <button
-  class="btn-primary"
-  routerLink="/products/create">
+            <label class="form-label">
 
-  + Nuevo Producto
+                Buscar
 
-</button>
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Nombre del producto..."
+                [(ngModel)]="search"
+                (input)="onSearch()">
+
+        </div>
+
+        <div class="col-lg-3">
+
+            <label class="form-label">
+
+                Categoría
+
+            </label>
+
+            <select
+                class="form-select"
+                [(ngModel)]="categoryId"
+                (change)="onCategory()">
+
+                <option [ngValue]="0">
+
+                    Todas
+
+                </option>
+
+                @for(category of categories; track category.id){
+
+                    <option [ngValue]="category.id">
+
+                        {{ category.name }}
+
+                    </option>
+
+                }
+
+            </select>
+
+        </div>
+
+        <div class="col-lg-2">
+
+            <label class="form-label">
+
+                Estado
+
+            </label>
+
+            <select
+                class="form-select"
+                [(ngModel)]="status"
+                (change)="onStatus()">
+
+                <option [ngValue]="null">
+
+                    Todos
+
+                </option>
+
+                <option [ngValue]="true">
+
+                    Activos
+
+                </option>
+
+                <option [ngValue]="false">
+
+                    Inactivos
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-lg-3 d-flex gap-2">
+
+            <button
+                class="btn btn-outline-secondary flex-fill"
+                (click)="clearFilters()">
+
+                <i class="bi bi-arrow-clockwise me-2"></i>
+
+                Limpiar
+
+            </button>
+
+            <a
+                routerLink="/products/create"
+                class="btn btn-primary flex-fill">
+
+                <i class="bi bi-plus-circle me-2"></i>
+
+                Nuevo
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

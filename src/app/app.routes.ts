@@ -33,6 +33,12 @@ export const routes: Routes = [
           import('./features/products/products.router').then(m => m.productsRoutes)
       },
       {
+  path: 'categories',
+  loadChildren: () =>
+    import('./features/categories/categories.routes')
+      .then(m => m.categoriesRoutes)
+},
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'

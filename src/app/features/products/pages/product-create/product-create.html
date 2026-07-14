@@ -1,4 +1,19 @@
+<h1 class="page-title">
+
+    Nuevo Producto
+
+</h1>
+
+<p class="page-subtitle">
+
+    Registra un nuevo producto.
+
+</p>
 
 <app-product-form
-  (formSubmit)="createProduct($event)">
+
+    [categories]="categories"
+
+    (save)="createProduct($event)">
+
 </app-product-form>

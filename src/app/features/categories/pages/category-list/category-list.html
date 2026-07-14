@@ -1,0 +1,21 @@
+<h1 class="page-title">
+
+    Categorías
+
+</h1>
+
+<p class="page-subtitle">
+
+    Administra todas las categorías.
+
+</p>
+
+<app-category-filters
+    (searchChange)="onSearch($event)"
+    (clear)="clearFilters()">
+</app-category-filters>
+
+<app-category-table
+    [categories]="categories"
+    (deleteCategory)="deleteCategory($event)">
+</app-category-table>
