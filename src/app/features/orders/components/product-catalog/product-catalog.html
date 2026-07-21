@@ -1,0 +1,105 @@
+<div class="card shadow-sm border-0 h-100 mx-auto" style="border-radius: 10px; margin-left: auto; margin-right: auto; max-width: 580px;">
+
+    <div class="card-header bg-white border-bottom py-2 d-flex justify-content-between align-items-center" style="border-radius: 10px 10px 0 0;">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-box-seam text-primary" style="font-size: 0.85rem;"></i>
+            <span class="fw-semibold" style="font-size: 0.85rem;">Catálogo</span>
+        </div>
+        <span class="badge bg-primary rounded-pill px-2" style="font-size: 0.7rem;">{{ filteredProducts.length }}</span>
+    </div>
+
+    <div class="card-body p-2 ">
+
+        
+
+
+<div class="card-body p-2">
+
+        <div class="input-group">
+            <span class="input-group-text  bg-white" style="border-radius: 6px 0 0 6px; font-size: 0.82rem;">
+                <i class="bi bi-search" style="font-size: 0.75rem;"></i>
+            </span>
+  
+                <input
+                    type="text"
+                    class="form-control form-control-sm   medida"
+                    style="border-radius: 0; font-size: 0.82rem;"
+                    placeholder="Buscar..."
+                    [(ngModel)]="search"
+                    (input)="filterProducts()">
+          
+        </div>
+
+    </div>
+
+
+
+
+        <div class="table-responsive" style="max-height: 540px; overflow: auto;" *ngIf="!loading">
+
+            <table class="table table-sm table-hover align-middle mb-0" style="font-size: 0.82rem;">
+
+                <thead class="table-light" style="position: sticky; top: 0; z-index: 1;">
+                    <tr>
+                        <th width="40" class="ps-2"></th>
+                        <th>Producto</th>
+                        <th class="text-end">Precio</th>
+                        <th class="text-center" width="60">Stock</th>
+                        <th width="44" class="text-center"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let product of filteredProducts">
+                        <td class="ps-2">
+                            <img
+                                [src]="product.imageUrl"
+                                width="34"
+                                height="34"
+                                class="rounded"
+                                style="object-fit: cover; background: #f1f3f5;"
+                                onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2234%22 height=%2234%22 fill=%22%23dee2e6%22><rect width=%2234%22 height=%2234%22 rx=%226%22/><text x=%2250%%22 y=%2254%%22 text-anchor=%22middle%22 fill=%22%23868e96%22 font-size=%2212%22>?</text></svg>'">
+                        </td>
+                        <td>
+                            <span class="fw-medium">{{ product.name }}</span>
+                        </td>
+                        <td class="text-end" style="white-space: nowrap;">
+                            {{ product.price | currency:'COP':'symbol':'1.0-0' }}
+                        </td>
+                        <td class="text-center">
+                            <span class="badge rounded-pill px-2" style="font-size: 0.7rem;"
+                                  [ngClass]="{
+                                      'bg-success': product.stock > 10,
+                                      'bg-warning text-dark': product.stock <= 10 && product.stock > 5,
+                                      'bg-danger': product.stock <= 5
+                                  }">
+                                {{ product.stock }}
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-primary px-1" style="border-radius: 6px; width: 30px; height: 30px; font-size: 0.75rem;"
+                                    (click)="add(product)">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="filteredProducts.length === 0">
+                        <td colspan="5" class="text-center py-4">
+                            <i class="bi bi-search text-muted" style="font-size: 1.3rem;"></i>
+                            <p class="text-muted mt-1 mb-0" style="font-size: 0.8rem;">No se encontraron productos</p>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div *ngIf="loading" class="text-center py-5">
+            <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+            <span class="ms-2 text-muted" style="font-size: 0.82rem;">Cargando...</span>
+        </div>
+
+    </div>
+
+</div>

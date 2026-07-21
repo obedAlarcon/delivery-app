@@ -8,7 +8,9 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService extends BaseService {
-
+  getLowStock(): Observable<Product[]> {
+  return this.http.get<Product[]>(this.endpoint + '/low-stock');
+}
   private endpoint = `${this.apiUrl}/v1/products`;
 
   getProducts(): Observable<Product[]> {

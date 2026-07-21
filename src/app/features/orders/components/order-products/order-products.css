@@ -1,0 +1,35 @@
+.card{
+    border: none;
+    border-radius: 12px;
+}
+
+.card-header{
+    border-bottom: none;
+    padding: 1rem 1.5rem;
+}
+
+.table th{
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.table td{
+    vertical-align: middle;
+}
+
+.table tbody tr:hover{
+    background: #f8f9fa;
+}
+
+.btn{
+    border-radius: 8px;
+}
+
+.form-control{
+    border-radius: 8px;
+}
+
+.badge{
+    font-size: .8rem;
+    padding: .6rem .8rem;
+}

@@ -1,0 +1,185 @@
+<div class="container-fluid py-4 d-print-none">
+
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary"></div>
+      <p class="mt-3">Cargando pedido...</p>
+    </div>
+  }
+
+  @if (!loading && order) {
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold">Pedido #{{ order.id }}</h2>
+        <span class="badge" [ngClass]="getStatusClass(order.status)">
+          {{order.status}}
+        </span>
+      </div>
+      
+      <!-- ========================================== -->
+      <!-- ✅ AQUÍ ESTÁN LOS 4 BOTONES CORRECTAMENTE  -->
+      <!-- ========================================== -->
+          <div>
+        <!-- ✅ Este debe llamar a downloadReceipt -->
+        <button class="btn btn-success me-2" (click)="downloadReceipt()">
+          <i class="bi bi-file-earmark-pdf"></i> Descargar PDF
+        </button>
+        
+        <!-- ✅ Este debe llamar a printReceipt -->
+    
+
+        <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Volver
+        </button>
+        
+        <button class="btn btn-primary" (click)="editOrder()">
+          <i class="bi bi-pencil"></i> Editar
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Cliente -->
+      <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="bi bi-person-circle"></i> Cliente</h5>
+          </div>
+          <div class="card-body">
+            <p><strong>Nombre:</strong> {{ order.customer?.name }}</p>
+            <p><strong>Email:</strong> {{ order.customer?.email }}</p>
+            <p><strong>Teléfono:</strong> {{ order.customer?.phone }}</p>
+            <p><strong>Dirección:</strong> {{ order.deliveryAddress }}</p>
+            <p><strong>Referencia:</strong> {{ order.deliveryReference }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="col-lg-6 mb-4 ">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0"><i class="bi bi-receipt"></i> Resumen</h5>
+          </div>
+          <div class="card-body resumen">
+            <p><strong>Método de pago:</strong> {{ order.paymentMethod }}</p>
+            <p><strong>Estado del pago:</strong> {{ order.paymentStatus }}</p>
+            <p><strong>Fecha:</strong> {{ order.createdAt | date:'medium' }}</p>
+            <hr>
+            <h4 class="text-end">
+              Total
+              <span class="text-success">
+                {{ order.total | currency:'COP':'symbol':'1.0-0' }}
+              </span>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Productos -->
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-dark text-white">
+        <h5 class="mb-0"><i class="bi bi-cart"></i> Productos</h5>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(item of order.orderDetails; track item.id) {
+              <tr>
+                <td>{{ item.product?.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price | currency:'COP':'symbol':'1.0-0' }}</td>
+                <td>{{ item.subtotal | currency:'COP':'symbol':'1.0-0' }}</td>
+              </tr>
+            }
+          </tbody>
+          <tfoot>
+            <tr class="fw-bold border-top-2">
+              <td colspan="3" class="text-end fs-5">Total:</td>
+              <td class="text-success fs-5">{{ order.total | currency:'COP':'symbol':'1.0-0' }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ✅ RECIBO PARA IMPRIMIR / DESCARGAR        -->
+    <!-- ========================================== -->
+<div id="recibo-imprimir" class="d-none d-print-block p-4 mt-4" style="font-family: monospace; max-width: 300px; margin: 0 auto;">
+
+      <div class="text-center mb-3">
+        <h4 class="fw-bold">MI EMPRESA S.A.S</h4>
+        <p class="mb-0">NIT: 900.123.456-7</p>
+        <p class="mb-0">Dirección de la tienda</p>
+        <p class="mb-0">Tel: 3001234567</p>
+        <hr style="border-style: dashed;">
+      </div>
+
+      <p class="mb-1"><strong>Fecha:</strong> {{ order.createdAt | date:'dd/MM/yyyy hh:mm a' }}</p>
+      <p class="mb-1"><strong>Pedido:</strong> #{{ order.id }}</p>
+      <p class="mb-1"><strong>Vendedor:</strong> {{ order.user?.name }}</p>
+      <hr style="border-style: dashed;">
+
+      <h6 class="fw-bold">CLIENTE</h6>
+      <p class="mb-1"><strong>Nombre:</strong> {{ order.customer?.name }}</p>
+      <p class="mb-1"><strong>Teléfono:</strong> {{ order.customer?.phone }}</p>
+      <p class="mb-1"><strong>Dirección:</strong> {{ order.deliveryAddress }}</p>
+      <p class="mb-1"><strong>Ref:</strong> {{ order.deliveryReference }}</p>
+      <hr style="border-style: dashed;">
+
+      <table class="table table-borderless table-sm mb-0 p-0">
+        <thead>
+          <tr style="border-bottom: 1px dashed #000;">
+            <th class="p-0">Cant</th>
+            <th class="p-0">Producto</th>
+            <th class="p-0 text-end">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(item of order.orderDetails; track item.id) {
+            <tr>
+              <td class="p-0">{{ item.quantity }}x</td>
+              <td class="p-0" style="font-size: 0.85em;">{{ item.product?.name }}</td>
+              <td class="p-0 text-end">{{ item.subtotal | currency:'COP':'symbol':'1.0-0' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <hr style="border-style: dashed; margin-top: 10px;">
+      
+      <div class="d-flex justify-content-between align-items-center fs-5 fw-bold">
+        <span>TOTAL:</span>
+        <span>{{ order.total | currency:'COP':'symbol':'1.0-0' }}</span>
+      </div>
+      
+      <p class="mt-2 mb-0"><strong>Método de pago:</strong> {{ order.paymentMethod }}</p>
+
+      <div class="text-center mt-4" style="font-size: 0.8em; color: gray;">
+        <p class="mb-0">¡Gracias por su compra!</p>
+        <p class="mb-0">Este documento no tiene validez fiscal</p>
+      </div>
+
+    </div>
+
+  }
+
+  @if (!loading && !order) {
+    <div class="text-center py-5">
+      <p class="text-danger">No se encontró el pedido</p>
+      <button class="btn btn-outline-primary" (click)="goBack()">Volver</button>
+    </div>
+  }
+
+</div>

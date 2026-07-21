@@ -38,6 +38,14 @@ export const routes: Routes = [
     import('./features/categories/categories.routes')
       .then(m => m.categoriesRoutes)
 },
+
+ {
+    path: 'orders',
+    loadChildren: () =>
+      import('./features/orders/orders.routes')
+        .then(m => m.ordersRoutes)
+  },
+
       {
         path: '',
         redirectTo: 'dashboard',

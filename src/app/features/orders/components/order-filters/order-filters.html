@@ -1,0 +1,48 @@
+<div class="filter-card">
+
+  <div class="row g-3 align-items-end">
+
+    <div class="col-lg-8">
+
+      <label class="form-label">
+
+        Buscar pedido
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Pedido, cliente, teléfono o estado..."
+        [(ngModel)]="search"
+        (input)="onSearch()">
+
+    </div>
+
+    <div class="col-lg-4 d-flex gap-2">
+
+      <button
+        class="btn btn-outline-secondary flex-fill"
+        (click)="clearFilters()">
+
+        <i class="bi bi-arrow-clockwise me-2"></i>
+
+        Limpiar
+
+      </button>
+
+      <a
+        routerLink="/orders/create"
+        class="btn btn-primary flex-fill">
+
+        <i class="bi bi-plus-circle me-2"></i>
+
+        Nuevo Pedido
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,111 @@
+<div class="container-fluid px-3">
+
+    <div class="row g-3 align-items-start">
+
+        <!-- IZQUIERDA -->
+        <div class="col-lg-6">
+
+            <app-customer-card
+                class="d-block w-100"
+                (customerSelected)="onCustomerSelected($event)">
+            </app-customer-card>
+
+            <div class="mt-3"></div>
+
+            <app-order-products
+                class="d-block w-100"
+                [items]="items"
+                (increaseItem)="increase($event)"
+                (decreaseItem)="decrease($event)"
+                (removeItem)="remove($event)">
+            </app-order-products>
+
+        </div>
+
+        <!-- DERECHA -->
+        <div class="col-lg-6">
+
+            <app-product-catalog
+                class="d-block w-100"
+                (addProduct)="addProduct($event)">
+            </app-product-catalog>
+
+        </div>
+
+    </div>
+<br>
+<br>
+
+
+    <div class="card shadow-sm border-0 mt-3">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h5 class="mb-1">Total del pedido</h5>
+                    <h3 class="text-success mb-0">
+                        {{ total | currency:'COP':'symbol':'1.0-0' }}
+                    </h3>
+                </div>
+
+                <button
+                    class="btn btn-success btn-lg"
+                    (click)="saveOrder()">
+
+                    <i class="bi bi-check-circle me-2"></i>
+                    Guardar pedido
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+<div class="row g-3 mb-4">
+
+    <div class="col-md-4">
+        <label class="form-label">Método de pago</label>
+        <select class="form-select"
+                [(ngModel)]="paymentMethod">
+
+            <option>Efectivo</option>
+            <option>Nequi</option>        
+            <option>Transferencia</option>
+            <option>Tarjeta débito</option>
+            <option>Tarjeta crédito</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Estado del pago</label>
+        <select class="form-select"
+                [(ngModel)]="paymentStatus">
+
+            <option>Pendiente</option>
+            <option>Pagado</option>           
+            <option>Cancelado</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Estado de la orden</label>
+        <select class="form-select"
+                [(ngModel)]="orderStatus">
+
+            <option>Pendiente</option>
+            <option>En proceso</option>
+         
+            <option>Entregado</option>
+            <option>Cancelado</option>
+
+        </select>
+    </div>
+
+</div>
+</div>

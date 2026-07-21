@@ -1,0 +1,119 @@
+.table-container{
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:1rem;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead th{
+
+    font-weight:700;
+
+    color:#64748b;
+
+    border-bottom:2px solid #e2e8f0;
+
+}
+
+.table tbody tr{
+
+    transition:.2s;
+
+}
+
+.table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+.btn-action{
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:10px;
+
+    margin:0 3px;
+
+    transition:.25s;
+
+}
+
+.btn-action i{
+
+    font-size:1rem;
+
+}
+
+.view{
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+}
+
+.view:hover{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+.edit{
+
+    background:#dcfce7;
+
+    color:#16a34a;
+
+}
+
+.edit:hover{
+
+    background:#16a34a;
+
+    color:#fff;
+
+}
+
+.delete{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+.delete:hover{
+
+    background:#dc2626;
+
+    color:#fff;
+
+}
+
+.badge{
+
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    font-size:.75rem;
+
+}

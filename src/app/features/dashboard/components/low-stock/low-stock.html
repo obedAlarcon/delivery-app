@@ -2,18 +2,14 @@
 
   <h3>Productos por agotarse</h3>
 
-  @for (product of products; track product.name) {
+  <div *ngFor="let product of products" class="item">
 
-    <div class="item">
+    <span>{{ product.name}}</span>
 
-      <span>{{ product.name }}</span>
+    <span class="badge">
+      {{ product.stock }}
+    </span>
 
-      <span class="badge">
-        {{ product.stock }}
-      </span>
-
-    </div>
-
-  }
+  </div>
 
 </div>

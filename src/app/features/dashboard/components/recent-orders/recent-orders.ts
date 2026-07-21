@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+
+import { OrderService } from '../../../orders/services/order.service';
+import { Order } from '../../../orders/models/order.model';
 
 @Component({
   selector: 'app-recent-orders',
@@ -8,33 +11,31 @@ import { Component } from '@angular/core';
   templateUrl: './recent-orders.html',
   styleUrl: './recent-orders.css',
 })
-export class RecentOrders {
+export class RecentOrders implements OnInit {
 
-  orders = [
-    {
-      id: 1001,
-      customer: 'Juan Pérez',
-      status: 'Pendiente',
-      total: '$45.000'
-    },
-    {
-      id: 1002,
-      customer: 'María López',
-      status: 'Entregado',
-      total: '$28.000'
-    },
-    {
-      id: 1003,
-      customer: 'Carlos Díaz',
-      status: 'En camino',
-      total: '$65.000'
-    },
-    {
-      id: 1004,
-      customer: 'Ana Torres',
-      status: 'Cancelado',
-      total: '$15.000'
-    }
-  ];
+  private orderService = inject(OrderService);
+ private cdr = inject(ChangeDetectorRef);
+  orders: Order[] = [];
+
+  ngOnInit(): void {
+    this.loadRecentOrders();
+  }
+
+  loadRecentOrders(): void {
+
+    this.orderService.getOrders().subscribe({
+
+      next: (orders) => {
+
+        // Mostrar únicamente los últimos 5 pedidos
+        this.orders = orders.slice(0, 5);
+this.cdr.detectChanges();
+      },
+
+      error: (err) => console.error(err)
+
+    });
+
+  }
 
 }

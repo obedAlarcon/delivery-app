@@ -1,0 +1,66 @@
+.customer-search{
+    position:relative;
+}
+
+.customer-dropdown{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:100%;
+
+    z-index:9999;
+
+    margin-top:4px;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:0 .5rem 1rem rgba(0,0,0,.15);
+
+}
+
+.input-group{
+
+    border-radius:8px;
+
+    overflow:hidden;
+    margin-top: 9px;
+}
+
+.input-group-text{
+
+    background:#fff;
+
+    border-right:0;
+
+}
+
+.form-control{
+
+    border-left:0;
+
+    border-right:0;
+
+    height:38px;
+
+}
+
+.btn-new{
+
+    min-width:110px;
+
+    font-weight:600;
+
+}
+.table td{
+
+    padding:.45rem .5rem;
+
+    vertical-align:middle;
+
+}

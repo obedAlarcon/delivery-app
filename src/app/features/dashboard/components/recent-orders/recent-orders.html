@@ -5,14 +5,12 @@
     <table>
 
         <thead>
-
             <tr>
                 <th>#</th>
                 <th>Cliente</th>
                 <th>Estado</th>
                 <th>Total</th>
             </tr>
-
         </thead>
 
         <tbody>
@@ -21,14 +19,19 @@
 
             <tr>
 
-                <td>{{order.id}}</td>
-                <td>{{order.customer}}</td>
+                <td>{{ order.id }}</td>
+
+                <td>{{ order.customer?.name }}</td>
+
                 <td>
                     <span class="status">
-                        {{order.status}}
+                        {{ order.status }}
                     </span>
                 </td>
-                <td>{{order.total}}</td>
+
+                <td>
+                    {{ order.total | currency:'COP':'symbol':'1.0-0' }}
+                </td>
 
             </tr>
 

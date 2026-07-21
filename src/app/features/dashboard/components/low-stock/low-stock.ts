@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+
+import { ProductService } from '../../../products/services/product.service';
+import { Product } from '../../../products/models/product.model';
 
 @Component({
   selector: 'app-low-stock',
@@ -8,14 +11,36 @@ import { Component } from '@angular/core';
   templateUrl: './low-stock.html',
   styleUrl: './low-stock.css',
 })
-export class LowStock {
+export class LowStock implements OnInit {
 
-  products = [
-    { name: 'Coca Cola 350ml', stock: 3 },
-    { name: 'Leche Entera', stock: 5 },
-    { name: 'Arroz Diana', stock: 2 },
-    { name: 'Huevos AA', stock: 1 },
-    { name: 'Aceite Premier', stock: 4 }
-  ];
+  private productService = inject(ProductService);
+ private cdr = inject(ChangeDetectorRef);
+
+  products: Product[] = [];
+
+  ngOnInit(): void {
+     console.log('LowStock iniciado');
+    this.loadLowStock();
+  }
+
+loadLowStock(): void {
+
+  this.productService.getLowStock().subscribe({
+
+    next: (products: Product[]) => {
+
+      console.log('Respuesta:', products);
+      console.log('Cantidad:', products.length);
+
+      this.products = products;
+ this.cdr.detectChanges();
+    },
+
+    error: (err) => console.error(err)
+
+  });
+
+}
+ 
 
 }

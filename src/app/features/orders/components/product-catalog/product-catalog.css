@@ -1,0 +1,46 @@
+.card-header{
+
+    min-height:28px;
+
+}
+
+.table td{
+
+    padding:.45rem .5rem;
+
+    vertical-align:middle;
+
+}
+.medida{
+height: 40px;
+}
+
+.table th{
+
+    padding:.55rem .5rem;
+
+    font-size:.90rem;
+
+}
+
+.table img{
+
+    border:1px solid #ececec;
+
+}
+
+.badge{
+
+    font-size:.72rem;
+
+}
+
+.btn-sm{
+
+    width:32px;
+
+    height:32px;
+
+    padding:0;
+
+}

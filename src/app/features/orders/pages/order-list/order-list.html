@@ -1,0 +1,26 @@
+<h1 class="page-title">
+
+  Pedidos
+
+</h1>
+
+<p class="page-subtitle">
+
+  Administra todos los pedidos del sistema.
+
+</p>
+
+<app-order-filters
+
+  (searchChange)="onSearch($event)"
+
+  (clear)="clearFilters()">
+
+</app-order-filters>
+
+<app-order-table
+    [orders]="orders"
+    (viewOrder)="viewOrder($event)"
+    (editOrder)="editOrder($event)"
+    (deleteOrder)="deleteOrder($event)">
+</app-order-table>

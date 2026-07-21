@@ -1,0 +1,19 @@
+.filter-card{
+    background:#fff;
+    border-radius:16px;
+    padding:1.5rem;
+    margin-bottom:1.5rem;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.form-label{
+    font-weight:600;
+}
+
+.form-control{
+    border-radius:10px;
+}
+
+.btn{
+    border-radius:10px;
+}
