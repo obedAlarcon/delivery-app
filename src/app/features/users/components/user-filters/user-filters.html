@@ -1,0 +1,85 @@
+<div class="card shadow-sm border-0 mb-4">
+
+  <div class="card-body">
+
+    <div class="row g-3 align-items-end">
+
+      <div class="col-lg-4 col-md-12">
+
+        <label class="form-label fw-semibold">
+          Buscar
+        </label>
+
+        <div class="input-group">
+
+          <span class="input-group-text">
+            <i class="bi bi-search"></i>
+          </span>
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre o correo..."
+            [(ngModel)]="search"
+            (input)="onSearch()">
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+
+        <label class="form-label fw-semibold">
+          Rol
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="role"
+          (change)="onRole()">
+
+          <option value="">Todos</option>
+          <option value="admin">Administrador</option>
+          <option value="user">Usuario</option>
+
+        </select>
+
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+
+        <label class="form-label fw-semibold">
+          Estado
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="status"
+          (change)="onStatus()">
+
+          <option value="">Todos</option>
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
+
+        </select>
+
+      </div>
+
+      <div class="col-lg-2 d-grid">
+
+        <button
+          class="btn btn-outline-secondary"
+          (click)="clearFilters()">
+
+          <i class="bi bi-arrow-clockwise me-2"></i>
+          Limpiar
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

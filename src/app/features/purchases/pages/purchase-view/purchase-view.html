@@ -1,0 +1,174 @@
+@if (loading) {
+  <div class="flex items-center justify-center py-20">
+    <div class="text-center">
+      <div class="inline-block w-5 h-5 border-2 border-gray-300 border-t-gray-800 rounded-full animate-spin mb-3"></div>
+      <p class="text-sm text-gray-400">Cargando factura...</p>
+    </div>
+  </div>
+} @else if (purchase) {
+
+<div class="invoice-wrapper">
+
+  <!-- Botón volver -->
+  <button (click)="back()" class="back-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+    </svg>
+    Volver
+  </button>
+
+  <div class="invoice-container">
+
+    <!-- CABECERA EMPRESA + USUARIO -->
+    <div class="invoice-header">
+
+      <div class="company-info">
+        <div class="logo">LOGO</div>
+        <div>
+          <h4 class="company-name">DELIVERY APP</h4>
+          <p>NIT: 900000000</p>
+          <p>Dirección empresa</p>
+          <p>Teléfono empresa</p>
+        </div>
+      </div>
+
+      <div class="user-info">
+        <p class="user-label">Perfil</p>
+        <p>Nombre: <strong>{{ purchase.user?.name }}</strong></p>
+        <p>Rol: <strong>{{ purchase.user?.role }}</strong></p>
+      </div>
+
+    </div>
+
+    <!-- Título Factura -->
+    <div class="invoice-title-row">
+      <div class="invoice-title-line"></div>
+      <h2 class="invoice-title">FACTURA DE COMPRA</h2>
+      <div class="invoice-title-line"></div>
+    </div>
+
+    <!-- PROVEEDOR -->
+    <section class="section-block">
+      <h5 class="section-title">PROVEEDOR</h5>
+
+      <div class="info-grid">
+        <span>Proveedor</span>
+        <strong>{{ purchase.supplier?.name }}</strong>
+
+        <span>Empresa</span>
+        <strong>{{ purchase.supplier?.company }}</strong>
+
+        <span>NIT</span>
+        <strong>{{ purchase.supplier?.nit }}</strong>
+
+        <span>Contacto</span>
+        <strong>{{ purchase.supplier?.contactPerson || purchase.supplier?.name }}</strong>
+
+        <span>Método de pago</span>
+        <strong>{{ purchase.paymentMethod }}</strong>
+
+        <span>Factura</span>
+        <strong>{{ purchase.invoiceNumber }}</strong>
+
+        <span>Estado</span>
+        <strong>
+          <span class="status-badge" [class.status-completed]="purchase.status === 'Completada'" [class.status-pending]="purchase.status !== 'Completada'">
+            {{ purchase.status }}
+          </span>
+        </strong>
+
+        <span>Fecha</span>
+        <strong>{{ formatDate(purchase.createdAt) }}</strong>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="section-block">
+      <h5 class="section-title">PRODUCTOS</h5>
+
+      <div class="table-wrapper">
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th class="text-center">Cant.</th>
+              <th class="text-right">Precio</th>
+              <th class="text-center">Desc.</th>
+              <th class="text-center">IVA</th>
+              <th class="text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (detail of purchase.purchaseDetails ?? []; track detail.id) {
+              <tr>
+                <td>{{ detail.product?.name }}</td>
+                <td class="text-center">{{ detail.quantity }}</td>
+                <td class="text-right">{{ money(detail.cost) }}</td>
+               <td class="text-center">{{ (detail.discount || 0) | number:'1.0-0' }}%</td>
+              <td class="text-center">{{ (detail.taxes?.[0]?.percentage || 0) | number:'1.0-0' }}%</td>
+              <td class="text-right subtotal-cell">{{ money(getDetailTotal(detail)) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TOTALES -->
+    <div class="totals-block">
+      <div class="totals-row">
+        <span>Subtotal</span>
+        <strong>{{ money(getBaseSubtotal()) }}</strong>
+      </div>
+
+      <div class="totals-row">
+        <span>Descuento</span>
+        <strong>-{{ money(getTotalDiscount()) }}</strong>
+      </div>
+
+      <div class="totals-row">
+        <span>Iva</span>
+        <strong>+{{ money(getTotalTaxes()) }}</strong>
+      </div>
+
+      <div class="totals-row totals-final">
+        <span>TOTAL</span>
+        <strong>{{ money(purchase.total) }}</strong>
+      </div>
+    </div>
+
+    <div class="invoice-actions">
+
+  <button
+    type="button"
+    class="btn-download"
+    (click)="downloadInvoice()">
+    <i class="bi bi-download"></i>
+    Descargar
+  </button>
+  <button
+    type="button"
+    class="btn-print"
+    (click)="printInvoice()">
+    <i class="bi bi-printer"></i>
+    Imprimir
+  </button>
+</div>
+
+
+    <!-- OBSERVACIONES -->
+    @if (purchase.notes) {
+      <section class="section-block">
+        <h5 class="section-title">OBSERVACIONES</h5>
+        <p class="notes-text">{{ purchase.notes }}</p>
+      </section>
+    }
+
+  </div>
+  
+
+<!-- BOTONES -->
+
+</div>
+
+}

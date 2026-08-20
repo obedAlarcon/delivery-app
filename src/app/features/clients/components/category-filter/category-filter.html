@@ -1,0 +1,27 @@
+<div class="category-filter">
+
+  <button
+    type="button"
+    class="category-button"
+    [class.active]="selectedCategory === null"
+    (click)="selectCategory(null)">
+
+    Todas
+
+  </button>
+
+  @for (category of categories; track category.id) {
+
+    <button
+      type="button"
+      class="category-button"
+      [class.active]="selectedCategory === category.id"
+      (click)="selectCategory(category.id)">
+
+      {{ category.name }}
+
+    </button>
+
+  }
+
+</div>

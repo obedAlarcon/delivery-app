@@ -1,0 +1,76 @@
+<article class="product-card">
+
+  <div class="product-image">
+
+    <img
+      [src]="product.imageUrl"
+      [alt]="product.name"
+      loading="lazy">
+
+    <button
+      type="button"
+      class="favorite-btn"
+      aria-label="Agregar a favoritos">
+
+      <i class="bi bi-heart"></i>
+
+    </button>
+
+  </div>
+
+
+  <div class="product-content">
+
+    <span class="product-category">
+      {{ product.category?.name || 'Producto' }}
+    </span>
+
+    <h3 class="product-name">
+      {{ product.name }}
+    </h3>
+
+    <p class="product-description">
+      {{ product.description }}
+    </p>
+
+    <div class="product-footer">
+
+      <div class="product-price">
+        ${{ product.price | number:'1.0-0' }}
+      </div>
+
+      <span
+        class="product-stock"
+        [class.low-stock]="product.stock > 0 && product.stock <= 10"
+        [class.no-stock]="product.stock <= 0">
+
+        @if (product.stock <= 0) {
+          Agotado
+        } @else if (product.stock <= 10) {
+          ¡Últimas {{ product.stock }}!
+        } @else {
+          {{ product.stock }} disponibles
+        }
+
+      </span>
+
+    </div>
+
+    <button
+  
+  type="button"
+  class="add-cart-btn"
+  [disabled]="product.stock <= 0"
+  (click)="addToCart()">
+
+      @if (product.stock > 0) {
+        <span>Agregar al carrito</span>
+      } @else {
+        <span>Agotado</span>
+      }
+
+    </button>
+
+  </div>
+
+</article>

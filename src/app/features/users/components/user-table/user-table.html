@@ -1,0 +1,187 @@
+<div class="table-card">
+
+    <!--=========================
+        TABLA
+    ==========================-->
+
+    <div class="table-responsive">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Id</th>
+
+                    <th>Nombre</th>
+
+                    <th>Correo</th>
+
+                    <th>Teléfono</th>
+
+                    <th>Rol</th>
+
+                    <th>Estado</th>
+
+                    <th class="text-center">Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let user of users">
+
+                    <td>{{ user.id }}</td>
+
+                    <td>{{ user.name }}</td>
+
+                    <td>{{ user.email }}</td>
+
+                    <td>{{ user.phone }}</td>
+
+                    <td>{{ user.role }}</td>
+
+                    <td>
+
+                        <span
+                            class="badge"
+                            [ngClass]="user.isActive ? 'bg-success' : 'bg-danger'">
+
+                            {{ user.isActive ? 'Activo' : 'Inactivo' }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="btn-action btn-edit"
+                                (click)="onEdit(user.id)">
+
+                                <i class="bi bi-pencil"></i>
+
+                            </button>
+
+                            <button
+                                class="btn-action btn-delete"
+                                (click)="onDelete(user.id)">
+
+                                <i class="bi bi-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr *ngIf="users.length===0">
+
+                    <td colspan="7" class="empty">
+
+                        No hay usuarios registrados.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!--=========================
+        TARJETAS MÓVIL
+    ==========================-->
+
+    <div class="mobile-users">
+
+        <div
+            class="user-card"
+            *ngFor="let user of users">
+
+            <div class="user-header">
+
+                <h4>{{ user.name }}</h4>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">📧 Correo</span>
+
+                <span>{{ user.email }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">📞 Teléfono</span>
+
+                <span>{{ user.phone }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">👔 Rol</span>
+
+                <span>{{ user.role }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">Estado</span>
+
+                <span
+                    class="badge"
+                    [ngClass]="user.isActive ? 'bg-success' : 'bg-danger'">
+
+                    {{ user.isActive ? 'Activo' : 'Inactivo' }}
+
+                </span>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="btn-action btn-edit"
+                    (click)="onEdit(user.id)">
+
+                    <i class="bi bi-pencil"></i>
+
+                </button>
+
+                <button
+                    class="btn-action btn-delete"
+                    (click)="onDelete(user.id)">
+
+                    <i class="bi bi-trash"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div
+            class="empty"
+            *ngIf="users.length===0">
+
+            No hay usuarios registrados.
+
+        </div>
+
+    </div>
+
+</div>

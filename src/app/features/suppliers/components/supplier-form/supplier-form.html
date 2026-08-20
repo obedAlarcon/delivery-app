@@ -1,0 +1,255 @@
+<form
+  [formGroup]="supplierForm"
+  (ngSubmit)="submit()"
+  class="supplier-form">
+
+  <div class="row">
+
+    <!-- Nombre -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Nombre
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name">
+
+      @if(hasError('name')){
+
+      <small class="text-danger">
+
+        El nombre es obligatorio.
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- Empresa -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Empresa
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="company">
+
+      @if(hasError('company')){
+
+      <small class="text-danger">
+
+        La empresa es obligatoria.
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- NIT -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        NIT
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nit">
+
+      @if(hasError('nit')){
+
+      <small class="text-danger">
+
+        El NIT es obligatorio.
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- Email -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Email
+
+      </label>
+
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email">
+
+      @if(hasError('email')){
+
+      <small class="text-danger">
+
+        Email inválido.
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- Teléfono -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Teléfono
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="phone">
+
+      @if(hasError('phone')){
+
+      <small class="text-danger">
+
+        El teléfono es obligatorio.
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- Dirección -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Dirección
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="address">
+
+      @if(hasError('address')){
+
+      <small class="text-danger">
+
+        La dirección es obligatoria.
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- Persona de contacto -->
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+
+        Persona de contacto
+
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="contactPerson">
+
+    </div>
+
+    <!-- Estado -->
+
+    <div class="col-md-6 mb-3 d-flex align-items-center">
+
+      <div class="form-check mt-4">
+
+        <input
+          id="supplierActive"
+          type="checkbox"
+          class="form-check-input"
+          formControlName="isActive">
+
+        <label
+          for="supplierActive"
+          class="form-check-label">
+
+          Proveedor activo
+
+        </label>
+
+      </div>
+
+    </div>
+
+    <!-- Observaciones -->
+
+    <div class="col-12 mb-4">
+
+      <label class="form-label">
+
+        Observaciones
+
+      </label>
+
+      <textarea
+        rows="4"
+        class="form-control"
+        formControlName="observations">
+
+      </textarea>
+
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      routerLink="/suppliers">
+
+      Cancelar
+
+    </button>
+
+    <button
+      type="submit"
+      class="btn btn-primary guardar">
+
+      <i class="bi bi-check-circle me-2"></i>
+
+      Guardar proveedor
+
+    </button>
+
+  </div>
+
+</form>

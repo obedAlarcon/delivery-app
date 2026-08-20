@@ -1,0 +1,390 @@
+<div class="tracking-page">
+
+  <!-- ================================================
+       CARGANDO
+  ================================================= -->
+
+  <div
+    *ngIf="loading"
+    class="loading-state">
+
+    <div class="loading-spinner"></div>
+
+    <p>
+      Cargando seguimiento...
+    </p>
+
+  </div>
+
+
+  <!-- ================================================
+       PEDIDO
+  ================================================= -->
+
+  <div
+    *ngIf="!loading && order"
+    class="tracking-container">
+
+
+    <!-- ==============================================
+         ENCABEZADO
+    =============================================== -->
+
+    <div class="tracking-header">
+
+      <div>
+
+        <span class="tracking-eyebrow">
+          SEGUIMIENTO
+        </span>
+
+        <h1>
+          Pedido #{{ order.id }}
+        </h1>
+
+        <p>
+          Revisa el estado de tu pedido.
+        </p>
+
+      </div>
+
+
+      <a
+        routerLink="/client/order-history"
+        class="back-button">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Mis pedidos
+
+      </a>
+
+    </div>
+
+
+    <!-- ==============================================
+         ESTADO ACTUAL
+    =============================================== -->
+
+    <div class="current-status">
+
+      <span>
+        Estado actual
+      </span>
+
+      <strong>
+        {{ order.status }}
+      </strong>
+
+    </div>
+
+
+    <!-- ==============================================
+         SEGUIMIENTO
+    =============================================== -->
+
+    <div class="tracking-card">
+
+      <h2>
+        Estado del pedido
+      </h2>
+
+
+      <div class="timeline">
+
+
+        <!-- PASO 1 -->
+
+        <div
+          class="timeline-step"
+          [ngClass]="getStepClass(1)">
+
+          <div class="step-icon">
+
+            <i class="bi bi-receipt"></i>
+
+          </div>
+
+          <div class="step-content">
+
+            <strong>
+              Pedido recibido
+            </strong>
+
+            <span>
+              Hemos recibido tu pedido.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- PASO 2 -->
+
+        <div
+          class="timeline-step"
+          [ngClass]="getStepClass(2)">
+
+          <div class="step-icon">
+
+            <i class="bi bi-box-seam"></i>
+
+          </div>
+
+          <div class="step-content">
+
+            <strong>
+              Preparando pedido
+            </strong>
+
+            <span>
+              Estamos preparando tus productos.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- PASO 3 -->
+
+        <div
+          class="timeline-step"
+          [ngClass]="getStepClass(3)">
+
+          <div class="step-icon">
+
+            <i class="bi bi-truck"></i>
+
+          </div>
+
+          <div class="step-content">
+
+            <strong>
+              En camino
+            </strong>
+
+            <span>
+              Tu pedido está en camino.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- PASO 4 -->
+
+        <div
+          class="timeline-step"
+          [ngClass]="getStepClass(4)">
+
+          <div class="step-icon">
+
+            <i class="bi bi-check-lg"></i>
+
+          </div>
+
+          <div class="step-content">
+
+            <strong>
+              Entregado
+            </strong>
+
+            <span>
+              Pedido entregado correctamente.
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ==============================================
+         INFORMACIÓN DEL PEDIDO
+    =============================================== -->
+
+    <div class="order-info-card">
+
+      <h2>
+        Información del pedido
+      </h2>
+
+
+      <div class="info-grid">
+
+
+        <div class="info-item">
+
+          <span>
+            Fecha
+          </span>
+
+          <strong>
+            {{ order.createdAt | date:'dd/MM/yyyy HH:mm' }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span>
+            Productos
+          </span>
+
+          <strong>
+            {{ getTotalItems() }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span>
+            Método de pago
+          </span>
+
+          <strong>
+            {{ getPaymentMethod(order.paymentMethod) }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span>
+            Estado del pago
+          </span>
+
+          <strong>
+            {{ order.paymentStatus }}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ==============================================
+         PRODUCTOS
+    =============================================== -->
+
+    <div class="products-card">
+
+      <h2>
+        <i class="bi bi-bag"></i>
+
+        Productos
+
+      </h2>
+
+
+      <div
+        class="product-row"
+        *ngFor="let item of order.orderDetails">
+
+
+        <div class="product-image">
+
+          <img
+            *ngIf="item.product?.imageUrl"
+            [src]="item.product?.imageUrl"
+            [alt]="item.product?.name">
+
+          <div
+            *ngIf="!item.product?.imageUrl"
+            class="no-image">
+
+            <i class="bi bi-image"></i>
+
+          </div>
+
+        </div>
+
+
+        <div class="product-info">
+
+          <strong>
+            {{ item.product?.name }}
+          </strong>
+
+          <span>
+            Cantidad: {{ item.quantity }}
+          </span>
+
+        </div>
+
+
+        <strong class="product-price">
+
+          {{ item.subtotal | currency:'COP':'symbol':'1.0-0' }}
+
+        </strong>
+
+      </div>
+
+
+      <div class="total-row">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          {{ order.total | currency:'COP':'symbol':'1.0-0' }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==============================================
+         ENTREGA
+    =============================================== -->
+
+    <div class="delivery-card">
+
+      <div class="delivery-icon">
+
+        <i class="bi bi-geo-alt"></i>
+
+      </div>
+
+      <div>
+
+        <span>
+          Dirección de entrega
+        </span>
+
+        <strong>
+          {{ order.deliveryAddress }}
+        </strong>
+
+        <small
+          *ngIf="order.deliveryReference">
+
+          {{ order.deliveryReference }}
+
+        </small>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

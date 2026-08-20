@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import 'chart.js/auto';
 import { BaseChartDirective } from 'ng2-charts';
-
 import {
   ChartConfiguration,
-  ChartOptions,
-  ChartType
+  ChartOptions
 } from 'chart.js';
+
+import { OrderService } from '../../../orders/services/order.service';
+import { Order } from '../../../orders/models/order.model';
 
 @Component({
   selector: 'app-sales-chart',
@@ -19,23 +21,18 @@ import {
   templateUrl: './sales-chart.html',
   styleUrl: './sales-chart.css'
 })
-export class SalesChart {
+export class SalesChart implements OnInit {
+private cdr = inject(ChangeDetectorRef);
+  private orderService = inject(OrderService);
 
-  lineChartType = 'line' as const;
+  public lineChartType: 'line' = 'line';
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [
-      'Ene',
-      'Feb',
-      'Mar',
-      'Abr',
-      'May',
-      'Jun'
-    ],
+    labels: [],
     datasets: [
       {
-        data: [12, 18, 15, 22, 30, 28],
         label: 'Ventas',
+        data: [],
         fill: true,
         tension: 0.4
       }
@@ -46,5 +43,69 @@ export class SalesChart {
     responsive: true,
     maintainAspectRatio: false
   };
+
+  ngOnInit(): void {
+    this.loadSales();
+  }
+
+  private loadSales(): void {
+
+    this.orderService.getOrders().subscribe({
+
+      next: (orders: Order[]) => {
+
+        const labels: string[] = [];
+        const sales: number[] = [];
+
+        for (let i = 6; i >= 0; i--) {
+
+          const date = new Date();
+          date.setHours(0, 0, 0, 0);
+          date.setDate(date.getDate() - i);
+
+          labels.push(
+            date.toLocaleDateString('es-CO', {
+              day: '2-digit',
+              month: 'short'
+              
+            })
+          );
+
+          const total = orders
+            .filter(order => {
+
+              const orderDate = new Date(order.createdAt);
+              orderDate.setHours(0, 0, 0, 0);
+
+              return orderDate.getTime() === date.getTime();
+
+            })
+            .reduce((sum, order) => sum + Number(order.total), 0);
+
+          sales.push(total);
+  
+        }
+
+        this.lineChartData = {
+          labels,
+          datasets: [
+            {
+              label: 'Ventas',
+              data: sales,
+              fill: true,
+              tension: 0.4
+            }
+          ]
+        };
+this.cdr.detectChanges();
+      },
+ 
+      error: (error) => {
+        console.error('Error al cargar ventas:', error);
+      }
+
+    });
+
+  }
 
 }

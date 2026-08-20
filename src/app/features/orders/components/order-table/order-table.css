@@ -1,119 +1,489 @@
-.table-container{
+/*==================================================
+  HOST
+==================================================*/
 
+:host{
+    display:block;
+    width:100%;
+    min-width:0;
+}
+
+/*==================================================
+  CONTENEDOR
+==================================================*/
+
+.table-card{
+    width:100%;
     background:#fff;
-
     border-radius:16px;
-
-    padding:1rem;
-
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-
+    box-shadow:0 8px 24px rgba(15,23,42,.08);
+    overflow:hidden;
+    margin-top:24px;
 }
 
-.table{
+/*==================================================
+  TABLA
+==================================================*/
 
-    margin-bottom:0;
-
+.table-container{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
 }
 
-.table thead th{
-
-    font-weight:700;
-
-    color:#64748b;
-
-    border-bottom:2px solid #e2e8f0;
-
+.orders-table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-.table tbody tr{
-
-    transition:.2s;
-
-}
-
-.table tbody tr:hover{
-
+.orders-table thead{
     background:#f8fafc;
+}
 
+.orders-table th{
+    padding:16px;
+    text-align:left;
+    font-size:14px;
+    font-weight:600;
+    color:#64748b;
+    white-space:nowrap;
+}
+
+.orders-table td{
+    padding:16px;
+    border-top:1px solid #e2e8f0;
+    vertical-align:middle;
+}
+
+.orders-table tbody tr{
+    transition:.25s;
+}
+
+.orders-table tbody tr:hover{
+    background:#f8fafc;
+}
+
+/*==================================================
+  CLIENTE
+==================================================*/
+
+.customer-info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.customer-info strong{
+    color:#1e293b;
+    font-size:15px;
+}
+
+.customer-info small{
+    color:#64748b;
+    font-size:13px;
+}
+
+/*==================================================
+  BADGES
+==================================================*/
+
+.badge{
+    padding:6px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+}
+
+/*==================================================
+  BOTONES
+==================================================*/
+
+.actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
 }
 
 .btn-action{
-
-    width:36px;
-
-    height:36px;
+    width:38px;
+    height:38px;
 
     border:none;
+    border-radius:50%;
 
-    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    margin:0 3px;
+    cursor:pointer;
+    transition:.25s;
+    font-size:16px;
+}
+
+.btn-view{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.btn-edit{
+    background:#fef3c7;
+    color:#ca8a04;
+}
+
+.btn-delete{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.btn-action:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+/*==================================================
+  EMPTY
+==================================================*/
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#64748b;
+}
+
+/*==================================================
+  TARJETAS MÓVIL
+==================================================*/
+
+.mobile-orders{
+    display:none;
+    padding:18px;
+}
+
+.order-card{
+
+    background:#fff;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 4px 14px rgba(15,23,42,.06);
 
     transition:.25s;
+}
+
+.order-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 28px rgba(15,23,42,.12);
 
 }
 
-.btn-action i{
+.order-card .card-header{
 
-    font-size:1rem;
+    display:flex;
 
-}
+    justify-content:space-between;
 
-.view{
+    align-items:center;
 
-    background:#dbeafe;
+    margin-bottom:18px;
 
-    color:#2563eb;
+    padding-bottom:14px;
 
-}
-
-.view:hover{
-
-    background:#2563eb;
-
-    color:#fff;
+    border-bottom:1px solid #eef2f7;
 
 }
 
-.edit{
+.order-card .card-header h4{
 
-    background:#dcfce7;
+    margin:0;
 
-    color:#16a34a;
+    font-size:18px;
 
-}
+    font-weight:700;
 
-.edit:hover{
-
-    background:#16a34a;
-
-    color:#fff;
+    color:#1e293b;
 
 }
 
-.delete{
+.order-card .card-header small{
 
-    background:#fee2e2;
-
-    color:#dc2626;
+    color:#64748b;
 
 }
 
-.delete:hover{
+.card-body{
 
-    background:#dc2626;
+    display:flex;
 
-    color:#fff;
+    flex-direction:column;
+
+    gap:16px;
 
 }
 
-.badge{
+.info-item{
 
-    padding:8px 12px;
+    display:flex;
 
-    border-radius:20px;
+    justify-content:space-between;
 
-    font-size:.75rem;
+    align-items:center;
+
+    gap:16px;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #eef2f7;
+
+}
+
+.info-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.label{
+
+    font-weight:600;
+
+    color:#334155;
+
+    flex-shrink:0;
+
+}
+
+.info-item span:last-child{
+
+    text-align:right;
+
+    color:#1e293b;
+
+    font-weight:500;
+
+}
+
+.order-card .actions{
+
+    margin-top:18px;
+
+    padding-top:18px;
+
+    border-top:1px solid #eef2f7;
+
+    justify-content:center;
+
+    gap:12px;
+
+}
+
+.order-card .btn-action{
+
+    width:42px;
+
+    height:42px;
+
+    font-size:17px;
+
+}
+/*==================================================
+  TABLET
+==================================================*/
+
+@media (max-width:991px){
+
+    .orders-table th,
+    .orders-table td{
+        padding:14px;
+    }
+
+    /* Ocultar Fecha */
+
+    .orders-table th:nth-child(6),
+    .orders-table td:nth-child(6){
+        display:none;
+    }
+
+}
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+@media (max-width:767px){
+
+    .desktop-table{
+        display:none;
+    }
+
+    .mobile-orders{
+        display:block;
+        padding:16px;
+    }
+
+    .table-card{
+        overflow:visible;
+        background:transparent;
+        box-shadow:none;
+    }
+
+    .order-card{
+
+        padding:20px;
+
+        border-radius:18px;
+
+        margin-bottom:18px;
+    }
+
+    .order-card .card-header{
+
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+
+        margin-bottom:18px;
+    }
+
+    .order-card .card-header h4{
+
+        font-size:18px;
+
+        margin:0;
+    }
+
+    .order-card .card-header small{
+
+        display:block;
+
+        margin-top:4px;
+
+        color:#64748b;
+    }
+
+    .card-body{
+
+        gap:0;
+    }
+
+    .info-item{
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        padding:14px 0;
+
+        gap:12px;
+    }
+
+    .label{
+
+        font-size:14px;
+
+        color:#475569;
+    }
+
+    .info-item span:last-child{
+
+        text-align:right;
+
+        font-size:14px;
+
+        word-break:break-word;
+    }
+
+    .order-card .actions{
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        gap:14px;
+
+        margin-top:18px;
+
+        padding-top:18px;
+
+        border-top:1px solid #eef2f7;
+    }
+
+    .order-card .btn-action{
+
+        width:42px;
+        height:42px;
+
+        border-radius:50%;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        transition:.25s;
+    }
+
+    .order-card .btn-view{
+        background:#dbeafe;
+        color:#2563eb;
+    }
+
+    .order-card .btn-edit{
+        background:#fef3c7;
+        color:#ca8a04;
+    }
+
+    .order-card .btn-delete{
+        background:#fee2e2;
+        color:#dc2626;
+    }
+
+    .order-card .btn-action:hover{
+
+        transform:translateY(-2px);
+
+        box-shadow:0 8px 18px rgba(15,23,42,.18);
+    }
+
+}
+
+/*==================================================
+  MOBILE PEQUEÑO
+==================================================*/
+
+@media (max-width:420px){
+
+    .order-card{
+
+        padding:18px;
+    }
+
+    .order-card .card-header h4{
+
+        font-size:16px;
+    }
+
+    .label{
+
+        font-size:13px;
+    }
+
+    .info-item span:last-child{
+
+        font-size:13px;
+    }
 
 }

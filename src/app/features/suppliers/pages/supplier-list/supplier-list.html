@@ -1,0 +1,17 @@
+
+<p class="page-subtitle">
+  Administra todos los proveedores registrados.
+</p>
+
+<app-supplier-filters
+  (searchChange)="onSearch($event)"
+  (statusChange)="onStatus($event)"
+  (clear)="clearFilters()">
+</app-supplier-filters>
+
+<app-supplier-table
+  [suppliers]="suppliers"
+  (view)="viewSupplier($event)"
+  (edit)="editSupplier($event)"
+  (delete)="deleteSupplier($event)">
+</app-supplier-table>

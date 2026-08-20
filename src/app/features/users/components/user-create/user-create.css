@@ -1,0 +1,32 @@
+.card{
+    border-radius:16px;
+}
+
+.card-header{
+    border-top-left-radius:16px;
+    border-top-right-radius:16px;
+}
+
+.form-control,
+.form-select{
+    border-radius:10px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow:0 0 0 .15rem rgba(13,110,253,.25);
+}
+
+.btn{
+    border-radius:10px;
+    min-width:160px;
+}
+
+.form-check-input{
+    width:3rem;
+    height:1.5rem;
+}
+
+label{
+    margin-bottom:.4rem;
+}

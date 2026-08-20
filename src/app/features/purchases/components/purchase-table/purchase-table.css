@@ -1,0 +1,270 @@
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+table {
+    width: 96%;
+    font-size: .95rem;
+}
+
+th {
+    white-space: nowrap;
+}
+
+.actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+    gap:8px;
+}
+
+.btn-action{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+ margin: 3px;
+ 
+    cursor:pointer;
+    transition:.25s;
+    font-size:16px;
+}
+
+.btn-view{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.btn-edit{
+    background:#fef3c7;
+    color:#ca8a04;
+}
+
+.btn-delete{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.btn-action:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/*==================================================
+  EMPTY
+==================================================*/
+
+.empty{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#64748b;
+
+}
+
+
+/*==================================================
+  TABLA DESKTOP
+==================================================*/
+
+.desktop-purchases {
+    display: block;
+    margin-left: 60px;
+}
+
+.mobile-purchases {
+    display: none;
+}
+
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+@media (max-width: 767px) {
+
+    /* Ocultar tabla */
+    .desktop-purchases {
+        display: none;
+    }
+
+    /* Mostrar tarjetas */
+    .mobile-purchases {
+        display: block;
+        padding: 12px;
+    }
+
+    /* Tarjeta */
+    .purchase-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, .05);
+    }
+
+    /*==================================================
+      INFORMACIÓN
+    ==================================================*/
+
+    .purchase-info {
+        width: 100%;
+    }
+
+    .purchase-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+
+        padding: 9px 0;
+
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .purchase-row:last-child {
+        border-bottom: none;
+    }
+
+    .purchase-label {
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .purchase-value {
+        color: #1e293b;
+        font-size: 13px;
+        font-weight: 500;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+
+    /*==================================================
+      TOTAL
+    ==================================================*/
+
+    .purchase-total .purchase-value {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    /*==================================================
+      ESTADO
+    ==================================================*/
+
+    .purchase-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 5px 12px;
+
+        border-radius: 999px;
+
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .purchase-status.completed {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .purchase-status.pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .purchase-status.cancelled {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    /*==================================================
+      ACCIONES
+    ==================================================*/
+
+    .purchase-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        margin-top: 18px;
+        padding-top: 14px;
+
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .purchase-actions .btn-action {
+        width: 36px;
+        height: 36px;
+
+        border: none;
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: .25s;
+
+        font-size: 15px;
+    }
+
+    .purchase-actions .btn-action:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-view {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .btn-edit {
+        background: #fef3c7;
+        color: #ca8a04;
+    }
+
+    .btn-delete {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+}
+
+
+/*==================================================
+  MOBILE PEQUEÑO
+==================================================*/
+
+@media (max-width: 400px) {
+
+    .mobile-purchases {
+        padding: 10px;
+    }
+
+    .purchase-card {
+        padding: 14px;
+    }
+
+    .purchase-row {
+        gap: 8px;
+    }
+
+    .purchase-label,
+    .purchase-value {
+        font-size: 12px;
+    }
+
+}

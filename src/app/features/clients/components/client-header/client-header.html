@@ -1,0 +1,76 @@
+<header class="client-header">
+
+  <div class="header-container">
+
+
+    <!-- =========================================
+         LOGO
+    ========================================== -->
+
+    <a
+      routerLink="/client/catalog"
+      class="brand">
+
+      <div class="brand-icon">
+
+        <i class="bi bi-shop"></i>
+
+      </div>
+
+
+      <div class="brand-info">
+
+        <span class="brand-name">
+          Delivery App
+        </span>
+
+        <span class="brand-subtitle">
+          Tu pedido, fácil y rápido
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <!-- =========================================
+         BUSCADOR
+    ========================================== -->
+
+    <div class="search-box">
+
+      <i class="bi bi-search"></i>
+
+      <input
+        type="text"
+        placeholder="Buscar productos..."
+        aria-label="Buscar productos"
+        (input)="onSearch($event)"
+      />
+
+    </div>
+
+
+    <!-- =========================================
+         CARRITO
+    ========================================== -->
+
+    <a
+      routerLink="/client/cart"
+      class="cart-button">
+
+      <i class="bi bi-cart3"></i>
+
+      <span class="cart-text">
+        Carrito
+      </span>
+
+      <span class="cart-count">
+        {{ cartCount }}
+      </span>
+
+    </a>
+
+  </div>
+
+</header>

@@ -1,0 +1,32 @@
+
+<h1 class="page-title">
+    Compras
+</h1>
+
+<p class="page-subtitle">
+    Administra todas las compras registradas.
+</p>
+
+<app-purchase-filters
+
+    (searchChange)="onSearch($event)"
+
+    (statusChange)="onStatus($event)"
+
+    (clear)="clearFilters()"
+
+    (create)="createPurchase()">
+
+</app-purchase-filters>
+
+<app-purchase-table
+
+    [purchases]="purchases"
+
+    (view)="viewPurchase($event)"
+
+    (edit)="editPurchase($event)"
+
+  (cancel)="cancelPurchase($event)">
+
+</app-purchase-table>

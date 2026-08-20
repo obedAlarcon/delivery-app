@@ -1,0 +1,53 @@
+<div class="client-layout">
+
+  <!-- HEADER -->
+  <app-client-header></app-client-header>
+
+
+  <!-- CONTENIDO -->
+  <main class="client-content">
+
+    <router-outlet></router-outlet>
+
+  </main>
+
+
+  <!-- MENÚ MÓVIL -->
+  <nav class="mobile-client-nav">
+
+    <a
+      routerLink="/client/catalog"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+
+      <i class="bi bi-shop"></i>
+
+      <span>Catálogo</span>
+
+    </a>
+
+
+    <a
+      routerLink="/client/order-history"
+      routerLinkActive="active">
+
+      <i class="bi bi-bag-check"></i>
+
+      <span>Pedidos</span>
+
+    </a>
+
+
+    <a
+      routerLink="/client/cart"
+      routerLinkActive="active">
+
+      <i class="bi bi-cart3"></i>
+
+      <span>Carrito</span>
+
+    </a>
+
+  </nav>
+
+</div>

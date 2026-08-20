@@ -1,148 +1,298 @@
-<div class="table-container">
+<div class="table-card">
 
-  <table class="table table-hover align-middle">
+    <!--=========================================
+      TABLA (PC Y TABLET)
+    ==========================================-->
 
-    <thead>
+    <div class="table-container desktop-table">
 
-      <tr>
+        <table class="orders-table">
 
-        <th># Pedido</th>
+            <thead>
 
-        <th>Cliente</th>
+                <tr>
 
-        <th>Total</th>
+                    <th># Pedido</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                    <th>Fecha</th>
+                    <th class="text-center">Acciones</th>
 
-        <th>Estado</th>
+                </tr>
 
-        <th>Pago</th>
+            </thead>
 
-        <th>Fecha</th>
+            <tbody>
 
-        <th class="text-center">Acciones</th>
+                @for(order of orders; track order.id){
 
-      </tr>
+                <tr>
 
-    </thead>
+                    <td>
 
-    <tbody>
+                        <strong>#{{ order.id }}</strong>
 
-      @for(order of orders; track order.id){
+                    </td>
 
-      <tr>
+                    <td>
 
-        <td>
+                        <div class="customer-info">
 
-          <strong>#{{ order.id }}</strong>
+                            <strong>{{ order.customer?.name }}</strong>
 
-        </td>
+                            <small>{{ order.customer?.phone }}</small>
 
-        <td>
+                        </div>
 
-          <div class="fw-semibold">
+                    </td>
 
-            {{ order.customer?.name }}
+                    <td>
 
-          </div>
+                        <strong>
 
-          <small class="text-muted">
+                            {{ order.total | currency:'COP':'symbol':'1.0-0' }}
 
-            {{ order.customer?.phone }}
+                        </strong>
 
-          </small>
+                    </td>
 
-        </td>
+                    <td>
 
-        <td>
+                        <span
+                            class="badge"
+                            [ngClass]="{
 
-          <strong>
+                            'bg-warning text-dark': order.status === 'Pendiente',
+                            'bg-primary': order.status === 'En proceso',
+                            'bg-success': order.status === 'Entregado',
+                            'bg-danger': order.status === 'Cancelado'
+
+                            }">
+
+                            {{ order.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="badge"
+                            [ngClass]="{
+
+                            'bg-warning text-dark': order.paymentStatus === 'Pendiente',
+                            'bg-success': order.paymentStatus === 'Pagado',
+                            'bg-danger': order.paymentStatus === 'Cancelado'
+
+                            }">
+
+                            {{ order.paymentStatus }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        {{ order.createdAt | date:'dd/MM/yyyy' }}
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="btn-action btn-view"
+                                (click)="viewOrder.emit(order.id)">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                            <button
+                                class="btn-action btn-edit"
+                                (click)="editOrder.emit(order.id)">
+
+                                <i class="bi bi-pencil"></i>
+
+                            </button>
+
+                            <button
+                                class="btn-action btn-delete"
+                                (click)="deleteOrder.emit(order.id)">
+
+                                <i class="bi bi-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                } @empty {
+
+                <tr>
+
+                    <td colspan="7" class="empty">
+
+                        <i class="bi bi-receipt fs-2"></i>
+
+                        <p>No existen pedidos registrados.</p>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!--=========================================
+      TARJETAS MÓVIL
+    ==========================================-->
+
+    <div class="mobile-orders">
+
+        @for(order of orders; track order.id){
+
+        <div class="order-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h4>Pedido #{{ order.id }}</h4>
+
+                    <small>{{ order.createdAt | date:'dd/MM/yyyy' }}</small>
+
+                </div>
+
+            </div>
+<div class="card-body">
+
+    <div class="info-item">
+
+        <span class="label">👤 Cliente</span>
+
+        <span>{{ order.customer?.name }}</span>
+
+    </div>
+
+    <div class="info-item">
+
+        <span class="label">📞 Teléfono</span>
+
+        <span>{{ order.customer?.phone }}</span>
+
+    </div>
+
+    <div class="info-item">
+
+        <span class="label">💰 Total</span>
+
+        <strong>
 
             {{ order.total | currency:'COP':'symbol':'1.0-0' }}
 
-          </strong>
+        </strong>
 
-        </td>
+    </div>
 
-        <td>
+    <div class="info-item">
 
-          <span
+        <span class="label">📦 Estado</span>
+
+        <span
             class="badge"
             [ngClass]="{
 
-              'bg-warning text-dark': order.status === 'Pendiente',
-
-              'bg-primary': order.status === 'En proceso',
-
-              'bg-success': order.status === 'Entregado',
-
-              'bg-danger': order.status === 'Cancelado'
+            'bg-warning text-dark': order.status === 'Pendiente',
+            'bg-primary': order.status === 'En proceso',
+            'bg-success': order.status === 'Entregado',
+            'bg-danger': order.status === 'Cancelado'
 
             }">
 
             {{ order.status }}
 
-          </span>
+        </span>
 
-        </td>
+    </div>
 
-        <td>
+    <div class="info-item">
 
-          <span
+        <span class="label">💳 Pago</span>
+
+        <span
             class="badge"
             [ngClass]="{
 
-              'bg-warning text-dark': order.paymentStatus === 'Pendiente',
-
-              'bg-success': order.paymentStatus === 'Pagado',
-
-              'bg-danger': order.paymentStatus === 'Cancelado'
+            'bg-warning text-dark': order.paymentStatus === 'Pendiente',
+            'bg-success': order.paymentStatus === 'Pagado',
+            'bg-danger': order.paymentStatus === 'Cancelado'
 
             }">
 
             {{ order.paymentStatus }}
 
-          </span>
+        </span>
 
-        </td>
+    </div>
 
-        <td>
+</div>
 
-          {{ order.createdAt | date:'dd/MM/yyyy' }}
+            <div class="actions">
 
-        </td>
+                <button
+                    class="btn-action btn-view"
+                    (click)="viewOrder.emit(order.id)">
 
-        <td class="text-center">
+                    <i class="bi bi-eye"></i>
 
-  <button
-    class="btn btn-sm btn-outline-primary me-2"
-    (click)="viewOrder.emit(order.id)">
+                </button>
 
-    <i class="bi bi-eye"></i>
+                <button
+                    class="btn-action btn-edit"
+                    (click)="editOrder.emit(order.id)">
 
-  </button>
+                    <i class="bi bi-pencil"></i>
 
-  <button
-    class="btn btn-sm btn-outline-warning me-2"
-    (click)="editOrder.emit(order.id)">
+                </button>
 
-    <i class="bi bi-pencil"></i>
+                <button
+                    class="btn-action btn-delete"
+                    (click)="deleteOrder.emit(order.id)">
 
-  </button>
+                    <i class="bi bi-trash"></i>
 
-  <button
-    class="btn btn-sm btn-outline-danger"
-    (click)="deleteOrder.emit(order.id)">
+                </button>
 
-    <i class="bi bi-trash"></i>
+            </div>
 
-  </button>
+        </div>
 
-</td>
-      </tr>
+        } @empty {
 
-      }
+        <div class="empty">
 
-    </tbody>
+            <i class="bi bi-receipt fs-1"></i>
 
-  </table>
+            <p>No existen pedidos registrados.</p>
+
+        </div>
+
+        }
+
+    </div>
 
 </div>

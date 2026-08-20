@@ -1,0 +1,369 @@
+<div class="card">
+
+  <!-- ==========================================
+       TABLA DESKTOP / TABLET
+  =========================================== -->
+
+  <div class="desktop-purchases">
+
+    <div class="table-responsive">
+
+      <table class="table align-middle mb-0">
+
+        <thead>
+
+          <tr>
+
+            <th>Fecha</th>
+
+            <th>Factura</th>
+
+            <th>Proveedor</th>
+
+            <th>Método de pago</th>
+
+            <th>Estado</th>
+
+            <th>Total</th>
+
+            <th class="text-center">Acciones</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (purchase of purchases; track purchase.id) {
+
+            <tr>
+
+              <!-- FECHA -->
+
+              <td>
+
+                {{ purchase.createdAt | date:'dd/MM/yyyy HH:mm' }}
+
+              </td>
+
+
+              <!-- FACTURA -->
+
+              <td>
+
+                {{ purchase.invoiceNumber }}
+
+              </td>
+
+
+              <!-- PROVEEDOR -->
+
+              <td>
+
+                {{ purchase.supplier?.name }}
+
+              </td>
+
+
+              <!-- MÉTODO DE PAGO -->
+
+              <td>
+
+                {{ purchase.paymentMethod }}
+
+              </td>
+
+
+              <!-- ESTADO -->
+
+              <td>
+
+                <span
+                  class="purchase-status"
+                  [class.completed]="purchase.status === 'COMPLETED'"
+                  [class.pending]="purchase.status === 'PENDING'"
+                  [class.cancelled]="purchase.status === 'CANCELLED'">
+
+                  {{ purchase.status }}
+
+                </span>
+
+              </td>
+
+
+              <!-- TOTAL -->
+
+              <td>
+
+                {{ purchase.total | currency:'COP':'symbol':'1.0-0' }}
+
+              </td>
+
+
+              <!-- ACCIONES -->
+
+              <td>
+
+                <div class="purchase-actions">
+
+                  <!-- VER -->
+
+                  <button
+                    type="button"
+                    class="btn-action btn-view"
+                    (click)="viewPurchase(purchase)"
+                    title="Ver compra">
+
+                    <i class="bi bi-eye-fill"></i>
+
+                  </button>
+
+
+                  <!-- EDITAR -->
+
+                  <button
+                    type="button"
+                    class="btn-action btn-edit"
+                    (click)="editPurchase(purchase.id)"
+                    title="Editar compra">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                  </button>
+
+
+                  <!-- CANCELAR -->
+
+                  <button
+                    type="button"
+                    class="btn-action btn-delete"
+                    (click)="cancelPurchase(purchase)"
+                    title="Cancelar compra">
+
+                  <i class="bi bi-trash-fill"></i>
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       TARJETAS MOBILE
+  =========================================== -->
+
+  <div class="mobile-purchases">
+
+    @for (purchase of purchases; track purchase.id) {
+
+      <div class="purchase-card">
+
+        <!-- ======================================
+             INFORMACIÓN DE LA COMPRA
+        ======================================= -->
+
+        <div class="purchase-info">
+
+
+          <!-- FECHA -->
+
+          <div class="purchase-row">
+
+            <span class="purchase-label">
+              Fecha
+            </span>
+
+            <span class="purchase-value">
+
+              {{ purchase.createdAt | date:'dd/MM/yyyy' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- FACTURA -->
+
+          <div class="purchase-row">
+
+            <span class="purchase-label">
+              Factura
+            </span>
+
+            <span class="purchase-value">
+
+              {{ purchase.invoiceNumber }}
+
+            </span>
+
+          </div>
+
+
+          <!-- PROVEEDOR -->
+
+          <div class="purchase-row">
+
+            <span class="purchase-label">
+              Proveedor
+            </span>
+
+            <span class="purchase-value">
+
+              {{ purchase.supplier?.company || purchase.supplier?.name || 'Sin proveedor' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- MÉTODO DE PAGO -->
+
+          <div class="purchase-row">
+
+            <span class="purchase-label">
+              Método pago
+            </span>
+
+            <span class="purchase-value">
+
+              {{ purchase.paymentMethod }}
+
+            </span>
+
+          </div>
+
+
+          <!-- ESTADO -->
+
+          <div class="purchase-row">
+
+            <span class="purchase-label">
+              Estado
+            </span>
+
+            <span class="purchase-value">
+
+              <span
+                class="purchase-status"
+                [class.completed]="purchase.status === 'COMPLETED'"
+                [class.pending]="purchase.status === 'PENDING'"
+                [class.cancelled]="purchase.status === 'CANCELLED'">
+
+                {{ purchase.status }}
+
+              </span>
+
+            </span>
+
+          </div>
+
+
+          <!-- TOTAL -->
+
+          <div class="purchase-row purchase-total">
+
+            <span class="purchase-label">
+              Total
+            </span>
+
+            <span class="purchase-value">
+
+              {{ purchase.total | currency:'COP':'symbol':'1.0-0' }}
+
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ======================================
+             ACCIONES
+        ======================================= -->
+
+        <div class="purchase-actions">
+
+
+          <!-- VER -->
+
+          <button
+            type="button"
+            class="btn-action btn-view"
+            (click)="viewPurchase(purchase)"
+            title="Ver compra">
+
+            <i class="bi bi-eye-fill"></i>
+
+          </button>
+
+
+          <!-- EDITAR -->
+
+          <button
+            type="button"
+            class="btn-action btn-edit"
+            (click)="editPurchase(purchase.id)"
+            title="Editar compra">
+
+            <i class="bi bi-pencil-square"></i>
+
+          </button>
+
+
+          <!-- CANCELAR -->
+
+          <button
+            type="button"
+            class="btn-action btn-delete"
+            (click)="cancelPurchase(purchase)"
+            title="Cancelar compra">
+
+            <i class="bi bi-trash-fill"></i>
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- ======================================
+         SIN COMPRAS
+    ======================================= -->
+
+    @empty {
+
+      <div class="text-center p-4 text-muted">
+
+        <i class="bi bi-cart-x fs-2"></i>
+
+        <p class="mt-2 mb-0">
+
+          No existen compras registradas.
+
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

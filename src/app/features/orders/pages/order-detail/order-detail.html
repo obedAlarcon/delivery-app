@@ -20,23 +20,29 @@
       <!-- ========================================== -->
       <!-- ✅ AQUÍ ESTÁN LOS 4 BOTONES CORRECTAMENTE  -->
       <!-- ========================================== -->
-          <div>
-        <!-- ✅ Este debe llamar a downloadReceipt -->
-        <button class="btn btn-success me-2" (click)="downloadReceipt()">
-          <i class="bi bi-file-earmark-pdf"></i> Descargar PDF
-        </button>
-        
-        <!-- ✅ Este debe llamar a printReceipt -->
-    
+        <div class="order-header">
 
-        <button class="btn btn-outline-secondary me-2" (click)="goBack()">
-          <i class="bi bi-arrow-left"></i> Volver
-        </button>
-        
-        <button class="btn btn-primary" (click)="editOrder()">
-          <i class="bi bi-pencil"></i> Editar
-        </button>
-      </div>
+
+  <div class="order-actions">
+
+    <button class="btn btn-success" (click)="downloadReceipt()">
+      <i class="bi bi-file-earmark-pdf"></i>
+      Descargar PDF
+    </button>
+
+    <button class="btn btn-outline-secondary" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+      Volver
+    </button>
+
+    <button class="btn btn-primary" (click)="editOrder()">
+      <i class="bi bi-pencil"></i>
+      Editar
+    </button>
+
+  </div>
+
+</div>
     </div>
 
     <div class="row">
@@ -79,40 +85,172 @@
     </div>
 
     <!-- Productos -->
-    <div class="card shadow-sm border-0">
-      <div class="card-header bg-dark text-white">
-        <h5 class="mb-0"><i class="bi bi-cart"></i> Productos</h5>
-      </div>
-      <div class="card-body p-0">
-        <table class="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(item of order.orderDetails; track item.id) {
-              <tr>
-                <td>{{ item.product?.name }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.price | currency:'COP':'symbol':'1.0-0' }}</td>
-                <td>{{ item.subtotal | currency:'COP':'symbol':'1.0-0' }}</td>
-              </tr>
-            }
-          </tbody>
-          <tfoot>
-            <tr class="fw-bold border-top-2">
-              <td colspan="3" class="text-end fs-5">Total:</td>
-              <td class="text-success fs-5">{{ order.total | currency:'COP':'symbol':'1.0-0' }}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+<!-- ==========================================
+     PRODUCTOS
+========================================== -->
+
+<div class="card shadow-sm border-0 mt-4">
+
+  <div class="card-header bg-dark text-white">
+    <h5 class="mb-0">
+      <i class="bi bi-cart"></i>
+      Productos
+    </h5>
+  </div>
+
+  <!-- ===========================
+       TABLA ESCRITORIO
+  ============================ -->
+
+  <div class="desktop-table">
+
+    <div class="table-responsive">
+
+      <table class="table table-hover mb-0">
+
+        <thead>
+
+          <tr>
+
+            <th>Producto</th>
+
+            <th>Cantidad</th>
+
+            <th>Precio</th>
+
+            <th>Subtotal</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for(item of order.orderDetails; track item.id){
+
+          <tr>
+
+            <td>{{ item.product?.name }}</td>
+
+            <td>{{ item.quantity }}</td>
+
+            <td>
+
+              {{ item.price | currency:'COP':'symbol':'1.0-0' }}
+
+            </td>
+
+            <td>
+
+              {{ item.subtotal | currency:'COP':'symbol':'1.0-0' }}
+
+            </td>
+
+          </tr>
+
+          }
+
+        </tbody>
+
+        <tfoot>
+
+          <tr class="fw-bold">
+
+            <td colspan="3" class="text-end">
+
+              Total
+
+            </td>
+
+            <td class="text-success">
+
+              {{ order.total | currency:'COP':'symbol':'1.0-0' }}
+
+            </td>
+
+          </tr>
+
+        </tfoot>
+
+      </table>
+
     </div>
 
+  </div>
+
+  <!-- ===========================
+       TARJETAS MÓVIL
+  ============================ -->
+
+  <div class="mobile-products">
+
+    @for(item of order.orderDetails; track item.id){
+
+    <div class="product-card">
+
+      <h6 class="product-title">
+
+        <i class="bi bi-box-seam-fill me-2"></i>
+
+        {{ item.product?.name }}
+
+      </h6>
+
+      <div class="product-body">
+
+        <p>
+
+          <strong>Cantidad</strong>
+
+          <span>{{ item.quantity }}</span>
+
+        </p>
+
+        <p>
+
+          <strong>Precio</strong>
+
+          <span>
+
+            {{ item.price | currency:'COP':'symbol':'1.0-0' }}
+
+          </span>
+
+        </p>
+
+        <p>
+
+          <strong>Subtotal</strong>
+
+          <span class="text-success fw-bold">
+
+            {{ item.subtotal | currency:'COP':'symbol':'1.0-0' }}
+
+          </span>
+
+        </p>
+
+      </div>
+
+    </div>
+
+    }
+
+    <div class="total-card">
+
+      <span>Total</span>
+
+      <strong>
+
+        {{ order.total | currency:'COP':'symbol':'1.0-0' }}
+
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
     <!-- ========================================== -->
     <!-- ✅ RECIBO PARA IMPRIMIR / DESCARGAR        -->
     <!-- ========================================== -->

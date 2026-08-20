@@ -1,0 +1,22 @@
+<app-user-filters
+    (searchChange)="onSearch($event)"
+    (roleChange)="onRole($event)"
+    (statusChange)="onStatus($event)"
+    (clear)="clearFilters()">
+</app-user-filters>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">Usuarios</h3>
+
+  <button
+    class="btn btn-primary"
+    [routerLink]="['/users/create']">
+    <i class="bi bi-plus-circle me-2"></i>
+    Crear usuario
+  </button>
+</div>
+
+<app-user-table
+  [users]="filteredUsers"
+  (editUser)="editUser($event)"
+  (deleteUser)="deleteUser($event)">
+</app-user-table>

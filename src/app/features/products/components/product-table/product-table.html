@@ -1,75 +1,191 @@
 <div class="table-card">
 
-  <table class="products-table">
+  <!-- ===========================
+       TABLA (Escritorio y Tablet)
+  ============================ -->
 
-    <thead>
+  <div class="table-container desktop-table">
 
-      <tr>
+    <table class="products-table">
 
-        <th>Imagen</th>
+      <thead>
 
-        <th>Producto</th>
+        <tr>
 
-        <th>Categoría</th>
+          <th>Imagen</th>
 
-        <th>Precio</th>
+          <th>Producto</th>
 
-        <th>Stock</th>
+          <th>Categoría</th>
 
-        <th>Estado</th>
+          <th>Precio</th>
 
-        <th class="text-center">Acciones</th>
+          <th>Stock</th>
 
-      </tr>
+          <th>Estado</th>
 
-    </thead>
+          <th class="text-center">Acciones</th>
 
-    <tbody>
+        </tr>
 
-      @for (product of products; track product.id) {
+      </thead>
 
-      <tr>
+      <tbody>
 
-        <td>
+        @for (product of products; track product.id) {
 
-          <img
-            class="product-image"
-            [src]="product.imageUrl"
-            [alt]="product.name">
+        <tr>
 
-        </td>
+          <td>
 
-        <td>
+            <img
+              class="product-image"
+              [src]="product.imageUrl"
+              [alt]="product.name">
 
-          <div class="product-info">
+          </td>
 
-            <strong>{{ product.name }}</strong>
+          <td>
 
-            <small>{{ product.description }}</small>
+            <div class="product-info">
 
-          </div>
+              <strong>{{ product.name }}</strong>
 
-        </td>
+              <small>{{ product.description }}</small>
 
-        <td>
+            </div>
+
+          </td>
+
+          <td>
+
+            {{ product.category?.name }}
+
+          </td>
+
+          <td>
+
+            {{ product.price | currency:'COP':'symbol':'1.0-0' }}
+
+          </td>
+
+          <td>
+
+            {{ product.stock }}
+
+          </td>
+
+          <td>
+
+            <span
+              class="status"
+              [class.active]="product.isActive"
+              [class.inactive]="!product.isActive">
+
+              {{ product.isActive ? 'Activo' : 'Inactivo' }}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="actions">
+
+              <button
+                class="btn-action btn-view"
+                (click)="onView(product)">
+
+                <i class="bi bi-eye-fill"></i>
+
+              </button>
+
+              <button
+                class="btn-action btn-edit"
+                (click)="onEdit(product.id)">
+
+                <i class="bi bi-pencil-square"></i>
+
+              </button>
+
+              <button
+                class="btn-action btn-delete"
+                (click)="onDelete(product)">
+
+                <i class="bi bi-trash-fill"></i>
+
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- ===========================
+       TARJETAS MÓVIL
+  ============================ -->
+
+  <div class="mobile-products">
+
+    @for (product of products; track product.id) {
+
+    <div class="product-card">
+
+      <div class="mobile-header">
+
+        <img
+          class="product-image"
+          [src]="product.imageUrl"
+          [alt]="product.name">
+
+        <div class="product-info">
+
+          <strong>{{ product.name }}</strong>
+
+          <small>{{ product.description }}</small>
+
+        </div>
+
+      </div>
+
+      <div class="mobile-body">
+
+        <p>
+
+          <strong>Categoría:</strong>
 
           {{ product.category?.name }}
 
-        </td>
+        </p>
 
-        <td>
+        <p>
+
+          <strong>Precio:</strong>
 
           {{ product.price | currency:'COP':'symbol':'1.0-0' }}
 
-        </td>
+        </p>
 
-        <td>
+        <p>
+
+          <strong>Stock:</strong>
 
           {{ product.stock }}
 
-        </td>
+        </p>
 
-        <td>
+        <p>
+
+          <strong>Estado:</strong>
 
           <span
             class="status"
@@ -80,66 +196,52 @@
 
           </span>
 
-        </td>
+        </p>
 
-        <td>
+      </div>
 
-          <div class="actions">
+      <div class="actions">
 
-            <button
-              class="btn-action btn-view"
-              type="button"
-              title="Ver"
-              (click)="onView(product)">
+        <button
+          class="btn-action btn-view"
+          (click)="onView(product)">
 
-              <i class="bi bi-eye-fill"></i>
+          <i class="bi bi-eye-fill"></i>
 
-            </button>
+        </button>
 
-            <button
-              class="btn-action btn-edit"
-              type="button"
-              title="Editar"
-              (click)="onEdit(product.id)">
+        <button
+          class="btn-action btn-edit"
+          (click)="onEdit(product.id)">
 
-              <i class="bi bi-pencil-square"></i>
+          <i class="bi bi-pencil-square"></i>
 
-            </button>
+        </button>
 
-            <button
-              class="btn-action btn-delete"
-              type="button"
-              title="Eliminar"
-              (click)="onDelete(product)">
+        <button
+          class="btn-action btn-delete"
+          (click)="onDelete(product)">
 
-              <i class="bi bi-trash-fill"></i>
+          <i class="bi bi-trash-fill"></i>
 
-            </button>
+        </button>
 
-          </div>
+      </div>
 
-        </td>
+    </div>
 
-      </tr>
+    } @empty {
 
-      } @empty {
+    <div class="empty">
 
-      <tr>
+      <i class="bi bi-box-seam fs-2"></i>
 
-        <td colspan="7" class="empty">
+      <p>No existen productos registrados.</p>
 
-          <i class="bi bi-box-seam fs-2"></i>
+    </div>
 
-          <p>No existen productos registrados.</p>
+    }
 
-        </td>
-
-      </tr>
-
-      }
-
-    </tbody>
-
-  </table>
+  </div>
 
 </div>

@@ -1,0 +1,542 @@
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+.container-fluid {
+    width: 100%;
+}
+
+
+/* =========================================================
+   FILA SUPERIOR
+   ========================================================= */
+
+.order-top-row {
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   CARD IZQUIERDA
+   CLIENTE + PRODUCTOS
+   ========================================================= */
+
+.order-left-card {
+
+    width: 100%;
+
+    background: #fff;
+
+    border-radius: 10px;
+
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+
+    border: 0;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CLIENTE
+   ========================================================= */
+
+.customer-component {
+    display: block;
+
+    width: 100%;
+}
+
+
+/*
+ * Quitamos el límite de 580px del componente cliente
+ * para que ocupe todo el ancho de la columna.
+ */
+
+.customer-component ::ng-deep > div {
+    max-width: none !important;
+
+    width: 100%;
+
+    margin: 0 !important;
+}
+
+
+/*
+ * La card interna del cliente pierde
+ * su sombra porque ya pertenece a la card exterior.
+ */
+
+.customer-component ::ng-deep .card {
+    box-shadow: none !important;
+
+    border-radius: 0 !important;
+
+    margin: 0 !important;
+}
+
+
+/* =========================================================
+   PRODUCTOS DENTRO DE LA MISMA CARD
+   ========================================================= */
+
+.order-products-inside {
+
+    width: 100%;
+
+    padding: 0 10px 10px 10px;
+
+}
+
+
+/*
+ * El componente de productos ocupa todo
+ * el ancho disponible.
+ */
+
+.order-products-component {
+
+    display: block;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CATÁLOGO
+   ========================================================= */
+
+.catalog-wrapper {
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #fff;
+
+    border-radius: 10px;
+
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+
+    overflow: hidden;
+}
+
+
+.catalog-component {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+}
+
+
+/*
+ * Quitamos el max-width de 580px
+ * del catálogo.
+ */
+
+.catalog-component ::ng-deep > div {
+
+    max-width: none !important;
+
+    width: 100%;
+
+    margin: 0 !important;
+}
+
+
+.catalog-component ::ng-deep .card {
+
+    height: 100%;
+
+    margin: 0 !important;
+
+    box-shadow: none !important;
+
+    border-radius: 0 !important;
+}
+
+
+/* =========================================================
+   ESPACIOS
+   ========================================================= */
+
+.main-space {
+    height: 30px;
+}
+
+.payment-space {
+    height: 16px;
+}
+
+
+/* =========================================================
+   TOTAL
+   ========================================================= */
+
+.order-total-card {
+
+    width: 100%;
+
+    border-radius: 8px;
+}
+
+
+.order-total-card .card-body {
+    padding: 16px;
+}
+
+
+.order-total-content {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.order-total-label {
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+
+.order-total-value {
+
+    font-size: 1.35rem;
+
+    font-weight: 700;
+
+    color: #198754;
+}
+
+
+/* =========================================================
+   BOTÓN
+   ========================================================= */
+
+.btn-save-order {
+
+    min-width: 155px;
+
+    height: 42px;
+
+    border-radius: 7px;
+
+    font-size: .85rem;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CAMPOS
+   ========================================================= */
+
+.form-label {
+    font-size: .9rem;
+}
+
+
+/* =========================================================
+   =========================================================
+   ESCRITORIO
+   =========================================================
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+    /*
+     * Las dos cards comienzan y terminan
+     * a la misma altura.
+     */
+
+    .order-left-card,
+    .catalog-wrapper {
+
+        height: 500px;
+    }
+
+
+    /*
+     * Cliente arriba.
+     */
+
+    .customer-component {
+        height: auto;
+    }
+
+
+    /*
+     * Productos ocupan el espacio restante.
+     */
+
+    .order-products-inside {
+
+        max-height: 390px;
+
+        overflow-y: auto;
+    }
+
+
+    /*
+     * Catálogo completo.
+     */
+
+    .catalog-wrapper {
+
+        overflow: hidden;
+    }
+
+
+    .catalog-component {
+
+        height: 100%;
+    }
+
+
+    /*
+     * Tabla del catálogo.
+     */
+
+    .catalog-component ::ng-deep .table-responsive {
+
+        max-height: 390px;
+
+        overflow-y: auto;
+    }
+
+}
+
+
+/* =========================================================
+   =========================================================
+   TABLET
+   =========================================================
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    .order-left-card,
+    .catalog-wrapper {
+
+        height: auto;
+    }
+
+
+    .order-products-inside {
+
+        max-height: none;
+
+        overflow: visible;
+    }
+
+
+    .catalog-component {
+
+        height: auto;
+    }
+
+}
+
+
+/* =========================================================
+   =========================================================
+   MÓVIL
+   =========================================================
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .container-fluid {
+
+        padding-left: 8px !important;
+
+        padding-right: 8px !important;
+    }
+
+
+    /*
+     * Card izquierda completa.
+     */
+
+    .order-left-card {
+
+        width: 100%;
+
+        height: auto;
+
+        border-radius: 8px;
+
+        overflow: hidden;
+    }
+
+
+    /*
+     * Cliente.
+     */
+
+    .customer-component {
+
+        width: 100%;
+
+        height: auto;
+    }
+
+
+    .customer-component ::ng-deep > div {
+
+        max-width: none !important;
+
+        width: 100%;
+
+        margin: 0 !important;
+    }
+
+
+    /*
+     * Productos.
+     */
+
+    .order-products-inside {
+
+        padding: 0 6px 6px 6px;
+
+        max-height: none;
+
+        overflow: visible;
+    }
+
+
+    /*
+     * Catálogo.
+     */
+
+    .catalog-wrapper {
+
+        width: 100%;
+
+        height: auto;
+
+        margin-top: 8px;
+
+        border-radius: 8px;
+
+        overflow: visible;
+    }
+
+
+    .catalog-component {
+
+        width: 100%;
+
+        height: auto;
+    }
+
+
+    .catalog-component ::ng-deep > div {
+
+        max-width: none !important;
+
+        width: 100%;
+
+        margin: 0 !important;
+    }
+
+
+    .catalog-component ::ng-deep .card {
+
+        height: auto;
+
+        border-radius: 8px !important;
+    }
+
+
+    .catalog-component ::ng-deep .table-responsive {
+
+        max-height: none;
+
+        overflow: visible;
+    }
+
+
+    /* -----------------------------------------
+       TOTAL
+       ----------------------------------------- */
+
+    .main-space {
+        height: 10px;
+    }
+
+
+    .order-total-card .card-body {
+        padding: 10px;
+    }
+
+
+    .order-total-content {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 10px;
+    }
+
+
+    .order-total-label {
+        font-size: .75rem;
+    }
+
+
+    .order-total-value {
+        font-size: 1rem;
+    }
+
+
+    .btn-save-order {
+
+        width: 100%;
+
+        min-width: 0;
+
+        height: 40px;
+
+        font-size: .76rem;
+    }
+
+
+    /* -----------------------------------------
+       ESTADOS
+       ----------------------------------------- */
+
+    .payment-space {
+        height: 10px;
+    }
+
+
+    .form-label {
+        font-size: .72rem;
+    }
+
+
+    .form-select {
+
+        height: 38px;
+
+        min-height: 38px;
+
+        font-size: .76rem;
+    }
+
+}

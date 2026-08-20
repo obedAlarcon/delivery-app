@@ -1,44 +1,41 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { BaseService } from '../../../core/services/base.service';
-import { Customer } from '../models/customer.model';
+import { environment } from '../../../../environments/environment';
+import {
+  Customer,
+  CreateCustomerDto,
+  UpdateCustomerDto
+} from '../models/customer.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService extends BaseService {
+export class CustomerService {
 
-  private endpoint = `${this.apiUrl}/v1/customers`;
+  private http = inject(HttpClient);
+
+  private apiUrl = `${environment.apiUrl}/v1/customers`;
 
   getCustomers(): Observable<Customer[]> {
-
-    return this.http.get<Customer[]>(this.endpoint);
-
+    return this.http.get<Customer[]>(this.apiUrl);
   }
 
-  getById(id: number): Observable<Customer> {
-
-    return this.http.get<Customer>(`${this.endpoint}/${id}`);
-
+  getCustomer(id: number): Observable<Customer> {
+    return this.http.get<Customer>(`${this.apiUrl}/${id}`);
   }
 
-  create(customer: Partial<Customer>): Observable<Customer> {
-
-    return this.http.post<Customer>(this.endpoint, customer);
-
+  create(customer: CreateCustomerDto): Observable<Customer> {
+    return this.http.post<Customer>(this.apiUrl, customer);
   }
 
-  update(id: number, customer: Partial<Customer>): Observable<Customer> {
-
-    return this.http.patch<Customer>(`${this.endpoint}/${id}`, customer);
-
+  update(id: number, customer: UpdateCustomerDto): Observable<Customer> {
+    return this.http.patch<Customer>(`${this.apiUrl}/${id}`, customer);
   }
 
   delete(id: number): Observable<void> {
-
-    return this.http.delete<void>(`${this.endpoint}/${id}`);
-
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
 }

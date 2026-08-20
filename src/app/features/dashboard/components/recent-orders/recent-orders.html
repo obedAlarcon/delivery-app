@@ -1,44 +1,76 @@
-<div class="card">
+<div class="card recent-orders">
 
     <h3>Pedidos recientes</h3>
 
-    <table>
 
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Cliente</th>
-                <th>Estado</th>
-                <th>Total</th>
-            </tr>
-        </thead>
+    <div class="table-container">
 
-        <tbody>
+        <table>
 
-            @for(order of orders; track order.id){
+            <thead>
 
-            <tr>
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                </tr>
 
-                <td>{{ order.id }}</td>
+            </thead>
 
-                <td>{{ order.customer?.name }}</td>
 
-                <td>
-                    <span class="status">
-                        {{ order.status }}
-                    </span>
-                </td>
+            <tbody>
 
-                <td>
-                    {{ order.total | currency:'COP':'symbol':'1.0-0' }}
-                </td>
+                @for(order of orders; track order.id){
 
-            </tr>
+                <tr>
 
-            }
+                    <td>
+                        {{ order.id }}
+                    </td>
 
-        </tbody>
 
-    </table>
+                    <td>
+                        {{ order.customer?.name }}
+                    </td>
+
+
+                    <td>
+
+                        <span
+                        class="status"
+                        [ngClass]="{
+                            'status-processing': order.status === 'En proceso',
+                            'status-delivered': order.status === 'Entregado',
+                            'status-cancelled': order.status === 'Cancelado',
+                            'status-pending': order.status === 'Pendiente'
+                        }">
+
+                            {{ order.status }}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {{ order.total | currency:'COP':'symbol':'1.0-0' }}
+
+                    </td>
+
+
+                </tr>
+
+                }
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
 
 </div>

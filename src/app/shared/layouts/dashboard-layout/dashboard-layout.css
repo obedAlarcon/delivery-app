@@ -1,3 +1,8 @@
+/*==================================================
+  Dashboard Layout
+==================================================*/
+
+
 .dashboard{
 
     display:flex;
@@ -6,7 +11,15 @@
 
     background:#f1f5f9;
 
+    overflow-x:hidden;
+
 }
+
+
+/*==================================================
+  Main Content
+==================================================*/
+
 
 .main-content{
 
@@ -20,12 +33,138 @@
 
     flex-direction:column;
 
+    overflow-x:hidden;
+
+    transition:.3s ease;
+
 }
+
+
+/*==================================================
+  Page Content
+==================================================*/
+
 
 .page-content{
 
     flex:1;
 
     padding:25px;
+
+    width:100%;
+
+    overflow-x:hidden;
+
+}
+
+
+/*==================================================
+  Responsive Tablet
+==================================================*/
+
+
+@media(max-width:991.98px){
+
+
+    .main-content{
+
+        margin-left:0;
+
+        width:100%;
+
+    }
+
+
+    .page-content{
+
+        padding:16px;
+
+    }
+
+
+}
+
+
+
+/*==================================================
+  Mobile
+==================================================*/
+
+
+@media(max-width:576px){
+
+
+    .page-content{
+
+        padding:12px;
+
+    }
+
+
+}
+
+
+
+/*==================================================
+  Sidebar Overlay
+==================================================*/
+
+
+.sidebar-overlay{
+
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s ease;
+
+    z-index:1035;
+
+
+}
+
+
+/* Mostrar overlay en móvil */
+
+
+@media(max-width:991.98px){
+
+
+    .sidebar-overlay.show{
+
+
+        opacity:1;
+
+        visibility:visible;
+
+
+    }
+
+
+}
+
+
+
+/* En escritorio oculto */
+
+
+@media(min-width:992px){
+
+
+    .sidebar-overlay{
+
+
+        display:none;
+
+
+    }
+
 
 }

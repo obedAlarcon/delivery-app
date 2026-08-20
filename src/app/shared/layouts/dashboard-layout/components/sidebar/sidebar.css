@@ -1,96 +1,131 @@
-.sidebar{
+/*==================================================
+  Sidebar
+==================================================*/
 
-    width:260px;
-    height:100vh;
+.sidebar {
 
-    background:#1e293b;
+    width: 260px;
+    height: 100vh;
 
-    color:white;
+    background: #1e293b;
 
-    position:fixed;
+    color: white;
 
-    left:0;
+    position: fixed;
 
-    top:0;
+    left: 0;
+    top: 0;
 
-    overflow:auto;
+    overflow: auto;
 
-}
-
-.logo{
-
-    padding:25px;
-
-    text-align:center;
-
-    border-bottom:1px solid rgba(255,255,255,.1);
+    z-index: 1040;
 
 }
 
-.logo h3{
+/*==================================================
+  Logo
+==================================================*/
 
-    margin:0;
+.logo {
 
-    font-size:24px;
+    padding: 25px;
 
-    font-weight:bold;
+    text-align: center;
 
-}
-
-.sidebar ul{
-
-    list-style:none;
-
-    margin:0;
-
-    padding:20px 0;
+    border-bottom: 1px solid rgba(255,255,255,.1);
 
 }
 
-.sidebar li{
+.logo h3 {
 
-    margin:4px 12px;
+    margin: 0;
 
-}
+    font-size: 24px;
 
-.sidebar a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    padding:14px 18px;
-
-    border-radius:10px;
-
-    color:#cbd5e1;
-
-    text-decoration:none;
-
-    transition:.25s;
+    font-weight: bold;
 
 }
 
-.sidebar a:hover{
+/*==================================================
+  Menú
+==================================================*/
 
-    background:#334155;
+.sidebar ul {
 
-    color:white;
+    list-style: none;
 
-}
+    margin: 0;
 
-.sidebar a.active{
-
-    background:#2563eb;
-
-    color:white;
+    padding: 20px 0;
 
 }
 
-.sidebar i{
+.sidebar li {
 
-    font-size:20px;
+    margin: 4px 12px;
+
+}
+
+.sidebar a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px 18px;
+
+    border-radius: 10px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    transition: .25s;
+
+}
+
+.sidebar a:hover {
+
+    background: #334155;
+
+    color: white;
+
+}
+
+.sidebar a.active {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+.sidebar i {
+
+    font-size: 20px;
+
+}
+
+/*==================================================
+  Responsive
+==================================================*/
+
+@media (max-width: 991.98px) {
+
+    .sidebar {
+
+        transform: translateX(-100%);
+
+        transition: transform .30s ease;
+
+    }
+
+    .sidebar.open {
+
+        transform: translateX(0);
+
+    }
 
 }

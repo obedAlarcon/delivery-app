@@ -68,79 +68,127 @@ export class ProductForm implements OnChanges {
   //=========================================
   // Reactive Form
   //=========================================
+productForm = this.fb.group({
 
-  productForm = this.fb.group({
-
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(3)
-      ]
-    ],
-
-    description: [
-      '',
-      Validators.required
-    ],
-
-    price: [
-      0,
-      [
-        Validators.required,
-        Validators.min(1)
-      ]
-    ],
-
-    stock: [
-      0,
-      [
-        Validators.required,
-        Validators.min(0)
-      ]
-    ],
-
-    categoryId: [
-      0,
-      Validators.required
-    ],
-
-    isActive: [
-      true
+  name: [
+    '',
+    [
+      Validators.required,
+      Validators.minLength(3)
     ]
+  ],
 
-  });
+  description: [
+    '',
+    Validators.required
+  ],
+
+  purchasePrice: [
+    0,
+    [
+      Validators.required,
+      Validators.min(1)
+    ]
+  ],
+
+  price: [
+    0,
+    [
+      Validators.required,
+      Validators.min(1)
+    ]
+  ],
+
+  stock: [
+    0,
+    [
+      Validators.required,
+      Validators.min(0)
+    ]
+  ],
+
+  minStock: [
+    5,
+    [
+      Validators.required,
+      Validators.min(0)
+    ]
+  ],
+
+  categoryId: [
+    0,
+    Validators.required
+  ],
+
+  isActive: [
+    true
+  ]
+
+});
 
   //=========================================
   // Editar
   //=========================================
 
-  ngOnChanges(changes: SimpleChanges): void {
+//=========================================
+// Editar
+//=========================================
 
-    if (changes['product'] && this.product) {
+ngOnChanges(changes: SimpleChanges): void {
 
-      this.productForm.patchValue({
+  if (changes['product'] && this.product) {
 
-        name: this.product.name,
+    this.productForm.patchValue({
 
-        description: this.product.description,
+      name: this.product.name,
 
-        price: this.product.price,
+      description: this.product.description,
 
-        stock: this.product.stock,
+      purchasePrice: this.product.purchasePrice,
 
-        categoryId: this.product.categoryId,
+      price: this.product.price,
 
-        isActive: this.product.isActive
+      stock: this.product.stock,
 
-      });
+      minStock: this.product.minStock,
 
-      this.previewImage = this.product.imageUrl;
+      categoryId: this.product.categoryId,
 
-    }
+      isActive: this.product.isActive
+
+    });
+
+    this.previewImage = this.product.imageUrl;
+
+  } else {
+
+    this.productForm.reset({
+
+      name: '',
+
+      description: '',
+
+      purchasePrice: 0,
+
+      price: 0,
+
+      stock: 0,
+
+      minStock: 5,
+
+      categoryId: 0,
+
+      isActive: true
+
+    });
+
+    this.previewImage = null;
+
+    this.selectedFile = null;
 
   }
 
+}
   //=========================================
   // Seleccionar imagen
   //=========================================

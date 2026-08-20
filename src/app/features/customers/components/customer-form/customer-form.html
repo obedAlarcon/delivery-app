@@ -1,1 +1,146 @@
-<p>customer-form works!</p>
+
+<form
+  [formGroup]="customerForm"
+  (ngSubmit)="submit()"
+  class="customer-form">
+
+  <div class="row">
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+        Nombre
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name">
+
+      @if(hasError('name')){
+        <small class="text-danger">
+          El nombre es obligatorio.
+        </small>
+      }
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+        Correo electrónico
+      </label>
+
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email">
+
+      @if(hasError('email')){
+        <small class="text-danger">
+          Correo electrónico inválido.
+        </small>
+      }
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+        Teléfono
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="phone">
+
+      @if(hasError('phone')){
+        <small class="text-danger">
+          El teléfono es obligatorio.
+        </small>
+      }
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+      <label class="form-label">
+        Dirección
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="address">
+
+      @if(hasError('address')){
+        <small class="text-danger">
+          La dirección es obligatoria.
+        </small>
+      }
+
+    </div>
+
+    <div class="col-12 mb-3">
+
+      <label class="form-label">
+        Referencia
+      </label>
+
+      <textarea
+        rows="3"
+        class="form-control"
+        formControlName="reference">
+      </textarea>
+
+    </div>
+
+    <div class="col-12 mb-4">
+
+      <div class="form-check">
+
+        <input
+          id="activo"
+          type="checkbox"
+          class="form-check-input"
+          formControlName="isActive">
+
+        <label
+          class="form-check-label"
+          for="activo">
+
+          Cliente activo
+
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      routerLink="/customers">
+
+      Cancelar
+
+    </button>
+
+    <button
+      type="submit"
+      class="btn btn-primary">
+
+      <i class="bi bi-check-circle me-2"></i>
+
+      Guardar cliente
+
+    </button>
+
+  </div>
+
+</form>

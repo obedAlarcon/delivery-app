@@ -1,0 +1,22 @@
+.card{
+    border-radius:12px;
+}
+
+.form-control,
+.form-select{
+    border-radius:10px;
+}
+
+.input-group-text{
+    background:#fff;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow:none;
+    border-color:#0d6efd;
+}
+
+.btn{
+    border-radius:10px;
+}

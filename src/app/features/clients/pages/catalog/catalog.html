@@ -1,0 +1,75 @@
+
+<main class="catalog-page">
+
+  <div class="catalog-container">
+
+    <!-- ==================================================
+         ENCABEZADO DEL CATÁLOGO
+    ================================================== -->
+
+    <div class="catalog-header">
+
+      <h1>
+        Catálogo
+      </h1>
+
+      <p>
+        Productos disponibles
+      </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         FILTRO DE CATEGORÍAS
+    ================================================== -->
+
+    <app-category-filter
+      [categories]="categories"
+      [selectedCategory]="selectedCategory"
+      (categoryChange)="onCategoryChange($event)">
+    </app-category-filter>
+
+
+    <!-- ==================================================
+         PRODUCTOS
+    ================================================== -->
+
+    <section class="products-grid">
+
+      @for (product of products; track product.id) {
+
+        <app-product-card
+          [product]="product">
+        </app-product-card>
+
+      }
+
+    </section>
+
+
+    <!-- ==================================================
+         SIN PRODUCTOS
+    ================================================== -->
+
+    @if (products.length === 0) {
+
+      <div class="empty-catalog">
+
+        <i class="bi bi-box-seam"></i>
+
+        <h3>
+          No hay productos disponibles
+        </h3>
+
+        <p>
+          No encontramos productos para esta categoría.
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+
+</main>

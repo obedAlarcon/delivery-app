@@ -1,0 +1,489 @@
+/*==================================================
+  HOST
+==================================================*/
+
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+
+/*==================================================
+  CONTENEDOR PRINCIPAL
+==================================================*/
+
+.container-fluid {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/*==================================================
+  CARDS
+==================================================*/
+
+.card {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+
+/*==================================================
+  TABLAS
+==================================================*/
+
+.report-table {
+    width: 100%;
+}
+
+.report-table .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.report-table table {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: .95rem;
+}
+
+.report-table th {
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.report-table td {
+    vertical-align: middle;
+}
+
+
+/*==================================================
+  ENCABEZADOS
+==================================================*/
+
+.report-table h2,
+.mobile-sales h2,
+.mobile-purchases h2 {
+    font-size: 1.35rem;
+}
+
+
+/*==================================================
+  BOTONES EXPORTAR
+==================================================*/
+
+.botones {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+
+/*==================================================
+  ESTADO
+==================================================*/
+
+.report-table .badge,
+.report-mobile-card .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+
+/*==================================================
+  DESKTOP
+==================================================*/
+
+.desktop-sales,
+.desktop-purchases {
+    display: block;
+}
+
+.mobile-sales,
+.mobile-purchases {
+    display: none;
+}
+
+
+/*==================================================
+  MOBILE CARD
+==================================================*/
+
+.report-mobile-card {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, .05);
+}
+
+
+/*==================================================
+  INFORMACIÓN
+==================================================*/
+
+.report-info {
+    width: 100%;
+}
+
+.report-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.report-row:last-child {
+    border-bottom: none;
+}
+
+
+/*==================================================
+  LABEL
+==================================================*/
+
+.report-label {
+    color: #64748b;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/*==================================================
+  VALOR
+==================================================*/
+
+.report-value {
+    color: #1e293b;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+
+/*==================================================
+  TOTAL DE CADA TARJETA
+==================================================*/
+
+.report-total {
+    padding-top: 12px;
+}
+
+.report-total .report-label {
+    color: #1e293b;
+}
+
+.report-total .report-value {
+    color: #1e293b;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/*==================================================
+  TOTAL GENERAL MOBILE
+==================================================*/
+
+.mobile-report-total {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 16px;
+
+    margin-top: 8px;
+
+    border-top: 2px solid #e2e8f0;
+
+    font-size: 14px;
+
+    color: #475569;
+}
+
+.mobile-report-total strong {
+    font-size: 16px;
+
+    color: #1e293b;
+}
+
+
+/*==================================================
+  TABLET
+==================================================*/
+
+@media (max-width: 991px) {
+
+    .report-table table {
+        font-size: .9rem;
+    }
+
+    .report-table th,
+    .report-table td {
+        padding: 12px;
+    }
+
+}
+
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+@media (max-width: 767px) {
+
+    /*----------------------------------------------
+      CONTENEDOR
+    ----------------------------------------------*/
+
+    .container-fluid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+
+    /*----------------------------------------------
+      CARD PRINCIPAL
+    ----------------------------------------------*/
+
+    .container-fluid > .card {
+        border-radius: 12px;
+    }
+
+    .container-fluid > .card > .card-body {
+        padding: 16px;
+    }
+
+
+    /*----------------------------------------------
+      FILTROS
+    ----------------------------------------------*/
+
+    .container-fluid > .card:first-of-type .card-body {
+        padding: 16px;
+    }
+
+    .container-fluid > .card:first-of-type .row {
+        row-gap: 12px;
+    }
+
+
+    /*----------------------------------------------
+      ENCABEZADO
+    ----------------------------------------------*/
+
+    .mb-4 h2 {
+        font-size: 1.5rem;
+    }
+
+
+    /*----------------------------------------------
+      OCULTAR TABLAS
+    ----------------------------------------------*/
+
+    .desktop-sales,
+    .desktop-purchases {
+        display: none;
+    }
+
+
+    /*----------------------------------------------
+      MOSTRAR TARJETAS
+    ----------------------------------------------*/
+
+    .mobile-sales,
+    .mobile-purchases {
+        display: block;
+    }
+
+
+    /*----------------------------------------------
+      TÍTULO
+    ----------------------------------------------*/
+
+    .mobile-sales h2,
+    .mobile-purchases h2 {
+        font-size: 1.2rem;
+        margin-bottom: 16px !important;
+    }
+
+
+    /*----------------------------------------------
+      TARJETA
+    ----------------------------------------------*/
+
+    .report-mobile-card {
+        padding: 16px;
+
+        margin-bottom: 14px;
+
+        border-radius: 14px;
+    }
+
+
+    /*----------------------------------------------
+      FILAS
+    ----------------------------------------------*/
+
+    .report-row {
+        min-height: 36px;
+
+        padding: 8px 0;
+
+        gap: 10px;
+    }
+
+
+    /*----------------------------------------------
+      LABEL
+    ----------------------------------------------*/
+
+    .report-label {
+        font-size: 13px;
+
+        flex-shrink: 0;
+    }
+
+
+    /*----------------------------------------------
+      VALOR
+    ----------------------------------------------*/
+
+    .report-value {
+        max-width: 62%;
+
+        font-size: 13px;
+    }
+
+
+    /*----------------------------------------------
+      TOTAL
+    ----------------------------------------------*/
+
+    .report-total .report-value {
+        font-size: 15px;
+    }
+
+
+    /*----------------------------------------------
+      TOTAL GENERAL
+    ----------------------------------------------*/
+
+    .mobile-report-total {
+        padding: 14px 4px;
+
+        margin-top: 4px;
+    }
+
+
+    .mobile-report-total strong {
+        font-size: 15px;
+    }
+
+
+    /*----------------------------------------------
+      BOTONES
+    ----------------------------------------------*/
+
+    .botones {
+        display: flex;
+
+        flex-direction: column;
+
+        width: 100%;
+
+        gap: 8px;
+    }
+
+    .botones .btn {
+        width: 100%;
+
+        margin: 0 !important;
+    }
+
+}
+
+
+/*==================================================
+  MOBILE PEQUEÑO
+==================================================*/
+
+@media (max-width: 400px) {
+
+    .container-fluid {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+
+    .container-fluid > .card > .card-body {
+        padding: 12px;
+    }
+
+
+    .report-mobile-card {
+        padding: 14px;
+
+        border-radius: 12px;
+    }
+
+
+    .report-row {
+        gap: 8px;
+    }
+
+
+    .report-label,
+    .report-value {
+        font-size: 12px;
+    }
+
+
+    .report-value {
+        max-width: 60%;
+    }
+
+
+    .report-total .report-value {
+        font-size: 14px;
+    }
+
+
+    .mobile-report-total {
+        font-size: 13px;
+    }
+
+
+    .mobile-report-total strong {
+        font-size: 14px;
+    }
+
+}

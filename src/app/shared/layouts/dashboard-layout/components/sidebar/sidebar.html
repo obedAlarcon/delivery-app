@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar" [class.open]="isOpen()">
 
     <div class="logo">
 
@@ -7,16 +7,16 @@
     </div>
 
     <ul>
-
-        @for(item of menu; track item.label){
+@for (item of menu; track $index){
 
             <li>
 
                 <a
-                 [routerLink]="item.route"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="{ exact: true }">
 
+  [routerLink]="item.route"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  (click)="closeSidebar()">
                     <i class="bi" [ngClass]="item.icon"></i>
 
                     <span>{{item.label}}</span>

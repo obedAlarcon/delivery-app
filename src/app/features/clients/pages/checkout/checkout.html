@@ -1,0 +1,524 @@
+<div class="checkout-page">
+
+  <!-- ENCABEZADO -->
+
+  <div class="checkout-header">
+
+    <div>
+
+      <span class="checkout-eyebrow">
+        FINALIZAR COMPRA
+      </span>
+
+      <h1>
+        Completa tu pedido
+      </h1>
+
+      <p>
+        Revisa tus productos y completa los datos de entrega.
+      </p>
+
+    </div>
+
+    <a
+      routerLink="/client/cart"
+      class="back-cart">
+
+      <i class="bi bi-arrow-left"></i>
+
+      Volver al carrito
+
+    </a>
+
+  </div>
+
+
+  <!-- CARRITO VACÍO -->
+
+  <div
+    *ngIf="items.length === 0"
+    class="empty-checkout">
+
+    <div class="empty-icon">
+
+      <i class="bi bi-cart-x"></i>
+
+    </div>
+
+    <h2>
+      Tu carrito está vacío
+    </h2>
+
+    <p>
+      Agrega algunos productos antes de continuar.
+    </p>
+
+    <a
+      routerLink="/client/catalog"
+      class="btn-primary">
+
+      Ver productos
+
+    </a>
+
+  </div>
+
+
+  <!-- CHECKOUT -->
+
+  <div
+    *ngIf="items.length > 0"
+    class="checkout-grid">
+
+
+    <!-- ==================================================
+         DATOS DEL CLIENTE
+    =================================================== -->
+
+    <section class="checkout-card">
+
+      <div class="card-header">
+
+        <div class="header-icon">
+
+          <i class="bi bi-person"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Datos de entrega
+          </h2>
+
+          <p>
+            ¿Dónde debemos entregar tu pedido?
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- NOMBRE -->
+
+        <div class="form-group full">
+
+          <label for="name">
+            Nombre completo
+          </label>
+
+          <input
+            id="name"
+            type="text"
+            [(ngModel)]="customer.name"
+            placeholder="Ingresa tu nombre completo">
+
+        </div>
+<!-- EMAIL -->
+
+<div class="form-group full">
+
+  <label for="email">
+    Correo electrónico
+  </label>
+
+  <input
+    id="email"
+    type="email"
+    [(ngModel)]="customer.email"
+    placeholder="correo@ejemplo.com">
+
+</div>
+
+        <!-- TELÉFONO -->
+
+        <div class="form-group">
+
+          <label for="phone">
+            Teléfono
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            [(ngModel)]="customer.phone"
+            placeholder="300 000 0000">
+
+        </div>
+
+
+        <!-- BARRIO -->
+
+        <div class="form-group">
+
+          <label for="neighborhood">
+            Barrio
+          </label>
+
+          <input
+            id="neighborhood"
+            type="text"
+            [(ngModel)]="customer.neighborhood"
+            placeholder="Barrio">
+
+        </div>
+
+
+        <!-- DIRECCIÓN -->
+
+        <div class="form-group full">
+
+          <label for="address">
+            Dirección
+          </label>
+
+          <input
+            id="address"
+            type="text"
+            [(ngModel)]="customer.address"
+            placeholder="Ej: Calle 10 # 20-30">
+
+        </div>
+
+
+        <!-- MÉTODO DE PAGO -->
+
+        <div class="form-group full">
+
+          <label>
+            Método de pago
+          </label>
+
+
+          <div class="payment-options">
+
+
+            <label class="payment-option">
+
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="cash"
+                [(ngModel)]="customer.paymentMethod">
+
+              <div class="payment-content">
+
+                <i class="bi bi-cash-stack"></i>
+
+                <div>
+
+                  <strong>
+                    Efectivo
+                  </strong>
+
+                  <span>
+                    Pago al recibir
+                  </span>
+
+                </div>
+
+              </div>
+
+            </label>
+
+
+            <label class="payment-option">
+
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="transfer"
+                [(ngModel)]="customer.paymentMethod">
+
+              <div class="payment-content">
+
+                <i class="bi bi-bank"></i>
+
+                <div>
+
+                  <strong>
+                    Transferencia
+                  </strong>
+
+                  <span>
+                    Transferencia bancaria
+                  </span>
+
+                </div>
+
+              </div>
+
+            </label>
+
+
+            <label class="payment-option">
+
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="delivery"
+                [(ngModel)]="customer.paymentMethod">
+
+              <div class="payment-content">
+
+                <i class="bi bi-wallet2"></i>
+
+                <div>
+
+                  <strong>
+                    Contraentrega
+                  </strong>
+
+                  <span>
+                    Paga al recibir
+                  </span>
+
+                </div>
+
+              </div>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- OBSERVACIONES -->
+
+        <div class="form-group full">
+
+          <label for="notes">
+            Observaciones
+          </label>
+
+          <textarea
+            id="notes"
+            rows="4"
+            [(ngModel)]="customer.notes"
+            placeholder="Indicaciones para la entrega...">
+          </textarea>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         RESUMEN DEL PEDIDO
+    =================================================== -->
+
+    <aside class="order-card">
+
+      <div class="card-header">
+
+        <div class="header-icon">
+
+          <i class="bi bi-bag-check"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Resumen del pedido
+          </h2>
+
+          <p>
+            {{ items.length }}
+            {{ items.length === 1 ? 'producto' : 'productos' }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCTOS -->
+
+      <div class="checkout-items">
+
+
+        <div
+          class="checkout-item"
+          *ngFor="let item of items">
+
+
+          <!-- IMAGEN -->
+
+          <div class="item-image">
+
+            <img
+              [src]="item.product.imageUrl"
+              [alt]="item.product.name">
+
+          </div>
+
+
+          <!-- INFORMACIÓN -->
+
+          <div class="item-info">
+
+            <h3>
+              {{ item.product.name }}
+            </h3>
+
+            <span class="item-price">
+
+              {{ item.product.price | currency:'COP':'symbol':'1.0-0' }}
+
+            </span>
+
+
+            <!-- CANTIDAD -->
+
+            <div class="quantity-control">
+
+              <button
+                type="button"
+                (click)="decreaseQuantity(item.product.id)">
+
+                <i class="bi bi-dash"></i>
+
+              </button>
+
+              <span>
+                {{ item.quantity }}
+              </span>
+
+              <button
+                type="button"
+                (click)="increaseQuantity(item.product.id)">
+
+                <i class="bi bi-plus"></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- SUBTOTAL -->
+
+          <div class="item-subtotal">
+
+            {{
+              item.product.price * item.quantity
+              | currency:'COP':'symbol':'1.0-0'
+            }}
+
+          </div>
+
+
+          <!-- ELIMINAR -->
+
+          <button
+            type="button"
+            class="remove-item"
+            (click)="removeItem(item.product.id)"
+            aria-label="Eliminar producto">
+
+            <i class="bi bi-trash"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTALES -->
+
+      <div class="totals">
+
+        <div class="total-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong>
+            {{ subtotal | currency:'COP':'symbol':'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <div class="total-row">
+
+          <span>
+            Envío
+          </span>
+
+          <strong>
+
+            <span *ngIf="shipping === 0">
+              Gratis
+            </span>
+
+            <span *ngIf="shipping > 0">
+              {{ shipping | currency:'COP':'symbol':'1.0-0' }}
+            </span>
+
+          </strong>
+
+        </div>
+
+
+        <div class="total-divider"></div>
+
+
+        <div class="total-row grand-total">
+
+          <span>
+            Total
+          </span>
+
+          <strong>
+            {{ total | currency:'COP':'symbol':'1.0-0' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONFIRMAR -->
+
+      <button
+        type="button"
+        class="confirm-button"
+        (click)="confirmOrder()">
+
+        <span>
+          Confirmar pedido
+        </span>
+
+        <i class="bi bi-arrow-right"></i>
+
+      </button>
+
+
+      <div class="secure-message">
+
+        <i class="bi bi-shield-check"></i>
+
+        <span>
+          Tu información está protegida
+        </span>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</div>

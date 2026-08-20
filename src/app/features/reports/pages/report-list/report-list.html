@@ -1,0 +1,1095 @@
+<div class="container-fluid py-4">
+
+  <!-- ==========================================
+       ENCABEZADO
+  =========================================== -->
+
+  <div class="mb-4">
+
+    <h2 class="fw-bold mb-1">
+      Reportes
+    </h2>
+
+    <p class="text-muted mb-0">
+      Consulta y genera reportes del sistema
+    </p>
+
+  </div>
+
+
+  <!-- ==========================================
+       FILTROS
+  =========================================== -->
+
+  <div class="card border-0 shadow-sm">
+
+    <div class="card-body">
+
+      <div class="row g-3 align-items-end">
+
+        <!-- TIPO DE REPORTE -->
+
+        <div class="col-md-4">
+
+          <label class="form-label fw-semibold">
+            Tipo de reporte
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="reportType"
+            (ngModelChange)="onReportTypeChange($event)">
+
+            <option value="sales">
+              Ventas
+            </option>
+
+            <option value="purchases">
+              Compras
+            </option>
+
+            <option value="inventory">
+              Inventario
+            </option>
+
+            <option value="customers">
+              Clientes
+            </option>
+
+            <option value="suppliers">
+              Proveedores
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- DESDE -->
+
+        <div class="col-md-3">
+
+          <label class="form-label fw-semibold">
+            Desde
+          </label>
+
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="dateFrom">
+
+        </div>
+
+
+        <!-- HASTA -->
+
+        <div class="col-md-3">
+
+          <label class="form-label fw-semibold">
+            Hasta
+          </label>
+
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="dateTo">
+
+        </div>
+
+
+        <!-- GENERAR -->
+
+        <div class="col-md-2">
+
+          <button
+            type="button"
+            class="btn btn-primary w-100"
+            (click)="generateReport()"
+            [disabled]="loading">
+
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm me-2">
+            </span>
+
+            {{ loading ? 'Generando...' : 'Generar reporte' }}
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       ERROR
+  =========================================== -->
+
+  <div
+    *ngIf="error"
+    class="alert alert-danger mt-4">
+
+    {{ error }}
+
+  </div>
+
+
+  <!-- ==========================================
+       REPORTE
+  =========================================== -->
+
+  <div class="card border-0 shadow-sm mt-4">
+
+    <div class="card-body">
+
+
+      <!-- ======================================
+           ENCABEZADO DEL RESULTADO
+      ======================================= -->
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <span
+          class="text-muted"
+          *ngIf="reportType === 'sales'">
+
+          {{ orders.length }} pedido(s)
+
+        </span>
+
+
+        <span
+          class="text-muted"
+          *ngIf="reportType === 'purchases'">
+
+          {{ purchases.length }} compra(s)
+
+        </span>
+
+      </div>
+
+
+      <!-- ==================================================
+           ===================== VENTAS =====================
+      =================================================== -->
+
+      <ng-container *ngIf="reportType === 'sales'">
+
+
+        <!-- ======================================
+             RESUMEN
+        ======================================= -->
+
+        <div
+          class="row g-3 mb-4"
+          *ngIf="orders.length > 0">
+
+
+          <!-- CANTIDAD -->
+
+          <div class="col-md-6">
+
+            <div class="card border-0 bg-light h-100">
+
+              <div class="card-body">
+
+                <p class="text-muted mb-1">
+                  Cantidad de ventas
+                </p>
+
+                <h3 class="fw-bold mb-0">
+                  {{ orders.length }}
+                </h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOTAL -->
+
+          <div class="col-md-6">
+
+            <div class="card border-0 bg-light h-100">
+
+              <div class="card-body">
+
+                <p class="text-muted mb-1">
+                  Total vendido
+                </p>
+
+                <h3 class="fw-bold mb-0">
+
+                  {{
+                    totalSales
+                      | currency:'COP':'symbol-narrow':'1.0-0'
+                  }}
+
+                </h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             TABLA DESKTOP / TABLET
+        ======================================= -->
+
+        <div class="report-table desktop-sales">
+
+          <h2 class="fw-bold mb-3">
+            Reporte de Ventas
+          </h2>
+
+          <div class="table-responsive">
+
+            <table class="table align-middle">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Fecha
+                  </th>
+
+                  <th>
+                    Pedido
+                  </th>
+
+                  <th>
+                    Cliente
+                  </th>
+
+                  <th>
+                    Método de pago
+                  </th>
+
+                  <th>
+                    Estado
+                  </th>
+
+                  <th class="text-end">
+                    Total
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <!-- SIN RESULTADOS -->
+
+                <tr *ngIf="orders.length === 0">
+
+                  <td
+                    colspan="6"
+                    class="text-center text-muted py-5">
+
+                    Selecciona un período y genera el reporte
+
+                  </td>
+
+                </tr>
+
+
+                <!-- PEDIDOS -->
+
+                <tr
+                  *ngFor="let order of orders">
+
+                  <td>
+
+                    {{
+                      order.createdAt
+                        | date:'dd/MM/yyyy HH:mm'
+                    }}
+
+                  </td>
+
+
+                  <td>
+
+                    #{{ order.id }}
+
+                  </td>
+
+
+                  <td>
+
+                    {{
+                      order.customer?.name
+                        || 'Cliente no disponible'
+                    }}
+
+                  </td>
+
+
+                  <td>
+
+                    {{ order.paymentMethod }}
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="badge bg-secondary">
+
+                      {{ order.status }}
+
+                    </span>
+
+                  </td>
+
+
+                  <td class="text-end fw-semibold">
+
+                    {{
+                      order.total
+                        | currency:'COP':'symbol-narrow':'1.0-0'
+                    }}
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+
+              <!-- TOTAL -->
+
+              <tfoot *ngIf="orders.length > 0">
+
+                <tr>
+
+                  <th
+                    colspan="5"
+                    class="text-end">
+
+                    Total ventas
+
+                  </th>
+
+                  <th class="text-end">
+
+                    {{
+                      totalSales
+                        | currency:'COP':'symbol-narrow':'1.0-0'
+                    }}
+
+                  </th>
+
+                </tr>
+
+              </tfoot>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             TARJETAS MOBILE
+        ======================================= -->
+
+        <div class="mobile-sales">
+
+          <h2 class="fw-bold mb-3">
+            Reporte de Ventas
+          </h2>
+
+
+          <!-- SIN RESULTADOS -->
+
+          <div
+            *ngIf="orders.length === 0"
+            class="text-center text-muted py-5">
+
+            Selecciona un período y genera el reporte
+
+          </div>
+
+
+          <!-- TARJETAS -->
+
+          <div
+            class="report-mobile-card"
+            *ngFor="let order of orders">
+
+            <div class="report-info">
+
+
+              <!-- FECHA -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Fecha
+                </span>
+
+                <span class="report-value">
+
+                  {{ order.createdAt | date:'dd/MM/yyyy' }}
+
+                </span>
+
+              </div>
+
+
+              <!-- PEDIDO -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Pedido
+                </span>
+
+                <span class="report-value">
+
+                  #{{ order.id }}
+
+                </span>
+
+              </div>
+
+
+              <!-- CLIENTE -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Cliente
+                </span>
+
+                <span class="report-value">
+
+                  {{
+                    order.customer?.name
+                      || 'Cliente no disponible'
+                  }}
+
+                </span>
+
+              </div>
+
+
+              <!-- MÉTODO DE PAGO -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Método pago
+                </span>
+
+                <span class="report-value">
+
+                  {{ order.paymentMethod }}
+
+                </span>
+
+              </div>
+
+
+              <!-- ESTADO -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Estado
+                </span>
+
+                <span class="report-value">
+
+                  <span class="badge bg-secondary">
+
+                    {{ order.status }}
+
+                  </span>
+
+                </span>
+
+              </div>
+
+
+              <!-- TOTAL -->
+
+              <div class="report-row report-total">
+
+                <span class="report-label">
+                  Total
+                </span>
+
+                <span class="report-value">
+
+                  {{
+                    order.total
+                      | currency:'COP':'symbol-narrow':'1.0-0'
+                  }}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOTAL GENERAL -->
+
+          <div
+            *ngIf="orders.length > 0"
+            class="mobile-report-total">
+
+            <span>
+              Total ventas
+            </span>
+
+            <strong>
+
+              {{
+                totalSales
+                  | currency:'COP':'symbol-narrow':'1.0-0'
+              }}
+
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             EXPORTAR VENTAS
+        ======================================= -->
+
+        <div
+          class="botones mt-3"
+          *ngIf="orders.length > 0">
+
+
+          <button
+            type="button"
+            class="btn btn-danger me-2"
+            (click)="exportToPDF()">
+
+            <i class="bi bi-file-earmark-pdf me-1"></i>
+
+            Exportar PDF
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="exportToExcel()">
+
+            <i class="bi bi-file-earmark-excel me-1"></i>
+
+            Exportar Excel
+
+          </button>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- ==================================================
+           ==================== COMPRAS =====================
+      =================================================== -->
+
+      <ng-container *ngIf="reportType === 'purchases'">
+
+
+        <!-- ======================================
+             RESUMEN
+        ======================================= -->
+
+        <div
+          class="row g-3 mb-4"
+          *ngIf="purchases.length > 0">
+
+
+          <!-- CANTIDAD -->
+
+          <div class="col-md-6">
+
+            <div class="card border-0 bg-light h-100">
+
+              <div class="card-body">
+
+                <p class="text-muted mb-1">
+                  Cantidad de compras
+                </p>
+
+                <h3 class="fw-bold mb-0">
+
+                  {{ purchases.length }}
+
+                </h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOTAL -->
+
+          <div class="col-md-6">
+
+            <div class="card border-0 bg-light h-100">
+
+              <div class="card-body">
+
+                <p class="text-muted mb-1">
+                  Total comprado
+                </p>
+
+                <h3 class="fw-bold mb-0">
+
+                  {{
+                    totalPurchases
+                      | currency:'COP':'symbol-narrow':'1.0-0'
+                  }}
+
+                </h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             TABLA DESKTOP / TABLET
+        ======================================= -->
+
+        <div class="report-table desktop-purchases">
+
+          <h2 class="fw-bold mb-3">
+            Reporte de Compras
+          </h2>
+
+          <div class="table-responsive">
+
+            <table class="table align-middle">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Fecha
+                  </th>
+
+                  <th>
+                    Factura
+                  </th>
+
+                  <th>
+                    Proveedor
+                  </th>
+
+                  <th>
+                    Método de pago
+                  </th>
+
+                  <th>
+                    Estado
+                  </th>
+
+                  <th class="text-end">
+                    Total
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <!-- SIN RESULTADOS -->
+
+                <tr *ngIf="purchases.length === 0">
+
+                  <td
+                    colspan="6"
+                    class="text-center text-muted py-5">
+
+                    Selecciona un período y genera el reporte
+
+                  </td>
+
+                </tr>
+
+
+                <!-- COMPRAS -->
+
+                <tr
+                  *ngFor="let purchase of purchases">
+
+                  <td>
+
+                    {{
+                      purchase.createdAt
+                        | date:'dd/MM/yyyy HH:mm'
+                    }}
+
+                  </td>
+
+
+                  <td>
+
+                    {{ purchase.invoiceNumber }}
+
+                  </td>
+
+
+                  <td>
+
+                    {{
+                      purchase.supplier?.company
+                        || purchase.supplier?.name
+                        || 'Proveedor no disponible'
+                    }}
+
+                  </td>
+
+
+                  <td>
+
+                    {{ purchase.paymentMethod }}
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="badge bg-secondary">
+
+                      {{ purchase.status }}
+
+                    </span>
+
+                  </td>
+
+
+                  <td class="text-end fw-semibold">
+
+                    {{
+                      purchase.total
+                        | currency:'COP':'symbol-narrow':'1.0-0'
+                    }}
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+
+              <!-- TOTAL -->
+
+              <tfoot *ngIf="purchases.length > 0">
+
+                <tr>
+
+                  <th
+                    colspan="5"
+                    class="text-end">
+
+                    Total compras
+
+                  </th>
+
+                  <th class="text-end">
+
+                    {{
+                      totalPurchases
+                        | currency:'COP':'symbol-narrow':'1.0-0'
+                    }}
+
+                  </th>
+
+                </tr>
+
+              </tfoot>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             TARJETAS MOBILE
+        ======================================= -->
+
+        <div class="mobile-purchases">
+
+          <h2 class="fw-bold mb-3">
+            Reporte de Compras
+          </h2>
+
+
+          <!-- SIN RESULTADOS -->
+
+          <div
+            *ngIf="purchases.length === 0"
+            class="text-center text-muted py-5">
+
+            Selecciona un período y genera el reporte
+
+          </div>
+
+
+          <!-- TARJETAS -->
+
+          <div
+            class="report-mobile-card"
+            *ngFor="let purchase of purchases">
+
+            <div class="report-info">
+
+
+              <!-- FECHA -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Fecha
+                </span>
+
+                <span class="report-value">
+
+                  {{ purchase.createdAt | date:'dd/MM/yyyy' }}
+
+                </span>
+
+              </div>
+
+
+              <!-- FACTURA -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Factura
+                </span>
+
+                <span class="report-value">
+
+                  {{ purchase.invoiceNumber }}
+
+                </span>
+
+              </div>
+
+
+              <!-- PROVEEDOR -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Proveedor
+                </span>
+
+                <span class="report-value">
+
+                  {{
+                    purchase.supplier?.company
+                      || purchase.supplier?.name
+                      || 'Proveedor no disponible'
+                  }}
+
+                </span>
+
+              </div>
+
+
+              <!-- MÉTODO DE PAGO -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Método pago
+                </span>
+
+                <span class="report-value">
+
+                  {{ purchase.paymentMethod }}
+
+                </span>
+
+              </div>
+
+
+              <!-- ESTADO -->
+
+              <div class="report-row">
+
+                <span class="report-label">
+                  Estado
+                </span>
+
+                <span class="report-value">
+
+                  <span class="badge bg-secondary">
+
+                    {{ purchase.status }}
+
+                  </span>
+
+                </span>
+
+              </div>
+
+
+              <!-- TOTAL -->
+
+              <div class="report-row report-total">
+
+                <span class="report-label">
+                  Total
+                </span>
+
+                <span class="report-value">
+
+                  {{
+                    purchase.total
+                      | currency:'COP':'symbol-narrow':'1.0-0'
+                  }}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOTAL GENERAL -->
+
+          <div
+            *ngIf="purchases.length > 0"
+            class="mobile-report-total">
+
+            <span>
+              Total compras
+            </span>
+
+            <strong>
+
+              {{
+                totalPurchases
+                  | currency:'COP':'symbol-narrow':'1.0-0'
+              }}
+
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================
+             EXPORTAR COMPRAS
+        ======================================= -->
+
+        <div
+          class="botones mt-3"
+          *ngIf="purchases.length > 0">
+
+
+          <button
+            type="button"
+            class="btn btn-danger me-2"
+            (click)="exportPurchasesToPDF()">
+
+            <i class="bi bi-file-earmark-pdf me-1"></i>
+
+            Exportar PDF
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="exportPurchasesToExcel()">
+
+            <i class="bi bi-file-earmark-excel me-1"></i>
+
+            Exportar Excel
+
+          </button>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- ==================================================
+           =================== INVENTARIO ===================
+      =================================================== -->
+
+      <ng-container *ngIf="reportType === 'inventory'">
+
+        <app-inventory></app-inventory>
+
+      </ng-container>
+
+
+      <!-- ==================================================
+           ==================== CLIENTES ====================
+      =================================================== -->
+
+      <ng-container *ngIf="reportType === 'customers'">
+
+        <app-customers></app-customers>
+
+      </ng-container>
+
+
+      <!-- ==================================================
+           =================== PROVEEDORES ==================
+      =================================================== -->
+
+      <ng-container *ngIf="reportType === 'suppliers'">
+
+        <app-suppliers></app-suppliers>
+
+      </ng-container>
+
+
+    </div>
+
+  </div>
+
+</div>

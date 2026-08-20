@@ -1,0 +1,845 @@
+/* ==================================================
+   CONTENEDOR PRINCIPAL
+================================================== */
+
+.tracking-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 35px 25px 60px;
+  background: #f6f7f5;
+}
+
+
+/* ==================================================
+   CONTENEDOR
+================================================== */
+
+.tracking-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* ==================================================
+   LOADING
+================================================== */
+
+.loading-state {
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #6b7280;
+}
+
+.loading-spinner {
+  width: 45px;
+  height: 45px;
+
+  border: 4px solid #e5e7eb;
+  border-top-color: #3d4537;
+
+  border-radius: 50%;
+
+  animation: tracking-spin 0.8s linear infinite;
+
+  margin-bottom: 15px;
+}
+
+@keyframes tracking-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.tracking-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-bottom: 25px;
+}
+
+.tracking-eyebrow {
+  display: block;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  color: #6b7280;
+
+  margin-bottom: 5px;
+}
+
+.tracking-header h1 {
+  margin: 0;
+
+  font-size: 32px;
+  font-weight: 700;
+
+  color: #20251f;
+}
+
+.tracking-header p {
+  margin: 8px 0 0;
+
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* ==================================================
+   BOTÓN VOLVER
+================================================== */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 11px 18px;
+
+  border: 1px solid #dfe3dc;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #3d4537;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: #3d4537;
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+
+/* ==================================================
+   ESTADO ACTUAL
+================================================== */
+
+.current-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 24px;
+
+  margin-bottom: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7e2;
+  border-radius: 14px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.current-status span {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.current-status strong {
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  background: #fff3cd;
+
+  color: #856404;
+
+  font-size: 14px;
+}
+
+
+/* ==================================================
+   TARJETAS GENERALES
+================================================== */
+
+.tracking-card,
+.order-info-card,
+.products-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7e2;
+  border-radius: 16px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+
+  margin-bottom: 20px;
+}
+
+.tracking-card {
+  padding: 28px;
+}
+
+.order-info-card {
+  padding: 25px;
+}
+
+.products-card {
+  padding: 25px;
+}
+
+.tracking-card h2,
+.order-info-card h2,
+.products-card h2 {
+  margin: 0 0 25px;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  color: #20251f;
+}
+
+
+/* ==================================================
+   TIMELINE
+================================================== */
+
+.timeline {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 10px 0;
+}
+
+
+/* Línea */
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  top: 31px;
+  left: 7%;
+  right: 7%;
+
+  height: 3px;
+
+  background: #e5e7e2;
+
+  z-index: 0;
+}
+
+
+/* ==================================================
+   PASO
+================================================== */
+
+.timeline-step {
+  position: relative;
+  z-index: 1;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  color: #9ca3af;
+}
+
+
+/* ==================================================
+   ICONO
+================================================== */
+
+.step-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f2ef;
+
+  border: 3px solid #ffffff;
+
+  box-shadow: 0 0 0 2px #e5e7e2;
+
+  font-size: 21px;
+
+  margin-bottom: 12px;
+
+  transition: all 0.25s ease;
+}
+
+
+/* ==================================================
+   CONTENIDO
+================================================== */
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.step-content strong {
+  font-size: 14px;
+
+  color: #6b7280;
+}
+
+.step-content span {
+  max-width: 180px;
+
+  font-size: 12px;
+
+  color: #9ca3af;
+
+  line-height: 1.4;
+}
+
+
+/* ==================================================
+   PASO ACTIVO
+================================================== */
+
+.timeline-step.active {
+  color: #3d4537;
+}
+
+.timeline-step.active .step-icon {
+  background: #3d4537;
+
+  color: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(61, 69, 55, 0.15);
+}
+
+.timeline-step.active .step-content strong {
+  color: #3d4537;
+}
+
+
+/* ==================================================
+   PASO COMPLETADO
+================================================== */
+
+.timeline-step.completed {
+  color: #3d4537;
+}
+
+.timeline-step.completed .step-icon {
+  background: #3d4537;
+
+  color: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(61, 69, 55, 0.15);
+}
+
+.timeline-step.completed .step-content strong {
+  color: #3d4537;
+}
+
+
+/* ==================================================
+   INFORMACIÓN DEL PEDIDO
+================================================== */
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+}
+
+.info-item {
+  padding: 17px;
+
+  background: #f8f9f7;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.info-item span {
+  font-size: 12px;
+
+  color: #7b8177;
+}
+
+.info-item strong {
+  font-size: 15px;
+
+  color: #20251f;
+}
+
+
+/* ==================================================
+   PRODUCTOS
+================================================== */
+
+.products-card h2 {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.products-card h2 i {
+  color: #3d4537;
+}
+
+
+/* ==================================================
+   PRODUCT ROW
+================================================== */
+
+.product-row {
+  display: grid;
+
+  grid-template-columns: 70px 1fr auto;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #edf0eb;
+}
+
+.product-row:last-of-type {
+  border-bottom: none;
+}
+
+
+/* ==================================================
+   IMAGEN PRODUCTO
+================================================== */
+
+.product-image {
+  width: 70px;
+  height: 70px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #f1f2ef;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.no-image {
+  color: #9ca3af;
+
+  font-size: 22px;
+}
+
+
+/* ==================================================
+   INFORMACIÓN PRODUCTO
+================================================== */
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.product-info strong {
+  font-size: 15px;
+
+  color: #20251f;
+}
+
+.product-info span {
+  font-size: 13px;
+
+  color: #7b8177;
+}
+
+
+/* ==================================================
+   PRECIO PRODUCTO
+================================================== */
+
+.product-price {
+  font-size: 15px;
+
+  color: #20251f;
+
+  white-space: nowrap;
+}
+
+
+/* ==================================================
+   TOTAL
+================================================== */
+
+.total-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 20px;
+
+  margin-top: 10px;
+
+  border-top: 2px solid #e5e7e2;
+}
+
+.total-row span {
+  font-size: 15px;
+
+  color: #6b7280;
+}
+
+.total-row strong {
+  font-size: 22px;
+
+  color: #3d4537;
+}
+
+
+/* ==================================================
+   ENTREGA
+================================================== */
+
+.delivery-card {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 22px 25px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7e2;
+
+  border-radius: 16px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.delivery-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #f1f2ef;
+
+  color: #3d4537;
+
+  font-size: 21px;
+}
+
+.delivery-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.delivery-card span {
+  font-size: 12px;
+
+  color: #7b8177;
+}
+
+.delivery-card strong {
+  font-size: 14px;
+
+  color: #20251f;
+}
+
+.delivery-card small {
+  font-size: 13px;
+
+  color: #7b8177;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 768px) {
+
+  .tracking-page {
+    padding: 25px 16px 45px;
+  }
+
+  .tracking-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tracking-header h1 {
+    font-size: 27px;
+  }
+
+  .back-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline {
+    gap: 8px;
+  }
+
+  .step-content span {
+    display: none;
+  }
+
+}
+
+
+/* ==================================================
+   MÓVIL
+================================================== */
+
+@media (max-width: 576px) {
+
+  .tracking-page {
+    padding: 20px 12px 35px;
+  }
+
+  .tracking-header {
+    margin-bottom: 18px;
+  }
+
+  .tracking-header h1 {
+    font-size: 24px;
+  }
+
+  .tracking-header p {
+    font-size: 13px;
+  }
+
+
+  /* Estado */
+
+  .current-status {
+    padding: 16px;
+
+    gap: 10px;
+  }
+
+  .current-status span {
+    font-size: 13px;
+  }
+
+
+  /* Timeline */
+
+  .tracking-card {
+    padding: 20px 15px;
+  }
+
+  .tracking-card h2,
+  .order-info-card h2,
+  .products-card h2 {
+    font-size: 17px;
+  }
+
+  .timeline {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    padding: 5px 0;
+  }
+
+  .timeline::before {
+    top: 28px;
+    bottom: 28px;
+
+    left: 28px;
+
+    width: 3px;
+    height: auto;
+
+    right: auto;
+  }
+
+  .timeline-step {
+    flex-direction: row;
+
+    align-items: center;
+
+    text-align: left;
+
+    gap: 14px;
+  }
+
+  .step-icon {
+    width: 56px;
+    height: 56px;
+
+    flex-shrink: 0;
+
+    margin-bottom: 0;
+  }
+
+  .step-content span {
+    display: block;
+
+    max-width: none;
+  }
+
+
+  /* Información */
+
+  .order-info-card {
+    padding: 20px 15px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+  }
+
+  .info-item {
+    padding: 13px;
+  }
+
+  .info-item strong {
+    font-size: 13px;
+  }
+
+
+  /* Productos */
+
+  .products-card {
+    padding: 20px 15px;
+  }
+
+  .product-row {
+    grid-template-columns: 55px 1fr;
+
+    gap: 12px;
+  }
+
+  .product-image {
+    width: 55px;
+    height: 55px;
+  }
+
+  .product-price {
+    grid-column: 2;
+
+    font-size: 14px;
+  }
+
+
+  /* Total */
+
+  .total-row {
+    padding-top: 17px;
+  }
+
+  .total-row strong {
+    font-size: 19px;
+  }
+
+
+  /* Entrega */
+
+  .delivery-card {
+    align-items: flex-start;
+
+    padding: 18px 15px;
+
+    gap: 12px;
+  }
+
+  .delivery-icon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  .delivery-card strong {
+    font-size: 13px;
+
+    line-height: 1.4;
+  }
+
+}
+
+
+/* ==================================================
+   MÓVIL PEQUEÑO
+================================================== */
+
+@media (max-width: 380px) {
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-header h1 {
+    font-size: 22px;
+  }
+
+}

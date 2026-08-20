@@ -1,0 +1,221 @@
+<div class="table-card">
+
+    <!--==========================
+        TABLA
+    ===========================-->
+
+    <div class="desktop-table">
+
+        <table class="products-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Nombre</th>
+
+                    <th>Correo</th>
+
+                    <th>Teléfono</th>
+
+                    <th>Dirección</th>
+
+                    <th>Referencia</th>
+
+                    <th>Estado</th>
+
+                    <th class="text-center">Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for (customer of customers; track customer.id) {
+
+                <tr>
+
+                    <td><strong>{{ customer.name }}</strong></td>
+
+                    <td>{{ customer.email }}</td>
+
+                    <td>{{ customer.phone }}</td>
+
+                    <td>{{ customer.address }}</td>
+
+                    <td>{{ customer.reference || '-' }}</td>
+
+                    <td>
+
+                        <span
+                            class="status"
+                            [class.active]="customer.isActive"
+                            [class.inactive]="!customer.isActive">
+
+                            {{ customer.isActive ? 'Activo' : 'Inactivo' }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="btn-action btn-view"
+                                (click)="onView(customer)">
+
+                                <i class="bi bi-eye-fill"></i>
+
+                            </button>
+
+                            <button
+                                class="btn-action btn-edit"
+                                (click)="onEdit(customer.id)">
+
+                                <i class="bi bi-pencil-square"></i>
+
+                            </button>
+
+                            <button
+                                class="btn-action btn-delete"
+                                (click)="onDelete(customer)">
+
+                                <i class="bi bi-trash-fill"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                } @empty {
+
+                <tr>
+
+                    <td colspan="7" class="empty">
+
+                        No existen clientes registrados.
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!--==========================
+        MOBILE
+    ===========================-->
+
+    <div class="mobile-customers">
+
+        @for (customer of customers; track customer.id) {
+
+        <div class="customer-card">
+
+            <div class="customer-header">
+
+                <h4>{{ customer.name }}</h4>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">📧 Correo</span>
+
+                <span>{{ customer.email }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">📞 Teléfono</span>
+
+                <span>{{ customer.phone }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">📍 Dirección</span>
+
+                <span>{{ customer.address }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">📌 Referencia</span>
+
+                <span>{{ customer.reference || '-' }}</span>
+
+            </div>
+
+            <div class="info-item">
+
+                <span class="label">Estado</span>
+
+                <span
+                    class="status"
+                    [class.active]="customer.isActive"
+                    [class.inactive]="!customer.isActive">
+
+                    {{ customer.isActive ? 'Activo' : 'Inactivo' }}
+
+                </span>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="btn-action btn-view"
+                    (click)="onView(customer)">
+
+                    <i class="bi bi-eye-fill"></i>
+
+                </button>
+
+                <button
+                    class="btn-action btn-edit"
+                    (click)="onEdit(customer.id)">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                </button>
+
+                <button
+                    class="btn-action btn-delete"
+                    (click)="onDelete(customer)">
+
+                    <i class="bi bi-trash-fill"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        } @empty {
+
+        <div class="empty">
+
+            No existen clientes registrados.
+
+        </div>
+
+        }
+
+    </div>
+
+</div>

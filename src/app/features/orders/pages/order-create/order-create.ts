@@ -85,12 +85,14 @@ orderStatus ='Pendiente';
     this.items = this.items.filter(i => i !== item);
   }
 
-  get total(): number {
-    return this.items.reduce(
-      (sum, item) => sum + item.subtotal,
-      0
-    );
-  }
+ get total(): number {
+    return this.items.reduce((sum, item) => {
+        const price = item.product?.price ?? 0;
+        const quantity = item.quantity ?? 0;
+
+        return sum + (price * quantity);
+    }, 0);
+}
 
   async saveOrder(): Promise<void> {
 

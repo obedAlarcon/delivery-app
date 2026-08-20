@@ -1,0 +1,244 @@
+/* ==================================================
+   CATALOG PAGE
+================================================== */
+
+.catalog-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background: linear-gradient(
+    180deg,
+    #f8fafc 0%,
+    #f1f5f9 100%
+  );
+
+  padding-bottom: 80px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+
+/* ==================================================
+   CONTENEDOR
+================================================== */
+
+.catalog-container {
+  width: 100%;
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  padding: 40px 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.catalog-header {
+  margin-bottom: 24px;
+}
+
+
+.catalog-container h1 {
+  margin: 0;
+
+  font-size: 32px;
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  color: #0f172a;
+
+  letter-spacing: -0.03em;
+}
+
+
+.catalog-container > p {
+  margin: 6px 0 0;
+
+  font-size: 15px;
+
+  color: #94a3b8;
+
+  font-weight: 500;
+}
+
+
+/* ==================================================
+   FILTRO DE CATEGORÍAS
+================================================== */
+
+app-category-filter {
+  display: block;
+
+  width: 100%;
+
+  min-width: 0;
+
+  margin-top: 24px;
+
+  margin-bottom: 8px;
+}
+
+
+/* ==================================================
+   GRID DE PRODUCTOS
+================================================== */
+
+.products-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 24px;
+
+  margin-top: 24px;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 1024px) {
+
+  .catalog-container {
+    padding: 32px 20px;
+  }
+
+
+  .products-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+  }
+
+}
+
+
+/* ==================================================
+   TABLET PEQUEÑA
+================================================== */
+
+@media (max-width: 768px) {
+
+  .catalog-container {
+    padding: 28px 16px;
+  }
+
+
+  .catalog-container h1 {
+    font-size: 26px;
+  }
+
+
+  .catalog-container > p {
+    font-size: 14px;
+
+    margin-bottom: 0;
+  }
+
+
+  app-category-filter {
+    margin-top: 20px;
+
+    margin-bottom: 4px;
+  }
+
+
+  .products-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 20px;
+  }
+
+}
+
+
+/* ==================================================
+   MÓVIL
+================================================== */
+
+@media (max-width: 576px) {
+
+  .catalog-page {
+    padding-bottom: 70px;
+  }
+
+
+  .catalog-container {
+    padding: 22px 12px;
+  }
+
+
+  .catalog-container h1 {
+    font-size: 24px;
+  }
+
+
+  .catalog-container > p {
+    font-size: 13px;
+
+    margin-top: 5px;
+  }
+
+
+  app-category-filter {
+    margin-top: 18px;
+
+    margin-bottom: 2px;
+
+    width: 100%;
+  }
+
+
+  .products-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 18px;
+  }
+
+}
+
+
+/* ==================================================
+   MÓVIL MUY PEQUEÑO
+================================================== */
+
+@media (max-width: 400px) {
+
+  .catalog-container {
+    padding: 20px 10px;
+  }
+
+
+  .catalog-container h1 {
+    font-size: 22px;
+  }
+
+
+  .products-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    margin-top: 16px;
+  }
+
+}

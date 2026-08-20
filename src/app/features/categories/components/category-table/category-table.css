@@ -1,62 +1,143 @@
-.table-container{
+/*==================================================
+  HOST
+==================================================*/
 
+:host{
+
+    display:block;
+    width:100%;
+    min-width:0;
+
+}
+
+/*==================================================
+  CARD
+==================================================*/
+
+.table-card{
+
+    width:100%;
     background:#fff;
 
-    border-radius:18px;
+    border-radius:16px;
+
+    box-shadow:0 8px 24px rgba(15,23,42,.08);
 
     overflow:hidden;
 
-    box-shadow:0 8px 25px rgba(15,23,42,.08);
+    margin-top:24px;
 
 }
 
-.table{
+/*==================================================
+  TABLA
+==================================================*/
 
-    margin:0;
+.table-container{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    -webkit-overflow-scrolling:touch;
 
 }
 
-thead{
+.categories-table{
 
-    background:#2563eb;
+    width:100%;
 
-    color:#fff;
+    border-collapse:collapse;
 
 }
 
-th{
+.categories-table thead{
+
+    background:#f8fafc;
+
+}
+
+.categories-table th{
 
     padding:16px;
+
+    text-align:left;
+
+    font-size:14px;
 
     font-weight:600;
 
+    color:#64748b;
+
+    white-space:nowrap;
+
 }
 
-td{
+.categories-table td{
 
     padding:16px;
+
+    border-top:1px solid #e2e8f0;
 
     vertical-align:middle;
 
 }
 
-.btn-action{
+.categories-table tbody tr{
 
-    width:36px;
+    transition:.25s;
 
-    height:36px;
+}
 
-    border:none;
+.categories-table tbody tr:hover{
 
-    border-radius:10px;
+    background:#f8fafc;
 
-    margin:0 4px;
+}
 
-    display:inline-flex;
+/*==================================================
+  NOMBRE
+==================================================*/
+
+.categories-table strong{
+
+    color:#1e293b;
+
+    font-size:15px;
+
+}
+
+/*==================================================
+  ACCIONES
+==================================================*/
+
+.actions{
+
+    display:flex;
 
     justify-content:center;
 
     align-items:center;
+
+    gap:8px;
+
+}
+
+.btn-action{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     cursor:pointer;
 
@@ -64,32 +145,190 @@ td{
 
     text-decoration:none;
 
-}
-
-.edit{
-
-    background:#2563eb;
-
-    color:#fff;
+    font-size:16px;
 
 }
 
-.edit:hover{
+.btn-edit{
 
-    background:#1d4ed8;
+    background:#dbeafe;
 
-}
-
-.delete{
-
-    background:#ef4444;
-
-    color:#fff;
+    color:#2563eb;
 
 }
 
-.delete:hover{
+.btn-delete{
 
-    background:#dc2626;
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+.btn-action:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/*==================================================
+  EMPTY
+==================================================*/
+
+.empty{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#64748b;
+
+}
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+.mobile-categories{
+
+    display:none;
+
+    padding:16px;
+
+}
+
+.category-card{
+
+    border:1px solid #e2e8f0;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    background:#fff;
+
+    margin-bottom:16px;
+
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:16px;
+
+}
+
+.card-header h4{
+
+    margin:0;
+
+    color:#1e293b;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.card-header small{
+
+    color:#64748b;
+
+}
+
+.card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.card-body p{
+
+    margin:0;
+
+    color:#475569;
+
+}
+
+.description{
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:3;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+
+}
+
+/*==================================================
+  TABLET
+==================================================*/
+
+@media(max-width:991px){
+
+    .categories-table th,
+    .categories-table td{
+
+        padding:14px;
+
+    }
+
+    /* Ocultar Fecha */
+
+    .categories-table th:nth-child(4),
+    .categories-table td:nth-child(4){
+
+        display:none;
+
+    }
+
+}
+
+/*==================================================
+  MÓVIL
+==================================================*/
+
+@media(max-width:767px){
+
+    .desktop-table{
+
+        display:none;
+
+    }
+
+    .mobile-categories{
+
+        display:block;
+
+    }
+
+    .category-card .actions{
+
+        justify-content:center;
+
+        margin-top:16px;
+
+    }
+
+    .category-card .btn-action{
+
+        width:36px;
+
+        height:36px;
+
+        font-size:15px;
+
+    }
 
 }

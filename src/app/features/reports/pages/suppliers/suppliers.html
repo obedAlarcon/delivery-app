@@ -1,0 +1,588 @@
+<div class="container-fluid py-4">
+
+  <!-- ==========================================
+       ENCABEZADO
+  =========================================== -->
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+      <h2 class="fw-bold mb-1">
+        Reporte de Proveedores
+      </h2>
+
+      <p class="text-muted mb-0">
+        Consulta el estado actual de tus proveedores
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="loadSuppliers()">
+
+      <i class="bi bi-arrow-clockwise me-2"></i>
+
+      Actualizar
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================
+       FILTROS
+  =========================================== -->
+
+  <div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body">
+
+      <div class="row g-3 align-items-end">
+
+        <!-- BUSCAR -->
+
+        <div class="col-12 col-md-8">
+
+          <label class="form-label fw-semibold">
+            Buscar proveedor
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text">
+
+              <i class="bi bi-search"></i>
+
+            </span>
+
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre, empresa, NIT, correo o teléfono..."
+              [(ngModel)]="searchTerm"
+              (input)="applyFilters()">
+
+          </div>
+
+        </div>
+
+
+        <!-- ESTADO -->
+
+        <div class="col-12 col-md-2">
+
+          <label class="form-label fw-semibold">
+            Estado
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="selectedStatus"
+            (change)="applyFilters()">
+
+            <option value="">
+              Todos
+            </option>
+
+            <option value="Activo">
+              Activos
+            </option>
+
+            <option value="Inactivo">
+              Inactivos
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- LIMPIAR -->
+
+        <div class="col-12 col-md-2">
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary w-100"
+            (click)="clearFilters()">
+
+            <i class="bi bi-x-circle me-1"></i>
+
+            Limpiar
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       KPIs
+  =========================================== -->
+
+  <div class="row g-3 mb-4">
+
+
+    <!-- TOTAL -->
+
+    <div class="col-12 col-sm-6 col-xl-4">
+
+      <div class="card border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <p class="text-muted mb-1">
+                Proveedores
+              </p>
+
+              <h3 class="fw-bold mb-0">
+                {{ totalSuppliers }}
+              </h3>
+
+            </div>
+
+            <div class="kpi-icon">
+
+              <i class="bi bi-truck"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIVOS -->
+
+    <div class="col-12 col-sm-6 col-xl-4">
+
+      <div class="card border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <p class="text-muted mb-1">
+                Proveedores activos
+              </p>
+
+              <h3 class="fw-bold mb-0">
+                {{ activeSuppliers }}
+              </h3>
+
+            </div>
+
+            <div class="kpi-icon">
+
+              <i class="bi bi-person-check"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INACTIVOS -->
+
+    <div class="col-12 col-sm-6 col-xl-4">
+
+      <div class="card border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <p class="text-muted mb-1">
+                Proveedores inactivos
+              </p>
+
+              <h3 class="fw-bold mb-0">
+                {{ inactiveSuppliers }}
+              </h3>
+
+            </div>
+
+            <div class="kpi-icon danger">
+
+              <i class="bi bi-person-x"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       TABLA / PROVEEDORES
+  =========================================== -->
+
+  <div class="card border-0 shadow-sm">
+
+    <div class="card-body">
+
+      <!-- ENCABEZADO -->
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h5 class="fw-bold mb-0">
+          Proveedores registrados
+        </h5>
+
+        <span class="text-muted">
+          {{ filteredSuppliers.length }} proveedores
+        </span>
+
+      </div>
+
+
+      <!-- ========================================
+           TABLA DESKTOP / TABLET
+      ========================================= -->
+
+      <div class="suppliers-desktop">
+
+        <div class="table-responsive">
+
+          <table class="table table-hover align-middle mb-0">
+
+            <thead class="table-light">
+
+              <tr>
+
+                <th>
+                  Proveedor
+                </th>
+
+                <th>
+                  Empresa
+                </th>
+
+                <th>
+                  NIT
+                </th>
+
+                <th>
+                  Correo
+                </th>
+
+                <th>
+                  Teléfono
+                </th>
+
+                <th>
+                  Contacto
+                </th>
+
+                <th>
+                  Estado
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="let supplier of filteredSuppliers">
+
+                <td>
+
+                  <strong>
+                    {{ supplier.name }}
+                  </strong>
+
+                </td>
+
+                <td>
+                  {{ supplier.company }}
+                </td>
+
+                <td>
+                  {{ supplier.nit }}
+                </td>
+
+                <td>
+                  {{ supplier.email }}
+                </td>
+
+                <td>
+                  {{ supplier.phone }}
+                </td>
+
+                <td>
+                  {{ supplier.contactPerson || 'Sin contacto' }}
+                </td>
+
+                <td>
+
+                  <span
+                    class="badge"
+                    [ngClass]="getStatusClass(supplier)">
+
+                    {{ getSupplierStatus(supplier) }}
+
+                  </span>
+
+                </td>
+
+              </tr>
+
+
+              <!-- SIN PROVEEDORES -->
+
+              <tr
+                *ngIf="filteredSuppliers.length === 0">
+
+                <td
+                  colspan="7"
+                  class="text-center text-muted py-5">
+
+                  <i
+                    class="bi bi-truck fs-1 d-block mb-2">
+                  </i>
+
+                  No hay proveedores para mostrar.
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           TARJETAS MOBILE
+      ========================================= -->
+
+      <div class="suppliers-mobile">
+
+
+        <!-- SIN PROVEEDORES -->
+
+        <div
+          *ngIf="filteredSuppliers.length === 0"
+          class="suppliers-empty text-center text-muted py-5">
+
+          <i
+            class="bi bi-truck fs-1 d-block mb-2">
+          </i>
+
+          No hay proveedores para mostrar.
+
+        </div>
+
+
+        <!-- TARJETAS -->
+
+        <div
+          class="supplier-card"
+          *ngFor="let supplier of filteredSuppliers">
+
+
+          <!-- PROVEEDOR -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              Proveedor
+            </span>
+
+            <span class="supplier-value supplier-name">
+
+              {{ supplier.name }}
+
+            </span>
+
+          </div>
+
+
+          <!-- EMPRESA -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              Empresa
+            </span>
+
+            <span class="supplier-value">
+
+              {{ supplier.company }}
+
+            </span>
+
+          </div>
+
+
+          <!-- NIT -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              NIT
+            </span>
+
+            <span class="supplier-value">
+
+              {{ supplier.nit }}
+
+            </span>
+
+          </div>
+
+
+          <!-- CORREO -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              Correo
+            </span>
+
+            <span class="supplier-value">
+
+              {{ supplier.email }}
+
+            </span>
+
+          </div>
+
+
+          <!-- TELÉFONO -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              Teléfono
+            </span>
+
+            <span class="supplier-value">
+
+              {{ supplier.phone }}
+
+            </span>
+
+          </div>
+
+
+          <!-- CONTACTO -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              Contacto
+            </span>
+
+            <span class="supplier-value">
+
+              {{ supplier.contactPerson || 'Sin contacto' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- ESTADO -->
+
+          <div class="supplier-row">
+
+            <span class="supplier-label">
+              Estado
+            </span>
+
+            <span class="supplier-value">
+
+              <span
+                class="badge"
+                [ngClass]="getStatusClass(supplier)">
+
+                {{ getSupplierStatus(supplier) }}
+
+              </span>
+
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ==========================================
+           EXPORTACIONES
+      =========================================== -->
+
+      <div class="suppliers-export">
+
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="exportExcel()">
+
+          <i class="bi bi-file-earmark-excel me-1"></i>
+
+          Excel
+
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="exportPDF()">
+
+          <i class="bi bi-file-earmark-pdf me-1"></i>
+
+          PDF
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

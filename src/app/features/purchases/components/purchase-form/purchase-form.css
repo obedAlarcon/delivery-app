@@ -1,0 +1,228 @@
+:host {
+  display: block;
+}
+
+
+/* CONTENEDOR PRINCIPAL */
+
+.purchase-container {
+  width:100%;
+}
+
+
+.purchase-layout {
+
+  display:grid;
+
+  grid-template-columns:60% 40%;
+
+  gap:1rem;
+
+  align-items:start;
+
+}
+
+
+
+/* FACTURA */
+
+.invoice-panel {
+
+  min-width:0;
+
+}
+
+
+
+/* CATALOGO */
+
+.catalog-panel {
+
+  height:calc(100vh - 170px);
+
+}
+
+
+
+.catalog-panel .card {
+
+  height:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+}
+
+
+
+/* HEADER */
+
+.catalog-header {
+
+  position:sticky;
+
+  top:0;
+
+  z-index:20;
+
+  background:#fff;
+
+  border-bottom:1px solid #ececec;
+
+}
+
+
+
+/* BUSCADOR */
+
+.input-group {
+
+  position:sticky;
+
+  top:0;
+
+  background:white;
+
+  z-index:10;
+
+}
+
+
+
+/* TABLA */
+
+.catalog-scroll {
+
+  overflow-y:auto;
+
+  flex:1;
+
+  max-height:100%;
+
+}
+
+
+
+.catalog-scroll table {
+
+  margin-bottom:0;
+
+}
+
+
+
+.catalog-scroll thead {
+
+  position:sticky;
+
+  top:0;
+
+  z-index:5;
+
+}
+
+
+
+
+/* IMAGEN */
+
+.object-fit-cover {
+
+  width:40px;
+
+  height:40px;
+
+  object-fit:cover;
+
+  border-radius:8px;
+
+  border:1px solid #e9ecef;
+
+}
+
+
+
+
+/* EFECTO PRODUCTOS */
+
+.table tbody tr {
+
+  transition:.25s;
+
+}
+
+
+.table tbody tr:hover {
+
+  background:#f8f9fa;
+
+  transform:scale(1.01);
+
+}
+
+
+
+
+/* BOTON AGREGAR */
+
+.catalog-scroll .btn {
+
+  width:34px;
+
+  height:34px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:0;
+
+}
+
+
+
+
+
+/* RESPONSIVE */
+
+@media(max-width:991px){
+
+
+  .purchase-layout {
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .catalog-panel {
+
+    height:auto;
+
+  }
+
+
+  .catalog-scroll {
+
+    max-height:450px;
+
+  }
+
+
+  .table > :not(caption) > * > * {
+
+    padding:.55rem .75rem;
+
+    vertical-align:middle;
+
+  }
+
+
+}

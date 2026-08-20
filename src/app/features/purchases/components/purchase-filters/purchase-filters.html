@@ -1,0 +1,104 @@
+<div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-body">
+
+
+        <div class="row g-3">
+
+
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Buscar
+                </label>
+
+
+                <input
+
+                    type="text"
+
+                    class="form-control"
+
+                    placeholder="Factura o proveedor"
+
+                    [(ngModel)]="search"
+
+                    (input)="onSearch()">
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+
+                <label class="form-label">
+                    Estado
+                </label>
+
+
+                <select
+
+                    class="form-select"
+
+                    [(ngModel)]="status"
+
+                    (change)="onStatusChange()">
+
+
+                    <option value="">
+                        Todos
+                    </option>
+
+
+                    <option value="PENDING">
+                        Pendiente
+                    </option>
+
+
+                    <option value="COMPLETED">
+                        Completada
+                    </option>
+
+
+                    <option value="CANCELLED">
+                        Cancelada
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+<div class="col-md-2 d-flex align-items-end gap-2">
+
+
+    <button
+
+        class="btn btn-primary w-100"
+
+        type="button"
+
+        (click)="goCreate()">
+
+
+        <i class="bi bi-plus-circle"></i>
+
+        Nueva compra
+
+
+    </button>
+
+
+</div>
+            
+
+
+        </div>
+
+
+    </div>
+
+</div>

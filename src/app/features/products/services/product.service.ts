@@ -8,6 +8,9 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService extends BaseService {
+  getAll() {
+    throw new Error('Method not implemented.');
+  }
   getLowStock(): Observable<Product[]> {
   return this.http.get<Product[]>(this.endpoint + '/low-stock');
 }

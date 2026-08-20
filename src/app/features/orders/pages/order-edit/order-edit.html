@@ -1,1 +1,140 @@
-<p>order-edit works!</p>
+<div class="container-fluid py-4">
+
+  <div class="row justify-content-center">
+
+    <div class="col-lg-6 col-md-8">
+
+      <div class="card order-card border-0 shadow-lg">
+
+        <div class="card-header bg-white border-0 py-4">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <h3 class="fw-bold mb-1">
+                <i class="bi bi-pencil-square text-primary me-2"></i>
+                Editar Pedido
+              </h3>
+
+              <small class="text-muted">
+                Actualiza el estado del pedido y del pago.
+              </small>
+
+            </div>
+
+            <span class="badge bg-primary fs-6 px-3 py-2">
+              #{{ orderId }}
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="card-body p-4">
+
+          <form [formGroup]="form">
+
+            <div class="mb-4">
+
+              <label class="form-label fw-semibold">
+
+                <i class="bi bi-truck me-2 text-primary"></i>
+
+                Estado del pedido
+
+              </label>
+
+              <select
+                class="form-select form-select-lg"
+                formControlName="status">
+
+                <option value="Pendiente">🟡 Pendiente</option>
+                <option value="En proceso">🔵 En proceso</option>
+                <option value="Entregado">🟢 Entregado</option>
+                <option value="Cancelado">🔴 Cancelado</option>
+
+              </select>
+
+            </div>
+
+            <div class="mb-4">
+
+              <label class="form-label fw-semibold">
+
+                <i class="bi bi-credit-card me-2 text-success"></i>
+
+                Estado del pago
+
+              </label>
+
+              <select
+                class="form-select form-select-lg"
+                formControlName="paymentStatus">
+
+                <option value="Pendiente">🟡 Pendiente</option>
+                <option value="Pagado">🟢 Pagado</option>
+                <option value="Cancelado">🔴 Cancelado</option>
+
+              </select>
+
+            </div>
+
+            <hr class="my-4">
+
+            <div class="d-flex justify-content-end gap-3">
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-lg px-4"
+                (click)="cancel()">
+
+                <i class="bi bi-x-circle me-2"></i>
+
+                Cancelar
+
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-primary btn-lg px-4"
+                (click)="save()"
+                [disabled]="saving">
+
+                @if (!saving) {
+
+                  <span>
+
+                    <i class="bi bi-check-circle me-2"></i>
+
+                    Guardar cambios
+
+                  </span>
+
+                } @else {
+
+                  <span>
+
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+
+                    Guardando...
+
+                  </span>
+
+                }
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,563 @@
+<div class="container-fluid py-4">
+
+  <!-- ==========================================
+       ENCABEZADO
+  =========================================== -->
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+      <h2 class="fw-bold mb-1">
+        Reporte de Clientes
+      </h2>
+
+      <p class="text-muted mb-0">
+        Consulta el estado actual de tus clientes
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="loadCustomers()">
+
+      <i class="bi bi-arrow-clockwise me-2"></i>
+
+      Actualizar
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================
+       FILTROS
+  =========================================== -->
+
+  <div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body">
+
+      <div class="row g-3 align-items-end">
+
+        <!-- BUSCAR -->
+
+        <div class="col-12 col-md-8">
+
+          <label class="form-label fw-semibold">
+            Buscar cliente
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text">
+
+              <i class="bi bi-search"></i>
+
+            </span>
+
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre, correo o teléfono..."
+              [(ngModel)]="searchTerm"
+              (input)="applyFilters()">
+
+          </div>
+
+        </div>
+
+
+        <!-- ESTADO -->
+
+        <div class="col-12 col-md-2">
+
+          <label class="form-label fw-semibold">
+            Estado
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="selectedStatus"
+            (change)="applyFilters()">
+
+            <option value="">
+              Todos
+            </option>
+
+            <option value="Activo">
+              Activos
+            </option>
+
+            <option value="Inactivo">
+              Inactivos
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- LIMPIAR -->
+
+        <div class="col-12 col-md-2">
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary w-100"
+            (click)="clearFilters()">
+
+            <i class="bi bi-x-circle me-1"></i>
+
+            Limpiar
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       KPIs
+  =========================================== -->
+
+  <div class="row g-3 mb-4">
+
+
+    <!-- TOTAL -->
+
+    <div class="col-12 col-sm-6 col-xl-4">
+
+      <div class="card border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <p class="text-muted mb-1">
+                Clientes
+              </p>
+
+              <h3 class="fw-bold mb-0">
+                {{ totalCustomers }}
+              </h3>
+
+            </div>
+
+            <div class="kpi-icon">
+
+              <i class="bi bi-people"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIVOS -->
+
+    <div class="col-12 col-sm-6 col-xl-4">
+
+      <div class="card border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <p class="text-muted mb-1">
+                Clientes activos
+              </p>
+
+              <h3 class="fw-bold mb-0">
+                {{ activeCustomers }}
+              </h3>
+
+            </div>
+
+            <div class="kpi-icon">
+
+              <i class="bi bi-person-check"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INACTIVOS -->
+
+    <div class="col-12 col-sm-6 col-xl-4">
+
+      <div class="card border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+              <p class="text-muted mb-1">
+                Clientes inactivos
+              </p>
+
+              <h3 class="fw-bold mb-0">
+                {{ inactiveCustomers }}
+              </h3>
+
+            </div>
+
+            <div class="kpi-icon danger">
+
+              <i class="bi bi-person-x"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       TABLA / CLIENTES
+  =========================================== -->
+
+  <div class="card border-0 shadow-sm">
+
+    <div class="card-body">
+
+      <!-- ENCABEZADO -->
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h5 class="fw-bold mb-0">
+          Clientes registrados
+        </h5>
+
+        <span class="text-muted">
+          {{ filteredCustomers.length }} clientes
+        </span>
+
+      </div>
+
+
+      <!-- ========================================
+           TABLA DESKTOP / TABLET
+      ========================================= -->
+
+      <div class="customers-desktop">
+
+        <div class="table-responsive">
+
+          <table class="table table-hover align-middle mb-0">
+
+            <thead class="table-light">
+
+              <tr>
+
+                <th>
+                  Cliente
+                </th>
+
+                <th>
+                  Correo
+                </th>
+
+                <th>
+                  Teléfono
+                </th>
+
+                <th>
+                  Dirección
+                </th>
+
+                <th>
+                  Referencia
+                </th>
+
+                <th>
+                  Estado
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="let customer of filteredCustomers">
+
+                <td>
+
+                  <strong>
+                    {{ customer.name }}
+                  </strong>
+
+                </td>
+
+                <td>
+                  {{ customer.email }}
+                </td>
+
+                <td>
+                  {{ customer.phone }}
+                </td>
+
+                <td>
+                  {{ customer.address || 'Sin dirección' }}
+                </td>
+
+                <td>
+                  {{ customer.reference || 'Sin referencia' }}
+                </td>
+
+                <td>
+
+                  <span
+                    class="badge"
+                    [ngClass]="getStatusClass(customer)">
+
+                    {{ getCustomerStatus(customer) }}
+
+                  </span>
+
+                </td>
+
+              </tr>
+
+
+              <!-- SIN CLIENTES -->
+
+              <tr
+                *ngIf="filteredCustomers.length === 0">
+
+                <td
+                  colspan="6"
+                  class="text-center text-muted py-5">
+
+                  <i
+                    class="bi bi-people fs-1 d-block mb-2">
+                  </i>
+
+                  No hay clientes para mostrar.
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           TARJETAS MOBILE
+      ========================================= -->
+
+      <div class="customers-mobile">
+
+
+        <!-- SIN CLIENTES -->
+
+        <div
+          *ngIf="filteredCustomers.length === 0"
+          class="customers-empty text-center text-muted py-5">
+
+          <i
+            class="bi bi-people fs-1 d-block mb-2">
+          </i>
+
+          No hay clientes para mostrar.
+
+        </div>
+
+
+        <!-- TARJETAS -->
+
+        <div
+          class="customer-card"
+          *ngFor="let customer of filteredCustomers">
+
+
+          <!-- CLIENTE -->
+
+          <div class="customer-row">
+
+            <span class="customer-label">
+              Cliente
+            </span>
+
+            <span class="customer-value customer-name">
+
+              {{ customer.name }}
+
+            </span>
+
+          </div>
+
+
+          <!-- CORREO -->
+
+          <div class="customer-row">
+
+            <span class="customer-label">
+              Correo
+            </span>
+
+            <span class="customer-value">
+
+              {{ customer.email }}
+
+            </span>
+
+          </div>
+
+
+          <!-- TELÉFONO -->
+
+          <div class="customer-row">
+
+            <span class="customer-label">
+              Teléfono
+            </span>
+
+            <span class="customer-value">
+
+              {{ customer.phone }}
+
+            </span>
+
+          </div>
+
+
+          <!-- DIRECCIÓN -->
+
+          <div class="customer-row">
+
+            <span class="customer-label">
+              Dirección
+            </span>
+
+            <span class="customer-value">
+
+              {{ customer.address || 'Sin dirección' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- REFERENCIA -->
+
+          <div class="customer-row">
+
+            <span class="customer-label">
+              Referencia
+            </span>
+
+            <span class="customer-value">
+
+              {{ customer.reference || 'Sin referencia' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- ESTADO -->
+
+          <div class="customer-row">
+
+            <span class="customer-label">
+              Estado
+            </span>
+
+            <span class="customer-value">
+
+              <span
+                class="badge"
+                [ngClass]="getStatusClass(customer)">
+
+                {{ getCustomerStatus(customer) }}
+
+              </span>
+
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ==========================================
+           EXPORTACIONES
+      =========================================== -->
+
+      <div class="customers-export">
+
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="exportExcel()">
+
+          <i class="bi bi-file-earmark-excel me-1"></i>
+
+          Excel
+
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="exportPDF()">
+
+          <i class="bi bi-file-earmark-pdf me-1"></i>
+
+          PDF
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

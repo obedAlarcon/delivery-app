@@ -1,0 +1,242 @@
+<div class="page-wrapper">
+
+  <!-- Botón volver -->
+  <button (click)="back()" class="back-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+    </svg>
+    Volver
+  </button>
+
+  <div class="page-title">
+    <h1>Nueva compra</h1>
+    <p>Registra una nueva factura de compra</p>
+  </div>
+
+  <!-- ===== ARRIBA: Proveedor + Catálogo ===== -->
+  <div class="main-grid">
+
+    <div class="left-col">
+      <div class="card">
+        <h3 class="card-title">Nueva factura de compra</h3>
+
+        <form [formGroup]="form">
+
+          <div class="form-group">
+            <label>Proveedor</label>
+            <select formControlName="supplierId" (change)="onSupplierChange($event)">
+              <option value="" disabled>Seleccionar proveedor...</option>
+              @for (s of suppliers; track s.id) {
+                <option [value]="s.id">{{ s.name }}</option>
+              }
+            </select>
+          </div>
+
+          @if (selectedSupplier) {
+            <div class="readonly-grid">
+              <div class="readonly-field">
+                <span class="readonly-label">Empresa</span>
+                <span class="readonly-value">{{ selectedSupplier.company || selectedSupplier.name }}</span>
+              </div>
+              <div class="readonly-field">
+                <span class="readonly-label">NIT</span>
+                <span class="readonly-value">{{ selectedSupplier.nit }}</span>
+              </div>
+              <div class="readonly-field">
+                <span class="readonly-label">Email</span>
+                <span class="readonly-value">{{ selectedSupplier.email || '-' }}</span>
+              </div>
+            </div>
+          }
+
+          <div class="form-row">
+            
+
+            
+            <div class="form-group flex-1">
+              <label>Fecha</label>
+              <input type="date" formControlName="date">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Método de pago</label>
+            <select formControlName="paymentMethod">
+              <option value="CASH">Efectivo (CASH)</option>
+              <option value="CARD">Tarjeta</option>
+              <option value="TRANSFER">Transferencia</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Observaciones</label>
+            <textarea formControlName="notes" rows="3" placeholder="Observaciones de la compra..."></textarea>
+          </div>
+
+        </form>
+      </div>
+    </div>
+<div class="right-col">
+      <div class="card card-catalog ">
+
+        <h3 class="card-title">Catálogo de productos</h3>
+
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" placeholder="Buscar producto..." [ngModel]="searchQuery" (ngModelChange)="searchQuery = $event; onSearch()">
+        </div>
+
+        @if (loadingProducts) {
+          <div class="text-center py-8 text-sm text-gray-400">Cargando...</div>
+        } @else if (filteredProducts.length === 0) {
+          <div class="text-center py-8 text-sm text-gray-400">No se encontraron productos</div>
+        } @else {
+          <div class="catalog-list">
+            @for (p of filteredProducts; track p.id) {
+              <div class="catalog-item" [class.added]="isAdded(p.id)">
+                <div class="catalog-img">
+                  @if (p.imageUrl) {
+                    <img [src]="p.imageUrl" [alt]="p.name">
+                  } @else {
+                    <div class="img-placeholder">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
+                      </svg>
+                    </div>
+                  }
+                </div>
+                <div class="catalog-info">
+                  <p class="catalog-name">{{ p.name }}</p>
+                  @if (p.description) {
+                    <p class="catalog-desc">{{ p.description }}</p>
+                  }
+                  <div class="catalog-meta">
+                    <span class="catalog-price">{{ money(p.price) }}</span>
+                    <span class="catalog-stock">Stock: {{ p.stock }}</span>
+                  </div>
+                </div>
+                <button class="btn-add" [disabled]="isAdded(p.id)" (click)="addProduct(p)">
+                  @if (isAdded(p.id)) {
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                  } @else {
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 5v14"/><path d="M5 12h14"/>
+                    </svg>
+                  }
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+      </div>
+    </div>
+
+  </div>
+  <!-- fin main-grid -->
+
+  <!-- ===== ABAJO: Tabla de productos + Totales (ancho completo) ===== -->
+  <div class="card" style="margin-top: 20px;">
+
+    <h3 class="card-title">Productos de la compra</h3>
+
+    @if (details.length === 0) {
+      <div class="empty-state">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+        </svg>
+        <p>No hay productos agregados.</p>
+        <span>Selecciona productos desde el catálogo.</span>
+      </div>
+    } @else {
+
+      <div class="details-table-wrap">
+        <table class="details-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th class="col-qty">Cant.</th>
+              <th class="col-price">Precio</th>
+              <th class="col-disc">Desc. %</th>
+              <th class="col-tax">IVA</th>
+              <th class="col-sub">Subtotal</th>
+              <th class="col-action"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (d of details; track $index; let i = $index) {
+              <tr>
+                <td class="td-name">{{ d.productName }}</td>
+                <td class="col-qty">
+                  <input type="number" [formControl]="d.quantity" class="input-sm" min="1">
+                </td>
+                <td class="col-price td-mono">{{ money(d.cost) }}</td>
+                <td class="col-disc">
+                  <input type="number" [formControl]="d.discount" class="input-sm" min="0" max="100">
+                </td>
+                <td class="col-tax">
+                  <select [formControl]="d.taxId" class="select-sm">
+                    @for (t of taxes; track t.id) {
+                      <option [value]="t.id">{{ t.percentage }}%</option>
+                    }
+                  </select>
+                </td>
+                <td class="col-sub td-mono td-bold">{{ money(d.subtotal) }}</td>
+                <td class="col-action">
+                  <button (click)="removeDetail(i)" class="btn-remove" title="Eliminar">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                      <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+<div class="totals-block">
+  <div class="totals-row">
+    <span>Subtotal</span>
+    <strong>{{ money(subtotal) }}</strong>
+  </div>
+  <div class="totals-row">
+    <span>Descuento</span>
+    <strong>-{{ money(totalDiscount) }}</strong>
+  </div>
+  <div class="totals-row">
+    <span>Iva</span>
+    <strong>+{{ money(totalTaxes) }}</strong>
+  </div>
+  <div class="totals-row totals-final">
+    <span>TOTAL</span>
+    <strong>{{ money(total) }}</strong>
+  </div>
+</div>
+
+
+    }
+
+<button
+  class="btn-save"
+  [class.opacity-50]="saving"
+  (click)="save()"
+>
+  @if (saving) {
+    <span class="spinner"></span>
+    Guardando...
+  } @else {
+    Guardar compra
+  }
+</button>
+
+
+  </div>
+
+</div>

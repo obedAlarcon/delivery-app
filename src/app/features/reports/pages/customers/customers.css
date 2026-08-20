@@ -1,0 +1,511 @@
+/*==================================================
+  HOST
+==================================================*/
+
+:host {
+
+  display: block;
+
+  width: 100%;
+
+  min-width: 0;
+
+}
+
+
+/*==================================================
+  KPI
+==================================================*/
+
+.kpi-icon {
+
+  width: 48px;
+
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background-color: #f1f3f5;
+
+  font-size: 1.4rem;
+
+}
+
+
+.kpi-icon.warning {
+
+  background-color: #fff3cd;
+
+  color: #856404;
+
+}
+
+
+.kpi-icon.danger {
+
+  background-color: #f8d7da;
+
+  color: #842029;
+
+}
+
+
+/*==================================================
+  CARD
+==================================================*/
+
+.card {
+
+  border-radius: 12px;
+
+}
+
+
+/*==================================================
+  TABLA
+==================================================*/
+
+.customers-desktop {
+
+  display: block;
+
+  width: 100%;
+
+}
+
+
+.customers-desktop .table-responsive {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+
+.table {
+
+  width: 100%;
+
+}
+
+
+.table th {
+
+  white-space: nowrap;
+
+  font-weight: 600;
+
+}
+
+
+.table td {
+
+  vertical-align: middle;
+
+}
+
+
+.table td strong {
+
+  color: #1e293b;
+
+}
+
+
+/*==================================================
+  BADGE
+==================================================*/
+
+.badge {
+
+  padding: .5rem .7rem;
+
+  font-weight: 500;
+
+  border-radius: 999px;
+
+}
+
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+.customers-mobile {
+
+  display: none;
+
+  width: 100%;
+
+}
+
+
+/*==================================================
+  CUSTOMER CARD
+==================================================*/
+
+.customer-card {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: #fff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  padding: 16px;
+
+  margin-bottom: 16px;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, .05);
+
+}
+
+
+/*==================================================
+  ROW
+==================================================*/
+
+.customer-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 38px;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+
+}
+
+
+.customer-row:last-child {
+
+  border-bottom: none;
+
+}
+
+
+/*==================================================
+  LABEL
+==================================================*/
+
+.customer-label {
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+
+}
+
+
+/*==================================================
+  VALUE
+==================================================*/
+
+.customer-value {
+
+  color: #1e293b;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  text-align: right;
+
+  max-width: 65%;
+
+  overflow-wrap: anywhere;
+
+}
+
+
+/*==================================================
+  CUSTOMER NAME
+==================================================*/
+
+.customer-name {
+
+  font-weight: 700;
+
+  color: #1e293b;
+
+}
+
+
+/*==================================================
+  EXPORT
+==================================================*/
+
+.customers-export {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 20px;
+
+  flex-wrap: wrap;
+
+}
+
+
+/*==================================================
+  TABLET
+==================================================*/
+
+@media (max-width: 991px) {
+
+  .table {
+
+    font-size: .9rem;
+
+  }
+
+
+  .table th,
+  .table td {
+
+    padding: 12px;
+
+  }
+
+}
+
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+@media (max-width: 767px) {
+
+
+  .container-fluid {
+
+    padding-left: 12px !important;
+
+    padding-right: 12px !important;
+
+  }
+
+
+  /*----------------------------------------------
+    ENCABEZADO
+  ----------------------------------------------*/
+
+  .container-fluid > .d-flex {
+
+    gap: 12px;
+
+  }
+
+
+  .container-fluid > .d-flex h2 {
+
+    font-size: 1.4rem;
+
+  }
+
+
+  .container-fluid > .d-flex p {
+
+    font-size: .85rem;
+
+  }
+
+
+  .container-fluid > .d-flex .btn {
+
+    white-space: nowrap;
+
+  }
+
+
+  /*----------------------------------------------
+    OCULTAR TABLA
+  ----------------------------------------------*/
+
+  .customers-desktop {
+
+    display: none;
+
+  }
+
+
+  /*----------------------------------------------
+    MOSTRAR TARJETAS
+  ----------------------------------------------*/
+
+  .customers-mobile {
+
+    display: block;
+
+  }
+
+
+  /*----------------------------------------------
+    KPI
+  ----------------------------------------------*/
+
+  .kpi-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    font-size: 1.2rem;
+
+  }
+
+
+  /*----------------------------------------------
+    CUSTOMER CARD
+  ----------------------------------------------*/
+
+  .customer-card {
+
+    padding: 16px;
+
+    margin-bottom: 14px;
+
+    border-radius: 14px;
+
+  }
+
+
+  /*----------------------------------------------
+    ROW
+  ----------------------------------------------*/
+
+  .customer-row {
+
+    gap: 10px;
+
+  }
+
+
+  /*----------------------------------------------
+    LABEL
+  ----------------------------------------------*/
+
+  .customer-label {
+
+    font-size: 13px;
+
+  }
+
+
+  /*----------------------------------------------
+    VALUE
+  ----------------------------------------------*/
+
+  .customer-value {
+
+    font-size: 13px;
+
+    max-width: 62%;
+
+  }
+
+
+  /*----------------------------------------------
+    EXPORT
+  ----------------------------------------------*/
+
+  .customers-export {
+
+    flex-direction: column;
+
+    width: 100%;
+
+  }
+
+
+  .customers-export .btn {
+
+    width: 100%;
+
+  }
+
+}
+
+
+/*==================================================
+  MOBILE PEQUEÑO
+==================================================*/
+
+@media (max-width: 400px) {
+
+
+  .container-fluid {
+
+    padding-left: 8px !important;
+
+    padding-right: 8px !important;
+
+  }
+
+
+  .card-body {
+
+    padding: 12px;
+
+  }
+
+
+  .customer-card {
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+  }
+
+
+  .customer-row {
+
+    gap: 8px;
+
+  }
+
+
+  .customer-label,
+  .customer-value {
+
+    font-size: 12px;
+
+  }
+
+
+  .customer-value {
+
+    max-width: 60%;
+
+  }
+
+}

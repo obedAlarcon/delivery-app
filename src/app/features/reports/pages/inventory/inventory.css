@@ -1,0 +1,553 @@
+/*==================================================
+  HOST
+==================================================*/
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+
+/*==================================================
+  KPI ICON
+==================================================*/
+
+.kpi-icon {
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #e9f2ff;
+  color: #0d6efd;
+
+  font-size: 1.4rem;
+}
+
+
+.kpi-icon.warning {
+
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+
+.kpi-icon.danger {
+
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+
+/*==================================================
+  CARDS
+==================================================*/
+
+.card {
+  border-radius: 12px;
+}
+
+
+/*==================================================
+  TABLA DESKTOP
+==================================================*/
+
+.inventory-desktop {
+  display: block;
+  width: 100%;
+}
+
+
+.inventory-desktop .table-responsive {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.table {
+  width: 100%;
+}
+
+
+.table th {
+
+  white-space: nowrap;
+
+  font-weight: 600;
+}
+
+
+.table td {
+
+  vertical-align: middle;
+}
+
+
+.table td strong {
+
+  color: #1e293b;
+}
+
+
+/*==================================================
+  BADGES
+==================================================*/
+
+.badge {
+
+  padding: 0.5rem 0.7rem;
+
+  font-weight: 500;
+
+  border-radius: 999px;
+}
+
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+.inventory-mobile {
+
+  display: none;
+
+  width: 100%;
+}
+
+
+/*==================================================
+  INVENTORY CARD
+==================================================*/
+
+.inventory-card {
+
+  width: 100%;
+
+  background: #fff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  padding: 16px;
+
+  margin-bottom: 16px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, .05);
+}
+
+
+/*==================================================
+  INFO
+==================================================*/
+
+.inventory-info {
+  width: 100%;
+}
+
+
+/*==================================================
+  ROW
+==================================================*/
+
+.inventory-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 38px;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+
+.inventory-row:last-child {
+
+  border-bottom: none;
+
+}
+
+
+/*==================================================
+  LABEL
+==================================================*/
+
+.inventory-label {
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/*==================================================
+  VALUE
+==================================================*/
+
+.inventory-value {
+
+  color: #1e293b;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  text-align: right;
+
+  max-width: 65%;
+
+  overflow-wrap: anywhere;
+}
+
+
+/*==================================================
+  PRODUCT NAME
+==================================================*/
+
+.product-name {
+
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+
+/*==================================================
+  INVENTORY TOTAL
+==================================================*/
+
+.inventory-total {
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+
+/*==================================================
+  EXPORTAR
+==================================================*/
+
+.inventory-export {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 20px;
+
+  flex-wrap: wrap;
+}
+
+
+/*==================================================
+  TABLET
+==================================================*/
+
+@media (max-width: 991px) {
+
+  .table {
+
+    font-size: .9rem;
+
+  }
+
+
+  .table th,
+  .table td {
+
+    padding: 12px;
+
+  }
+
+}
+
+
+/*==================================================
+  MOBILE
+==================================================*/
+
+@media (max-width: 767px) {
+
+
+  /*----------------------------------------------
+    CONTENEDOR
+  ----------------------------------------------*/
+
+  .container-fluid {
+
+    padding-left: 12px !important;
+
+    padding-right: 12px !important;
+
+  }
+
+
+  /*----------------------------------------------
+    ENCABEZADO
+  ----------------------------------------------*/
+
+  .container-fluid > .d-flex {
+
+    gap: 12px;
+
+  }
+
+
+  .container-fluid > .d-flex h2 {
+
+    font-size: 1.4rem;
+
+  }
+
+
+  .container-fluid > .d-flex .btn {
+
+    white-space: nowrap;
+
+  }
+
+
+  /*----------------------------------------------
+    OCULTAR TABLA
+  ----------------------------------------------*/
+
+  .inventory-desktop {
+
+    display: none;
+
+  }
+
+
+  /*----------------------------------------------
+    MOSTRAR TARJETAS
+  ----------------------------------------------*/
+
+  .inventory-mobile {
+
+    display: block;
+
+  }
+
+
+  /*----------------------------------------------
+    CARD PRINCIPAL
+  ----------------------------------------------*/
+
+  .card-body {
+
+    padding: 16px;
+
+  }
+
+
+  /*----------------------------------------------
+    FILTROS
+  ----------------------------------------------*/
+
+  .input-group {
+
+    width: 100%;
+
+  }
+
+
+  /*----------------------------------------------
+    KPI
+  ----------------------------------------------*/
+
+  .kpi-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    font-size: 1.2rem;
+
+  }
+
+
+  /*----------------------------------------------
+    VALOR INVENTARIO
+  ----------------------------------------------*/
+
+  .container-fluid > .card.mb-4
+  .card-body {
+
+    padding: 16px;
+
+  }
+
+
+  /*----------------------------------------------
+    INVENTORY CARD
+  ----------------------------------------------*/
+
+  .inventory-card {
+
+    padding: 16px;
+
+    margin-bottom: 14px;
+
+    border-radius: 14px;
+
+  }
+
+
+  /*----------------------------------------------
+    ROW
+  ----------------------------------------------*/
+
+  .inventory-row {
+
+    gap: 10px;
+
+  }
+
+
+  /*----------------------------------------------
+    LABEL
+  ----------------------------------------------*/
+
+  .inventory-label {
+
+    font-size: 13px;
+
+  }
+
+
+  /*----------------------------------------------
+    VALUE
+  ----------------------------------------------*/
+
+  .inventory-value {
+
+    font-size: 13px;
+
+    max-width: 62%;
+
+  }
+
+
+  /*----------------------------------------------
+    TOTAL
+  ----------------------------------------------*/
+
+  .inventory-total {
+
+    font-size: 14px;
+
+  }
+
+
+  /*----------------------------------------------
+    EXPORTAR
+  ----------------------------------------------*/
+
+  .inventory-export {
+
+    flex-direction: column;
+
+    width: 100%;
+
+  }
+
+
+  .inventory-export .btn {
+
+    width: 100%;
+
+  }
+
+}
+
+
+/*==================================================
+  MOBILE PEQUEÑO
+==================================================*/
+
+@media (max-width: 400px) {
+
+
+  .container-fluid {
+
+    padding-left: 8px !important;
+
+    padding-right: 8px !important;
+
+  }
+
+
+  .card-body {
+
+    padding: 12px;
+
+  }
+
+
+  .inventory-card {
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+  }
+
+
+  .inventory-row {
+
+    gap: 8px;
+
+  }
+
+
+  .inventory-label,
+  .inventory-value {
+
+    font-size: 12px;
+
+  }
+
+
+  .inventory-value {
+
+    max-width: 60%;
+
+  }
+
+
+  .inventory-total {
+
+    font-size: 13px;
+
+  }
+
+}

@@ -1,0 +1,425 @@
+/* ============================================
+   PRODUCT CARD - Estilo Profesional
+   ============================================ */
+
+.product-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.1);
+  border-color: rgba(34, 197, 94, 0.15);
+}
+
+
+/* ---------- IMAGEN ---------- */
+
+/* ---------- IMAGEN ---------- */
+
+.product-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f8fafc;                    /* ← fondo limpio */
+  display: flex;                          /* ← centra la imagen */
+  align-items: center;
+  justify-content: center;
+  padding: 16px;                          /* ← espacio para que no toque bordes */
+}
+
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;                    /* ← CONTAIN en vez de COVER */
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);                 /* ← zoom más suave porque ya no se recorta */
+}
+
+
+/* ---------- BOTÓN FAVORITO ---------- */
+
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.favorite-btn:hover {
+  background: #ffffff;
+  color: #ef4444;
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
+}
+
+.favorite-btn:active {
+  transform: scale(0.95);
+}
+
+.favorite-btn.active {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+
+/* ---------- BADGE STOCK ---------- */
+
+.product-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.04), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ---------- CONTENIDO ---------- */
+
+.product-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+
+
+/* ---------- CATEGORÍA ---------- */
+
+.product-category {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #22c55e;
+  background: #f0fdf4;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  width: fit-content;
+  border: 1px solid rgba(34, 197, 94, 0.12);
+}
+
+
+/* ---------- NOMBRE ---------- */
+
+.product-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/* ---------- DESCRIPCIÓN ---------- */
+
+.product-description {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+
+/* ---------- FOOTER (PRECIO + STOCK) ---------- */
+
+.product-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+  gap: 8px;
+}
+
+.product-price {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.product-stock {
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  background: #f0fdf4;
+  padding: 4px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Stock bajo */
+.product-stock.low-stock {
+  color: #f59e0b;
+  background: #fffbeb;
+}
+
+/* Agotado */
+.product-stock.no-stock {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+
+/* ---------- BOTÓN AGREGAR AL CARRITO ---------- */
+
+.add-cart-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #ffffff;
+  box-shadow:
+    0 2px 8px rgba(34, 197, 94, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-cart-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.add-cart-btn:hover::before {
+  left: 100%;
+}
+
+.add-cart-btn:hover {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  box-shadow:
+    0 4px 16px rgba(34, 197, 94, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.add-cart-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 1px 4px rgba(34, 197, 94, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.add-cart-btn i {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.add-cart-btn:hover i {
+  transform: scale(1.15);
+}
+
+/* Estado deshabilitado (Agotado) */
+.add-cart-btn:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.add-cart-btn:disabled::before {
+  display: none;
+}
+
+.add-cart-btn:disabled:hover {
+  transform: none;
+}
+
+.add-cart-btn:disabled i {
+  transform: none;
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* ============================================
+   RESPONSIVE - MÓVIL
+   ============================================ */
+
+@media (max-width: 640px) {
+
+  .product-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-radius: 14px;
+  }
+
+  /* ---------- IMAGEN ---------- */
+
+  .product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 12px;
+    min-width: 0;
+  }
+
+  .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /* ---------- CONTENIDO ---------- */
+
+  .product-content {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 14px;
+    gap: 5px;
+  }
+
+  /* ---------- CATEGORÍA ---------- */
+
+  .product-category {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ---------- NOMBRE ---------- */
+
+  .product-name {
+    width: 100%;
+    min-width: 0;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  /* ---------- DESCRIPCIÓN ---------- */
+
+  .product-description {
+    width: 100%;
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* ---------- PRECIO + STOCK ---------- */
+
+  .product-footer {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 6px;
+    padding-top: 12px;
+    margin-top: auto;
+  }
+
+  .product-price {
+    min-width: 0;
+    font-size: 19px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .product-stock {
+    max-width: 50%;
+    min-width: 0;
+
+    font-size: 10px;
+    padding: 4px 7px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ---------- BOTÓN ---------- */
+
+  .add-cart-btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 12px;
+    padding: 10px 12px;
+
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+}

@@ -73,4 +73,24 @@ export class OrderService {
 
   }
 
+//==========================================
+// Obtener pedidos por email del cliente
+//==========================================
+
+getOrdersByCustomerEmail(
+  email: string
+): Observable<Order[]> {
+
+  return this.http.get<Order[]>(
+    `${this.apiUrl}/customer`,
+    {
+      params: {
+        email
+      }
+    }
+  );
+
+}
+
+
 }

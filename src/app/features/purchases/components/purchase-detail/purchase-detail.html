@@ -1,0 +1,716 @@
+@if (readOnly) {
+
+  <!-- ========================================= -->
+  <!-- MODO LECTURA -->
+  <!-- ========================================= -->
+
+  <h2 class="fw-bold">
+    FACTURA DE COMPRA
+  </h2>
+
+
+  <!-- PROVEEDOR -->
+
+  <h5 class="invoice-title">
+    PROVEEDOR
+  </h5>
+
+
+  <div class="invoice-info">
+
+    
+
+
+    <div>
+      <span>Empresa</span>
+      <strong>
+        {{ form.get('company')?.value }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Contacto</span>
+      <strong>
+        {{ form.get('contact')?.value }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Método de pago</span>
+      <strong>
+        {{ form.get('paymentMethod')?.value }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Factura</span>
+      <strong>
+        {{ form.get('invoiceNumber')?.value }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Estado</span>
+      <strong>
+        {{ form.get('status')?.value }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Fecha</span>
+      <strong>
+        {{ form.get('purchaseDate')?.value }}
+      </strong>
+    </div>
+
+  </div>
+
+
+  <!-- PRODUCTOS -->
+
+  <h5 class="invoice-title">
+    PRODUCTOS
+  </h5>
+
+
+  <div class="table-responsive">
+
+    <table class="invoice-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Producto
+          </th>
+
+          <th>
+            Cant
+          </th>
+
+          <th>
+            Precio
+          </th>
+
+          <th>
+            Desc.
+          </th>
+
+          <th>
+            IVA
+          </th>
+
+          <th>
+            Subtotal
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        @for (item of details.controls; track $index) {
+
+          <tr>
+
+            <td>
+              {{ item.get('name')?.value }}
+            </td>
+
+            <td>
+              {{ item.get('quantity')?.value }}
+            </td>
+
+            <td>
+              {{ item.get('cost')?.value | currency:'COP':'symbol':'1.0-0' }}
+            </td>
+
+            <td>
+              {{ item.get('discount')?.value }}%
+            </td>
+
+            <td>
+              {{ item.get('taxRate')?.value }}%
+            </td>
+
+            <td>
+              {{ item.get('total')?.value | currency:'COP':'symbol':'1.0-0' }}
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- TOTALES -->
+
+  <div class="invoice-totals">
+
+    <div>
+      <span>Subtotal:</span>
+
+      <strong>
+        {{ subtotal | currency:'COP':'symbol':'1.0-0' }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Descuento:</span>
+
+      <strong>
+        {{ totalDiscount | currency:'COP':'symbol':'1.0-0' }}
+      </strong>
+    </div>
+
+
+    <div>
+      <span>Impuestos:</span>
+
+      <strong>
+        {{ totalTax | currency:'COP':'symbol':'1.0-0' }}
+      </strong>
+    </div>
+
+
+    <div class="grand-total">
+
+      <span>
+        TOTAL:
+      </span>
+
+      <strong>
+        {{ total | currency:'COP':'symbol':'1.0-0' }}
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- OBSERVACIONES -->
+
+  @if (form.get('notes')?.value) {
+
+    <h5 class="invoice-title">
+      OBSERVACIONES
+    </h5>
+
+    <p>
+      {{ form.get('notes')?.value }}
+    </p>
+
+  }
+
+
+} @else {
+
+  <!-- ========================================= -->
+  <!-- MODO NUEVA COMPRA -->
+  <!-- ========================================= -->
+
+  <form [formGroup]="form">
+
+
+    <!-- ======================================= -->
+    <!-- DATOS DE LA COMPRA -->
+    <!-- ======================================= -->
+
+    <div class="purchase-header">
+
+      <h4 class="fw-bold mb-4">
+        Nueva factura de compra
+      </h4>
+
+
+      <div class="row g-3">
+
+
+        <!-- PROVEEDOR -->
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            Proveedor
+          </label>
+
+          <select
+            class="form-select"
+            formControlName="supplierId">
+
+            <option [ngValue]="null">
+              Seleccionar proveedor
+            </option>
+
+            @for (supplier of suppliers; track supplier.id) {
+
+              <option [ngValue]="supplier.id">
+
+                {{ supplier.name }}
+
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <!-- EMPRESA -->
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            Empresa
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="company"
+            readonly>
+
+        </div>
+
+
+        <!-- NIT -->
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            NIT
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nit"
+            readonly>
+
+        </div>
+
+
+        <!-- FACTURA -->
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            Número de factura
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="invoiceNumber"
+            placeholder="Ej: FV-001">
+
+        </div>
+
+
+        <!-- FECHA -->
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            Fecha
+          </label>
+
+          <input
+            type="date"
+            class="form-control"
+            formControlName="purchaseDate">
+
+        </div>
+
+
+        <!-- MÉTODO DE PAGO -->
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            Método de pago
+          </label>
+
+          <select
+            class="form-select"
+            formControlName="paymentMethod">
+
+            <option value="CASH">
+              Efectivo
+            </option>
+
+            <option value="CARD">
+              Tarjeta
+            </option>
+
+            <option value="TRANSFER">
+              Transferencia
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- OBSERVACIONES -->
+
+        <div class="col-12">
+
+          <label class="form-label">
+            Observaciones
+          </label>
+
+          <textarea
+            class="form-control"
+            rows="2"
+            formControlName="notes"
+            placeholder="Observaciones de la compra...">
+          </textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <hr class="my-4">
+
+
+    <!-- ======================================= -->
+    <!-- PRODUCTOS -->
+    <!-- ======================================= -->
+
+    <h5 class="fw-bold mb-3">
+      Productos de la compra
+    </h5>
+
+
+    @if (details.length === 0) {
+
+      <div class="alert alert-light border text-center">
+
+        <i class="bi bi-cart-x fs-4 d-block mb-2"></i>
+
+        No hay productos agregados.
+
+        <br>
+
+        <small class="text-muted">
+          Selecciona productos desde el catálogo.
+        </small>
+
+      </div>
+
+    } @else {
+
+      <div class="table-responsive">
+
+        <table class="table table-bordered align-middle">
+
+          <thead class="table-light">
+
+            <tr>
+
+              <th>
+                Producto
+              </th>
+
+              <th class="text-center">
+                Cant.
+              </th>
+
+              <th class="text-end">
+                Precio
+              </th>
+
+              <th class="text-center">
+                Desc. %
+              </th>
+
+              <th class="text-center">
+                IVA
+              </th>
+
+              <th class="text-end">
+                Subtotal
+              </th>
+
+              <th class="text-end">
+                Total
+              </th>
+
+              <th></th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody formArrayName="details">
+
+            @for (item of details.controls; track $index) {
+
+              <tr [formGroupName]="$index">
+
+
+                <!-- PRODUCTO -->
+
+                <td>
+
+                  <div class="fw-semibold">
+
+                    {{ item.get('name')?.value }}
+
+                  </div>
+
+                  <small class="text-muted">
+
+                    {{ item.get('description')?.value }}
+
+                  </small>
+
+                </td>
+
+
+                <!-- CANTIDAD -->
+
+                <td>
+
+                  <input
+                    type="number"
+                    min="1"
+                    class="form-control text-center"
+                    formControlName="quantity">
+
+                </td>
+
+
+                <!-- PRECIO -->
+
+                <td>
+
+                  <input
+                    type="number"
+                    min="0"
+                    class="form-control text-end"
+                    formControlName="cost">
+
+                </td>
+
+
+                <!-- DESCUENTO -->
+
+                <td>
+
+                  <div class="input-group">
+
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      class="form-control text-center"
+                      formControlName="discount">
+
+                    <span class="input-group-text">
+                      %
+                    </span>
+
+                  </div>
+
+                </td>
+
+
+                <!-- IVA -->
+
+                <td>
+
+                  <select
+                    class="form-select"
+                    formControlName="taxId">
+
+                    <option [ngValue]="null">
+                      Sin IVA
+                    </option>
+
+                    @for (tax of taxes; track tax.id) {
+
+                      <option [ngValue]="tax.id">
+
+                        {{ tax.name }}
+                        ({{ tax.percentage }}%)
+
+                      </option>
+
+                    }
+
+                  </select>
+
+                </td>
+
+
+                <!-- SUBTOTAL -->
+
+                <td class="text-end">
+
+                  {{ item.get('subtotal')?.value | currency:'COP':'symbol':'1.0-0' }}
+
+                </td>
+
+
+                <!-- TOTAL -->
+
+                <td class="text-end fw-semibold">
+
+                  {{ item.get('total')?.value | currency:'COP':'symbol':'1.0-0' }}
+
+                </td>
+
+
+                <!-- ELIMINAR -->
+
+                <td class="text-center">
+
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    (click)="removeProduct($index)"
+                    title="Eliminar producto">
+
+                    <i class="bi bi-trash"></i>
+
+                  </button>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+
+    <!-- ======================================= -->
+    <!-- TOTALES -->
+    <!-- ======================================= -->
+
+    <div class="row justify-content-end mt-4">
+
+      <div class="col-md-6 col-lg-5">
+
+        <div class="border rounded p-3">
+
+
+          <div class="d-flex justify-content-between mb-2">
+
+            <span>
+              Subtotal
+            </span>
+
+            <strong>
+              {{ subtotal | currency:'COP':'symbol':'1.0-0' }}
+            </strong>
+
+          </div>
+
+
+          <div class="d-flex justify-content-between mb-2">
+
+            <span>
+              Descuento
+            </span>
+
+            <strong class="text-danger">
+
+              {{ totalDiscount | currency:'COP':'symbol':'1' }}
+
+            </strong>
+
+          </div>
+
+
+          <div class="d-flex justify-content-between mb-2">
+
+            <span>
+              Iva
+            </span>
+
+            <strong>
+
+              {{ totalTax | currency:'COP':'symbol':'1' }}
+                    
+            </strong>
+
+          </div>
+
+
+          <hr>
+
+
+          <div class="d-flex justify-content-between">
+
+            <strong class="fs-5">
+              TOTAL
+            </strong>
+
+            <strong class="fs-5 text-primary">
+
+              {{ total | currency:'COP':'symbol':'1.0-0' }}
+
+            </strong>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================= -->
+    <!-- GUARDAR -->
+    <!-- ======================================= -->
+
+    <div class="d-flex justify-content-end mt-4">
+
+      <button
+        type="button"
+        class="btn btn-primary px-4"
+        [disabled]="form.invalid || details.length === 0"
+        (click)="save()">
+
+        <i class="bi bi-save me-2"></i>
+
+        Guardar compra
+
+      </button>
+
+    </div>
+
+
+  </form>
+
+}

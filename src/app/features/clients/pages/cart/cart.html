@@ -1,0 +1,263 @@
+<div class="cart-page">
+
+  <!-- HEADER -->
+  <div class="cart-header">
+
+    <div>
+      <span class="cart-eyebrow">
+        Tu compra
+      </span>
+
+      <h1>
+        Mi carrito
+      </h1>
+
+      <p>
+        Revisa tus productos antes de continuar.
+      </p>
+    </div>
+
+    @if (items.length > 0) {
+
+      <button
+        type="button"
+        class="clear-cart-btn"
+        (click)="clearCart()">
+
+        <i class="bi bi-trash3"></i>
+
+        Vaciar carrito
+
+      </button>
+
+    }
+
+  </div>
+
+
+  <!-- CARRITO VACÍO -->
+  @if (items.length === 0) {
+
+    <section class="empty-cart">
+
+      <div class="empty-cart-icon">
+
+        <i class="bi bi-cart3"></i>
+
+      </div>
+
+      <h2>
+        Tu carrito está vacío
+      </h2>
+
+      <p>
+        Agrega algunos productos desde nuestro catálogo.
+      </p>
+
+      <a
+        routerLink="/client/catalog"
+        class="continue-shopping-btn">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Ir al catálogo
+
+      </a>
+
+    </section>
+
+  }
+
+
+  <!-- CARRITO CON PRODUCTOS -->
+  @if (items.length > 0) {
+
+    <div class="cart-layout">
+
+
+      <!-- PRODUCTOS -->
+      <section class="cart-products">
+
+        <div class="cart-products-header">
+
+          <h2>
+            Productos
+          </h2>
+
+          <span>
+            {{ totalItems }}
+            {{ totalItems === 1 ? 'producto' : 'productos' }}
+          </span>
+
+        </div>
+
+
+        @for (item of items; track item.product.id) {
+
+          <article class="cart-item">
+
+
+            <!-- IMAGEN -->
+            <div class="cart-item-image">
+
+              <img
+                [src]="item.product.imageUrl"
+                [alt]="item.product.name">
+
+            </div>
+
+
+            <!-- INFORMACIÓN -->
+            <div class="cart-item-info">
+
+              <span class="cart-item-category">
+
+                {{ item.product.category?.name || 'Producto' }}
+
+              </span>
+
+              <h3>
+                {{ item.product.name }}
+              </h3>
+
+              <p>
+                ${{ item.product.price | number:'1.0-0' }}
+                por unidad
+              </p>
+
+            </div>
+
+
+            <!-- CANTIDAD -->
+            <div class="cart-item-quantity">
+
+              <button
+                type="button"
+                (click)="decrease(item.product.id)"
+                aria-label="Disminuir cantidad">
+
+                <i class="bi bi-dash"></i>
+
+              </button>
+
+              <span>
+                {{ item.quantity }}
+              </span>
+
+              <button
+                type="button"
+                (click)="increase(item.product.id)"
+                [disabled]="item.quantity >= item.product.stock"
+                aria-label="Aumentar cantidad">
+
+                <i class="bi bi-plus"></i>
+
+              </button>
+
+            </div>
+
+
+            <!-- SUBTOTAL -->
+            <div class="cart-item-total">
+
+              <strong>
+                ${{ (item.product.price * item.quantity) | number:'1.0-0' }}
+              </strong>
+
+              <button
+                type="button"
+                class="remove-item-btn"
+                (click)="remove(item.product.id)"
+                aria-label="Eliminar producto">
+
+                <i class="bi bi-trash"></i>
+
+              </button>
+
+            </div>
+
+          </article>
+
+        }
+
+      </section>
+
+
+      <!-- RESUMEN -->
+      <aside class="cart-summary">
+
+        <h2>
+          Resumen del pedido
+        </h2>
+
+
+        <div class="summary-row">
+
+          <span>
+            Productos
+          </span>
+
+          <span>
+            {{ totalItems }}
+          </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong>
+            ${{ subtotal | number:'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="summary-total">
+
+          <span>
+            Total
+          </span>
+
+          <strong>
+            ${{ total | number:'1.0-0' }}
+          </strong>
+
+        </div>
+
+
+        <a
+          routerLink="/client/checkout"
+          class="checkout-btn">
+
+          Continuar al checkout
+
+          <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+
+        <a
+          routerLink="/client/catalog"
+          class="continue-shopping">
+
+          <i class="bi bi-arrow-left"></i>
+
+          Seguir comprando
+
+        </a>
+
+      </aside>
+
+    </div>
+
+  }
+
+</div>

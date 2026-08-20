@@ -1,0 +1,129 @@
+/* ==================================================
+   LAYOUT
+================================================== */
+
+.client-layout {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #f6f7f5;
+
+  overflow-x: hidden;
+}
+
+
+/* ==================================================
+   CONTENIDO
+================================================== */
+
+.client-content {
+  width: 100%;
+  min-width: 0;
+
+  padding-top: 72px;
+
+  box-sizing: border-box;
+}
+
+
+/* ==================================================
+   MENÚ MÓVIL
+================================================== */
+
+.mobile-client-nav {
+  display: none;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 768px) {
+
+  .client-content {
+    padding-top: 118px;
+  }
+
+}
+
+
+/* ==================================================
+   MÓVIL
+================================================== */
+
+@media (max-width: 576px) {
+
+  .client-content {
+    padding-top: 112px;
+    padding-bottom: 60px;
+  }
+
+
+  .mobile-client-nav {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e5e7e2;
+
+    z-index: 1100;
+  }
+
+
+  .mobile-client-nav a {
+    flex: 1;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    text-decoration: none;
+
+    color: #7b8177;
+
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+
+  .mobile-client-nav a i {
+    font-size: 20px;
+  }
+
+
+  .mobile-client-nav a.active {
+    color: #3d4537;
+  }
+
+}
+
+
+/* ==================================================
+   MÓVIL PEQUEÑO
+================================================== */
+
+@media (max-width: 400px) {
+
+  .client-content {
+    padding-top: 108px;
+  }
+
+}

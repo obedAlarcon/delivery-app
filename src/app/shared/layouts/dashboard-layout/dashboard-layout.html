@@ -1,5 +1,12 @@
 <div class="dashboard">
 
+    <!-- Overlay (solo móvil) -->
+    <div
+        class="sidebar-overlay"
+        [class.show]="sidebarService.isOpen()"
+        (click)="sidebarService.close()">
+    </div>
+
     <app-sidebar></app-sidebar>
 
     <div class="main-content">

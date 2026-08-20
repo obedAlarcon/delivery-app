@@ -1,60 +1,105 @@
 <div class="container-fluid px-3">
 
-    <div class="row g-3 align-items-start">
+    <!-- =====================================================
+         PARTE SUPERIOR
+         ===================================================== -->
 
-        <!-- IZQUIERDA -->
+    <div class="row g-3 order-top-row">
+
+        <!-- =================================================
+             IZQUIERDA
+             CLIENTE + PRODUCTOS EN UNA SOLA CARD
+             ================================================= -->
+
         <div class="col-lg-6">
 
-            <app-customer-card
-                class="d-block w-100"
-                (customerSelected)="onCustomerSelected($event)">
-            </app-customer-card>
+            <div class="order-left-card">
 
-            <div class="mt-3"></div>
+                <!-- CLIENTE -->
 
-            <app-order-products
-                class="d-block w-100"
-                [items]="items"
-                (increaseItem)="increase($event)"
-                (decreaseItem)="decrease($event)"
-                (removeItem)="remove($event)">
-            </app-order-products>
+                <app-customer-card
+                    class="customer-component"
+                    (customerSelected)="onCustomerSelected($event)">
+                </app-customer-card>
+
+
+                <!-- PRODUCTOS DEL PEDIDO -->
+
+                <div class="order-products-inside">
+
+                    <app-order-products
+                        class="order-products-component"
+                        [items]="items"
+                        (increaseItem)="increase($event)"
+                        (decreaseItem)="decrease($event)"
+                        (removeItem)="remove($event)">
+                    </app-order-products>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <!-- DERECHA -->
+
+        <!-- =================================================
+             DERECHA
+             CATÁLOGO
+             ================================================= -->
+
         <div class="col-lg-6">
 
-            <app-product-catalog
-                class="d-block w-100"
-                (addProduct)="addProduct($event)">
-            </app-product-catalog>
+            <div class="catalog-wrapper">
+
+                <app-product-catalog
+                    class="catalog-component"
+                    (addProduct)="addProduct($event)">
+                </app-product-catalog>
+
+            </div>
 
         </div>
 
     </div>
-<br>
-<br>
 
 
-    <div class="card shadow-sm border-0 mt-3">
+    <!-- =====================================================
+         ESPACIO
+         ===================================================== -->
+
+    <div class="main-space"></div>
+
+
+    <!-- =====================================================
+         TOTAL DEL PEDIDO
+         ===================================================== -->
+
+    <div class="card shadow-sm border-0 order-total-card">
 
         <div class="card-body">
 
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="order-total-content">
 
-                <div>
-                    <h5 class="mb-1">Total del pedido</h5>
-                    <h3 class="text-success mb-0">
+                <div class="order-total-info">
+
+                    <div class="order-total-label">
+                        Total del pedido
+                    </div>
+
+                    <div class="order-total-value">
                         {{ total | currency:'COP':'symbol':'1.0-0' }}
-                    </h3>
+                    </div>
+
                 </div>
 
+
                 <button
-                    class="btn btn-success btn-lg"
+                    type="button"
+                    class="btn btn-success btn-save-order"
                     (click)="saveOrder()">
 
                     <i class="bi bi-check-circle me-2"></i>
+
                     Guardar pedido
 
                 </button>
@@ -64,48 +109,76 @@
         </div>
 
     </div>
-    <br>
-<div class="row g-3 mb-4">
 
-    <div class="col-md-4">
-        <label class="form-label">Método de pago</label>
-        <select class="form-select"
+
+    <div class="payment-space"></div>
+
+
+    <!-- =====================================================
+         ESTADOS
+         ===================================================== -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+                Método de pago
+            </label>
+
+            <select
+                class="form-select"
                 [(ngModel)]="paymentMethod">
 
-            <option>Efectivo</option>
-            <option>Nequi</option>        
-            <option>Transferencia</option>
-            <option>Tarjeta débito</option>
-            <option>Tarjeta crédito</option>
+                <option>Efectivo</option>
+                <option>Nequi</option>
+                <option>Transferencia</option>
+                <option>Tarjeta débito</option>
+                <option>Tarjeta crédito</option>
 
-        </select>
-    </div>
+            </select>
 
-    <div class="col-md-4">
-        <label class="form-label">Estado del pago</label>
-        <select class="form-select"
+        </div>
+
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+                Estado del pago
+            </label>
+
+            <select
+                class="form-select"
                 [(ngModel)]="paymentStatus">
 
-            <option>Pendiente</option>
-            <option>Pagado</option>           
-            <option>Cancelado</option>
+                <option>Pendiente</option>
+                <option>Pagado</option>
+                <option>Cancelado</option>
 
-        </select>
-    </div>
+            </select>
 
-    <div class="col-md-4">
-        <label class="form-label">Estado de la orden</label>
-        <select class="form-select"
+        </div>
+
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+                Estado de la orden
+            </label>
+
+            <select
+                class="form-select"
                 [(ngModel)]="orderStatus">
 
-            <option>Pendiente</option>
-            <option>En proceso</option>
-         
-            <option>Entregado</option>
-            <option>Cancelado</option>
+                <option>Pendiente</option>
+                <option>En proceso</option>
+                <option>Entregado</option>
+                <option>Cancelado</option>
 
-        </select>
+            </select>
+
+        </div>
+
     </div>
 
-</div>
 </div>

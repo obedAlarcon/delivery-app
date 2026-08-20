@@ -5,11 +5,13 @@ import { SalesChart } from '../../components/sales-chart/sales-chart';
 
 import { RecentOrders } from '../../components/recent-orders/recent-orders';
 import { LowStock } from '../../components/low-stock/low-stock';
+import { BestSellingProductComponent } from '../../components/best-selling-product/best-selling-product';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports: [CommonModule,StatCards,SalesChart, RecentOrders,LowStock],
+  imports: [CommonModule,StatCards,SalesChart, RecentOrders,LowStock, BestSellingProductComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

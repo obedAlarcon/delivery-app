@@ -1,37 +1,205 @@
-.dashboard-header{
-    margin-bottom:30px;
+/*==================================================
+  Base
+==================================================*/
+
+* {
+    box-sizing: border-box;
 }
 
-.dashboard-header h2{
-    font-size:30px;
-    color:#1e293b;
-    margin-bottom:6px;
+
+/* Evita scroll horizontal */
+
+.dashboard-container,
+.dashboard-grid,
+.dashboard-bottom,
+.stats-grid {
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
 }
 
-.dashboard-header p{
-    color:#64748b;
+
+/*==================================================
+  Header
+==================================================*/
+
+.dashboard-header {
+
+    margin-bottom: 32px;
+
 }
 
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:24px;
-    margin-top:24px;
-}
-.dashboard-bottom{
-    margin-top:24px;
-}
-.dashboard-bottom{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:24px;
-    margin-top:24px;
+
+.dashboard-header h2 {
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: #1e293b;
+
+    margin-bottom: 8px;
+
 }
 
-@media (min-width:992px){
 
-    .dashboard-bottom{
-        grid-template-columns:2fr 1fr;
+.dashboard-header p {
+
+    color: #64748b;
+
+    font-size: 15px;
+
+}
+
+
+
+/*==================================================
+  Grid principal
+==================================================*/
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 24px;
+
+    width: 100%;
+
+    min-width: 0;
+
+}
+
+
+
+/*==================================================
+  Parte inferior
+==================================================*/
+
+.dashboard-bottom {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 24px;
+
+    margin-top: 24px;
+
+    width: 100%;
+
+    min-width: 0;
+
+}
+
+
+
+/*==================================================
+  Escritorio
+==================================================*/
+
+@media(min-width:992px) {
+
+
+    .dashboard-grid {
+
+        grid-template-columns: 2fr 1fr;
+
+        align-items: start;
+
     }
+
+
+    .dashboard-bottom {
+
+        grid-template-columns: 2fr 1fr;
+
+        align-items: start;
+
+    }
+
+}
+
+
+
+/*==================================================
+  Tablet
+==================================================*/
+
+@media(max-width:991px) {
+
+
+    .dashboard-header h2 {
+
+        font-size: 26px;
+
+    }
+
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .dashboard-bottom {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+
+/*==================================================
+  Móvil
+==================================================*/
+
+@media(max-width:576px) {
+
+
+    .dashboard-header {
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .dashboard-header h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .dashboard-header p {
+
+        font-size: 14px;
+
+    }
+
+
+    .dashboard-grid,
+    .dashboard-bottom {
+
+        gap: 16px;
+
+    }
+
+}
+/* Los componentes Angular deben ocupar toda la celda del grid */
+
+.dashboard-grid > * ,
+.dashboard-bottom > *{
+
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
 }

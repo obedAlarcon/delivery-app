@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../../features/auth/services/auth.service';
+import { SidebarService } from '../../../../../core/services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,11 @@ import { AuthService } from '../../../../../features/auth/services/auth.service'
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
+
+private sidebarService = inject(SidebarService);
+
+isOpen = this.sidebarService.isOpen;
+  
   menu = [
 
     {
@@ -48,6 +54,16 @@ export class Sidebar {
       label: 'Clientes',
       route: '/customers'
     },
+    {
+  label: 'Proveedores',
+  icon: 'bi-truck',
+  route: '/suppliers'
+},
+{
+ icon:'bi-bag-check',
+ label:'Compras',
+ route:'/purchases'
+},
 
     {
       icon: 'bi-graph-up',
@@ -59,12 +75,22 @@ export class Sidebar {
       icon: 'bi-gear',
       label: 'Configuración',
       route: '/settings'
-    }
+    },
 
   ];
 private authService = inject(AuthService);
 
 logout() {
   this.authService.logout();
+}
+
+closeSidebar(): void {
+
+  if (window.innerWidth < 992) {
+
+    this.sidebarService.close();
+
+  }
+
 }
 }

@@ -1,0 +1,242 @@
+/* =========================================
+   CONTENEDOR DE LA FACTURA
+========================================= */
+
+.invoice-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 25px;
+  background: #fff;
+}
+
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+.invoice-title {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 18px;
+  
+}
+
+
+/* =========================================
+   INFORMACIÓN DEL PROVEEDOR
+========================================= */
+
+.invoice-info {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 10px 20px;
+  margin-bottom: 25px;
+}
+
+.invoice-info span {
+  font-weight: 600;
+  color: #555;
+}
+
+.invoice-info strong {
+  font-weight: 500;
+  color: #222;
+}
+
+
+/* =========================================
+   TABLA DE PRODUCTOS
+========================================= */
+
+.invoice-table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+
+/* ENCABEZADO */
+
+.invoice-table th {
+  background: #f8f9fa;
+  border-bottom: 2px solid #222;
+  padding: 10px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* CELDAS */
+
+.invoice-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+
+/* =========================================
+   COLUMNAS
+========================================= */
+
+/* Producto */
+
+.invoice-table th:nth-child(1),
+.invoice-table td:nth-child(1) {
+  width: 34%;
+  text-align: left;
+}
+
+
+/* Cantidad */
+
+.invoice-table th:nth-child(2),
+.invoice-table td:nth-child(2) {
+  width: 10%;
+  text-align: center;
+}
+
+
+/* Precio */
+
+.invoice-table th:nth-child(3),
+.invoice-table td:nth-child(3) {
+  width: 17%;
+  text-align: right;
+}
+
+
+/* Descuento */
+
+.invoice-table th:nth-child(4),
+.invoice-table td:nth-child(4) {
+  width: 11%;
+  text-align: center;
+}
+
+
+/* IVA */
+
+.invoice-table th:nth-child(5),
+.invoice-table td:nth-child(5) {
+  width: 10%;
+  text-align: center;
+}
+
+
+/* Subtotal */
+
+.invoice-table th:nth-child(6),
+.invoice-table td:nth-child(6) {
+  width: 18%;
+  text-align: right;
+}
+
+
+/* =========================================
+   NOMBRE DEL PRODUCTO
+========================================= */
+
+.invoice-table td:first-child {
+  font-weight: 600;
+  color: #222;
+}
+
+
+/* =========================================
+   INPUTS DE LA TABLA
+========================================= */
+
+.invoice-table input,
+.invoice-table select {
+  width: 100%;
+  min-width: 0;
+  height: 34px;
+  padding: 5px 7px;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   TOTALES
+========================================= */
+
+.invoice-total {
+  width: 350px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-top: 25px;
+}
+
+
+.invoice-total div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   TOTAL FINAL
+========================================= */
+
+.grand-total {
+  border-top: 2px solid #000;
+  margin-top: 10px;
+  padding-top: 15px !important;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .invoice-container {
+    padding: 18px;
+  }
+
+
+  .invoice-info {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+
+  .invoice-table {
+    min-width: 650px;
+  }
+
+
+  .invoice-table th,
+  .invoice-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+
+
+  .invoice-total {
+    width: 100%;
+    max-width: 350px;
+  }
+
+}
+.clamp-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}

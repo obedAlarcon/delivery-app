@@ -1,0 +1,316 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="save()"
+  class="purchase-container">
+
+
+  <div class="purchase-layout">
+
+
+    <!-- ========================= -->
+    <!-- FACTURA DE COMPRA -->
+    <!-- ========================= -->
+
+    <div class="invoice-panel">
+
+
+      <app-purchase-detail
+
+  [form]="form"
+
+  [details]="details"
+
+  [suppliers]="suppliers"
+
+  [taxes]="taxes"
+
+  (remove)="removeProduct($event)"
+
+  (savePurchase)="save()">
+
+</app-purchase-detail>
+    </div>
+
+
+
+    <!-- ========================= -->
+    <!-- CATÁLOGO DE PRODUCTOS -->
+    <!-- ========================= -->
+
+    <div class="catalog-panel">
+
+
+      <div class="card shadow-sm border-0 h-100">
+
+
+
+        <!-- HEADER -->
+
+        <div class="card-header bg-white catalog-header">
+
+
+          <h5 class="mb-0">
+
+            <i class="bi bi-box-seam me-2"></i>
+
+            Catálogo de productos
+
+          </h5>
+
+
+        </div>
+
+
+
+
+        <div class="card-body">
+
+
+
+          <!-- BUSCADOR -->
+
+          <div class="input-group mb-3">
+
+
+            <span class="input-group-text">
+
+              <i class="bi bi-search"></i>
+
+            </span>
+
+
+
+            <input
+
+              type="text"
+
+              class="form-control"
+
+              placeholder="Buscar producto..."
+
+              (input)="filterProducts($event)">
+
+
+          </div>
+
+
+
+
+
+          <!-- TABLA PRODUCTOS -->
+
+
+          <div class="table-responsive catalog-scroll">
+
+
+
+            <table class="table table-hover align-middle">
+
+
+
+              <thead class="table-light sticky-top">
+
+
+
+                <tr>
+
+
+                  <th></th>
+
+
+                  <th>
+                    Producto
+                  </th>
+
+
+                  <th class="text-end">
+                    Precio
+                  </th>
+
+
+                  <th class="text-center">
+                    Stock
+                  </th>
+
+
+                  <th></th>
+
+
+                </tr>
+
+
+
+              </thead>
+
+
+
+
+
+              <tbody>
+
+
+
+                @for(product of filteredProducts; track product.id){
+
+
+
+                  <tr>
+
+
+
+                    <!-- IMAGEN -->
+
+                    <td>
+
+
+                      <img
+
+                        [src]="product.imageUrl"
+
+                        width="40"
+
+                        height="40"
+
+                        class="rounded object-fit-cover">
+
+
+                    </td>
+
+
+
+
+
+                    <!-- PRODUCTO -->
+
+
+                    <td>
+
+
+
+                      <div class="fw-semibold">
+
+
+                        {{ product.name }}
+
+
+                      </div>
+
+
+
+
+
+                      <small class="text-muted">
+
+
+                        {{ product.description }}
+
+
+                      </small>
+
+
+
+                    </td>
+
+
+
+
+
+                    <!-- PRECIO -->
+
+
+                    <td class="text-end">
+
+
+                      {{ product.price | currency:'COP':'symbol':'1.0-0' }}
+
+
+                    </td>
+
+
+
+
+
+                    <!-- STOCK -->
+
+
+                    <td class="text-center">
+
+
+                      {{ product.stock }}
+
+
+                    </td>
+
+
+
+
+
+                    <!-- ACCIÓN -->
+
+
+                    <td>
+
+
+
+                      <button
+
+
+                        type="button"
+
+
+                        class="btn btn-primary btn-sm"
+
+
+                        (click)="addProduct(product)">
+
+
+
+                        <i class="bi bi-plus-lg"></i>
+
+
+
+                      </button>
+
+
+
+                    </td>
+
+
+
+                  </tr>
+
+
+
+                }
+
+
+
+              </tbody>
+
+
+
+            </table>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</form>

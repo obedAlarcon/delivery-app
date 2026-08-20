@@ -1,0 +1,33 @@
+<p>customer-edit works!</p>
+<div class="container-fluid">
+
+  <div class="card shadow-sm">
+
+    <div class="card-header">
+
+      <h4 class="mb-0">
+
+        <i class="bi bi-pencil-square me-2"></i>
+
+        Editar cliente
+
+      </h4>
+
+    </div>
+
+    <div class="card-body">
+
+      @if (customer) {
+
+<app-customer-form
+  [customer]="customer"
+  buttonText="Actualizar cliente"
+  (save)="save($event)">
+</app-customer-form>
+      }
+
+    </div>
+
+  </div>
+
+</div>
