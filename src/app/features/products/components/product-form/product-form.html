@@ -32,6 +32,7 @@
 
     </div>
 
+
     <!-- Categoría -->
 
     <div class="col-md-6 mb-3">
@@ -42,21 +43,28 @@
 
       </label>
 
- <select
-  class="form-select"
-  formControlName="categoryId">
+      <select
+        class="form-select"
+        formControlName="categoryId">
 
-  <option [ngValue]="0">
-    Seleccione una categoría
-  </option>
+        <option [ngValue]="0">
 
-  @for (category of categories; track category.id) {
-    <option [ngValue]="category.id">
-      {{ category.name }}
-    </option>
-  }
+          Seleccione una categoría
 
-</select>
+        </option>
+
+        @for (category of categories; track category.id) {
+
+          <option [ngValue]="category.id">
+
+            {{ category.name }}
+
+          </option>
+
+        }
+
+      </select>
+
       @if(hasError('categoryId')){
 
         <small class="text-danger">
@@ -68,6 +76,7 @@
       }
 
     </div>
+
 
     <!-- Descripción -->
 
@@ -83,7 +92,6 @@
         rows="4"
         class="form-control"
         formControlName="description">
-
       </textarea>
 
       @if(hasError('description')){
@@ -97,6 +105,35 @@
       }
 
     </div>
+
+
+    <!-- Precio de compra -->
+
+    <div class="col-md-4 mb-3">
+
+      <label class="form-label">
+
+        Precio de compra
+
+      </label>
+
+      <input
+        type="number"
+        class="form-control"
+        formControlName="purchasePrice">
+
+      @if(hasError('purchasePrice')){
+
+        <small class="text-danger">
+
+          Precio de compra inválido.
+
+        </small>
+
+      }
+
+    </div>
+
 
     <!-- Precio -->
 
@@ -125,6 +162,7 @@
 
     </div>
 
+
     <!-- Stock -->
 
     <div class="col-md-4 mb-3">
@@ -152,6 +190,7 @@
 
     </div>
 
+
     <!-- Estado -->
 
     <div class="col-md-4 mb-3 d-flex align-items-center">
@@ -176,6 +215,7 @@
 
     </div>
 
+
     <!-- Imagen -->
 
     <div class="col-12 mb-4">
@@ -193,6 +233,7 @@
         (change)="onFileSelected($event)">
 
     </div>
+
 
     <!-- Vista previa -->
 
@@ -225,7 +266,10 @@
 
   </div>
 
-<div class="form-actions">
+
+  <!-- Acciones -->
+
+  <div class="form-actions">
 
     <button
       type="button"

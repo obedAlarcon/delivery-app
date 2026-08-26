@@ -1,176 +1,63 @@
-/* ==================================================
-   HOST
-================================================== */
-
 :host {
   display: block;
   width: 100%;
 }
 
-
-/* ==================================================
-   FILTRO DESKTOP
-================================================== */
-
 .category-filter {
-
-  width: 100%;
-
   display: flex;
-
   align-items: center;
-
-  gap: 10px;
-
+  gap: 8px;
   flex-wrap: wrap;
-
-  padding: 0;
-
-  box-sizing: border-box;
 }
-
-
-/* ==================================================
-   BOTONES
-================================================== */
 
 .category-button {
-
-  flex: 0 0 auto;
-
-  height: 38px;
-
+  height: 40px;
   padding: 0 16px;
-
-  border: 1px solid #dee2e6;
-
-  border-radius: 9px;
-
-  background: #ffffff;
-
-  color: #495057;
-
-  font-family: inherit;
-
+ 
+ border-radius: 10px;
+   background: #ffffff;
+ border: none;
+  color: #424753;
   font-size: 13px;
-
-  font-weight: 600;
-
+  font-weight: 650;
   white-space: nowrap;
-
   cursor: pointer;
-
-  transition:
-    background .2s ease,
-    border-color .2s ease,
-    color .2s ease;
+  transition: 0.22s var(--ease);
 }
-
-
-/* ==================================================
-   HOVER
-================================================== */
 
 .category-button:hover {
+ background: #f0f3ff;
 
-  background: #f5f7f4;
 
-  border-color: #cfd5cc;
-
-  color: #3d4537;
+  transform: translateY(-1px);
 }
-
-
-/* ==================================================
-   ACTIVO
-================================================== */
 
 .category-button.active {
-
-  background: #3d4537;
-
-  border-color: #3d4537;
-
+  background:#2c364d;
+  border-color: #0051a9;
   color: #ffffff;
+  border-radius: 10px;
+  font-size: 17px;
+  box-shadow:
+    0 4px 14px rgba(0, 81, 169, 0.22);
 }
-
-
-/* ==================================================
-   MÓVIL
-================================================== */
 
 @media (max-width: 576px) {
-
   .category-filter {
-
-    width: 100%;
-
+    margin-top: 40px;
     padding: 12px;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    align-items: center;
-
-    justify-content: flex-start;
-
-    gap: 8px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5e9e3;
-
-    border-radius: 12px;
-
-    box-sizing: border-box;
-
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, .04);
-
+      background: #ffffff;
+  border-color: #c2c6d5;
+   border: none;
+    border-radius: 10px;
+    box-shadow: var(--sh-sm);
   }
 
-
   .category-button {
-
     height: 36px;
-
-    padding: 0 13px;
-
     font-size: 12px;
-
-    border-radius: 8px;
-
-    flex: 0 0 auto;
-
   }
-
-}
-
-
-/* ==================================================
-   MÓVIL PEQUEÑO
-================================================== */
-
-@media (max-width: 400px) {
-
-  .category-filter {
-
-    padding: 10px;
-
-    gap: 7px;
-
+  button.category-button{
+    font-size: 15px;
   }
-
-
-  .category-button {
-
-    height: 34px;
-
-    padding: 0 11px;
-
-    font-size: 11px;
-
-  }
-
 }

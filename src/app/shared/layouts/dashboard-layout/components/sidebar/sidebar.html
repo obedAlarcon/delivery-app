@@ -1,38 +1,35 @@
 <aside class="sidebar" [class.open]="isOpen()">
 
     <div class="logo">
-
-        <h3>DeliveryApp</h3>
-
+        <div class="logo-mark">
+            <i class="bi bi-bag-check-fill"></i>
+        </div>
+        <div class="logo-text">
+            <h3>DeliveryApp</h3>
+            <span>Panel de gestión</span>
+        </div>
     </div>
 
-    <ul>
-@for (item of menu; track $index){
+    <nav class="sidebar-nav">
 
+        <ul>
+            @for (item of menu; track $index) {
             <li>
-
                 <a
-
-  [routerLink]="item.route"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="{ exact: true }"
-  (click)="closeSidebar()">
+                    [routerLink]="item.route"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    (click)="closeSidebar()">
                     <i class="bi" [ngClass]="item.icon"></i>
-
                     <span>{{item.label}}</span>
-
                 </a>
-
             </li>
+            }
+        </ul>
+    </nav>
 
-        }
-
-    </ul>
-
-
-
-<button (click)="logout()">
-  <i class="bi bi-box-arrow-right"></i>
-  Cerrar sesión
-</button>
+    <button type="button" class="logout-btn" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i>
+        Cerrar sesión
+    </button>
 </aside>

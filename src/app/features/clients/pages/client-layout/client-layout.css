@@ -5,9 +5,7 @@
 .client-layout {
   width: 100%;
   min-height: 100vh;
-
-  background: #f6f7f5;
-
+  background: #f9f9ff;
   overflow-x: hidden;
 }
 
@@ -19,8 +17,10 @@
 .client-content {
   width: 100%;
   min-width: 0;
+  background: #f9f9ff;
 
   padding-top: 72px;
+  padding-bottom: 0;
 
   box-sizing: border-box;
 }
@@ -56,9 +56,12 @@
 
   .client-content {
     padding-top: 112px;
-    padding-bottom: 60px;
+    padding-bottom: 76px;
   }
 
+  /* ================================================
+     MENÚ INFERIOR
+  ================================================ */
 
   .mobile-client-nav {
     position: fixed;
@@ -68,28 +71,40 @@
     bottom: 0;
 
     width: 100%;
-    height: 60px;
+    height: 68px;
 
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-around;
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.96);
 
-    border-top: 1px solid #e5e7e2;
+    border-top: 1px solid #c2c6d5;
 
-    z-index: 1100;
+    box-shadow:
+      0 -4px 18px rgba(12, 28, 50, 0.08);
+
+    z-index: 9999;
+
+    padding: 6px 8px;
+
+    box-sizing: border-box;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
 
-  .mobile-client-nav a {
-    flex: 1;
+  /* ================================================
+     ENLACES
+  ================================================ */
 
-    height: 100%;
+  .mobile-client-nav a {
+
+    flex: 1;
 
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
@@ -97,20 +112,56 @@
 
     text-decoration: none;
 
-    color: #7b8177;
+    color: #727784;
 
     font-size: 11px;
     font-weight: 600;
+
+    border-radius: 12px;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
   }
 
+
+  /* ================================================
+     ICONOS
+  ================================================ */
 
   .mobile-client-nav a i {
-    font-size: 20px;
+    font-size: 22px;
+    line-height: 1;
+
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
   }
 
 
+  /* ================================================
+     TEXTO
+  ================================================ */
+
+  .mobile-client-nav a span {
+    line-height: 1;
+  }
+
+
+  /* ================================================
+     ACTIVO
+  ================================================ */
+
   .mobile-client-nav a.active {
-    color: #3d4537;
+    color: #0051a9;
+
+    background: rgba(0, 81, 169, 0.07);
+  }
+
+  .mobile-client-nav a.active i {
+    color: #1769d1;
+
+    transform: translateY(-1px);
   }
 
 }
@@ -124,6 +175,19 @@
 
   .client-content {
     padding-top: 108px;
+    padding-bottom: 76px;
+  }
+
+  .mobile-client-nav {
+    height: 64px;
+  }
+
+  .mobile-client-nav a {
+    font-size: 10px;
+  }
+
+  .mobile-client-nav a i {
+    font-size: 21px;
   }
 
 }

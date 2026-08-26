@@ -772,11 +772,12 @@
   }
 
   .history-header h1 {
-    font-size: 24px;
+    font-size: 30px;
+    margin-top: 40px;
   }
 
   .history-header p {
-    font-size: 13px;
+    font-size: 18px;
   }
 
   .order-card {
@@ -800,11 +801,23 @@
 
   .summary-item {
     border-right: 0;
+
     border-bottom: 1px solid #edf0eb;
   }
-
+.productTo span{
+  font-size: 18px;
+}
+.cardItem span{
+  font-size: 18px;
+}
   .summary-item:last-child {
     border-bottom: 0;
+  }
+  .stadoPago span{
+    font-size: 18px;
+  }
+  .totalPago span{
+    font-size: 18px;
   }
 
   .order-products {
