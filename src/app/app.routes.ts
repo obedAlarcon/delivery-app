@@ -13,6 +13,12 @@ export const routes: Routes = [
         .then(m => m.authRoutes)
   },
   {
+  path: 'recovery',
+  loadComponent: () =>
+    import('./features/auth/pages/login/recovery/recovery')
+      .then(m => m.Recovery)
+},
+  {
     path: 'client',
     loadChildren: () =>
       import('./features/clients/client.router')
@@ -52,6 +58,12 @@ export const routes: Routes = [
           import('./features/orders/orders.routes')
             .then(m => m.ordersRoutes)
       },
+{
+  path: 'credits',
+  loadChildren: () =>
+    import('./features/credits/credit.routes')
+      .then(m => m.creditsRoutes)
+},
 
       {
         path: 'users',
@@ -93,8 +105,8 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
-      }
-
+      },
+  
     ]
 
   }

@@ -1,0 +1,241 @@
+<div class="credits-container">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Créditos</h1>
+      <p>Gestiona los créditos de tus clientes</p>
+    </div>
+
+    <button class="btn-primary">
+      + Nuevo crédito
+    </button>
+
+  </div>
+
+
+  <!-- Cargando -->
+
+  <div
+    class="message loading"
+    *ngIf="loading">
+
+    Cargando créditos...
+
+  </div>
+
+
+  <!-- Error -->
+
+  <div
+    class="message error"
+    *ngIf="errorMessage">
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- Tabla -->
+
+  <div
+    class="card"
+    *ngIf="!loading">
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Pedido</th>
+
+            <th>Precio contado</th>
+
+            <th>Incremento</th>
+
+            <th>Total crédito</th>
+
+            <th>Cuotas</th>
+
+            <th>Valor cuota</th>
+
+            <th>Próximo pago</th>
+<th>Total pagado</th>
+            <th>Estado</th>
+
+            <th>Acciones</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let credit of credits">
+
+
+            <!-- Pedido -->
+
+            <td data-label="Pedido">
+
+              #{{ credit.orderId }}
+
+            </td>
+
+
+            <!-- Precio contado -->
+
+            <td data-label="Precio contado">
+
+              ${{ credit.precioContado | number:'1.0-0' }}
+
+            </td>
+
+
+            <!-- Incremento -->
+
+            <td data-label="Incremento">
+
+              {{ credit.porcentajeIncremento }}%
+
+            </td>
+
+
+            <!-- Total crédito -->
+
+            <td
+              data-label="Total crédito"
+              class="credit-price">
+
+              ${{ credit.totalCredito | number:'1.0-0' }}
+
+            </td>
+
+
+            <!-- Número de cuotas -->
+
+            <td data-label="Cuotas">
+
+              {{ credit.numeroCuotas }}
+
+            </td>
+
+
+            <!-- Valor cuota -->
+
+            <td data-label="Valor cuota">
+
+              ${{ credit.valorCuota | number:'1.0-0' }}
+
+            </td>
+
+
+            <!-- Próximo pago -->
+
+            <td data-label="Próximo pago">
+
+              {{ credit.fechaProximoPago | date:'dd/MM/yyyy' }}
+
+            </td>
+             <td data-label="Total pagado">
+
+              ${{ credit.totalPagado | number:'1.0-0' }}
+
+            </td>
+
+
+            <!-- Estado -->
+
+            <td data-label="Estado">
+
+              <span
+                class="status"
+                [ngClass]="{
+
+                  'pending':
+                    credit.estado === 'Pendiente',
+
+                  'paid':
+                    credit.estado === 'Pagado',
+
+                  'overdue':
+                    credit.estado === 'Vencido'
+
+                }">
+
+                {{ credit.estado }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Acciones -->
+
+            <td data-label="Acciones">
+
+              <div class="actions">
+
+                <button
+  class="btn-action btn-detail"
+  title="Ver detalle"
+  (click)="verDetalle(credit.id!)">
+
+  <i class="bi bi-eye"></i>
+</button>
+
+                <button
+                  type="button"
+                  class="btn-action edit"
+                  title="Editar">
+
+                  ✏️
+
+                </button>
+
+
+                <button
+                  type="button"
+                  class="btn-action delete"
+                  title="Eliminar">
+
+                  🗑️
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- Sin créditos -->
+
+          <tr
+            *ngIf="credits.length === 0">
+
+            <td
+              colspan="9"
+              class="empty">
+
+              No hay créditos registrados.
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

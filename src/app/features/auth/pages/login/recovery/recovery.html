@@ -1,0 +1,93 @@
+<div class="recovery-page">
+
+  <div class="recovery-card">
+
+    <div class="recovery-header">
+
+      <h1>Crear nueva contraseña</h1>
+
+      <p>
+        Crea una nueva contraseña para recuperar
+        el acceso a tu cuenta.
+      </p>
+
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+
+        <label for="newPassword">
+          Nueva contraseña
+        </label>
+
+        <input
+          id="newPassword"
+          name="newPassword"
+          type="password"
+          [(ngModel)]="newPassword"
+          placeholder="Ingresa tu nueva contraseña"
+          autocomplete="new-password"
+          [disabled]="loading || !token"
+          required
+        />
+
+      </div>
+
+      <div class="password-requirements">
+
+        <p>La contraseña debe contener:</p>
+
+        <ul>
+          <li>Mínimo 6 caracteres</li>
+          <li>Una letra mayúscula</li>
+          <li>Una letra minúscula</li>
+          <li>Un número</li>
+          <li>Un carácter especial</li>
+        </ul>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="confirmPassword">
+          Confirmar contraseña
+        </label>
+
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          [(ngModel)]="confirmPassword"
+          placeholder="Confirma tu nueva contraseña"
+          autocomplete="new-password"
+          [disabled]="loading || !token"
+          required
+        />
+
+      </div>
+
+      <button
+        type="submit"
+        class="recovery-button"
+        [disabled]="loading || !token">
+
+        @if (loading) {
+          Guardando...
+        } @else {
+          Cambiar contraseña
+        }
+
+      </button>
+
+    </form>
+
+    <a
+      routerLink="/login"
+      class="back-login">
+      Volver al inicio de sesión
+    </a>
+
+  </div>
+
+</div>

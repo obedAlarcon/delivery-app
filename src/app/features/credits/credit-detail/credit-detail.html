@@ -1,0 +1,325 @@
+<div class="credit-detail-page">
+
+  <!-- ENCABEZADO -->
+  <div class="page-header">
+
+    <div>
+      <button class="btn-back" (click)="volver()">
+        <i class="bi bi-arrow-left"></i>
+        Volver
+      </button>
+
+      <h1>
+        Detalle del crédito
+      </h1>
+
+      <p>
+        Consulta la información y estado del crédito.
+      </p>
+    </div>
+
+    @if (credit) {
+      <span class="status-badge" [class]="estadoClase">
+        {{ credit.estado }}
+      </span>
+    }
+
+  </div>
+
+
+  <!-- CARGANDO -->
+  @if (loading) {
+
+    <div class="loading-card">
+
+      <div class="spinner"></div>
+
+      <p>
+        Cargando información del crédito...
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- CONTENIDO -->
+  @if (!loading && credit) {
+
+    <!-- RESUMEN -->
+    <div class="summary-grid">
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          <i class="bi bi-cash-stack"></i>
+        </div>
+
+        <div>
+          <span>Total del crédito</span>
+
+          <strong>
+            {{ credit.totalCredito | currency:'COP':'symbol-narrow':'1.0-0' }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          <i class="bi bi-check-circle"></i>
+        </div>
+
+        <div>
+          <span>Total pagado</span>
+
+          <strong>
+            {{ credit.totalPagado | currency:'COP':'symbol-narrow':'1.0-0' }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          <i class="bi bi-wallet2"></i>
+        </div>
+
+        <div>
+          <span>Saldo pendiente</span>
+
+          <strong>
+            {{ saldoPendiente | currency:'COP':'symbol-narrow':'1.0-0' }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          <i class="bi bi-calendar-check"></i>
+        </div>
+
+        <div>
+          <span>Próximo pago</span>
+
+          <strong>
+            {{ credit.fechaProximoPago | date:'dd/MM/yyyy' }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INFORMACIÓN -->
+    <div class="content-grid">
+
+      <!-- INFORMACIÓN DEL CRÉDITO -->
+      <section class="card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>
+              Información del crédito
+            </h2>
+
+            <p>
+              Condiciones establecidas para este crédito.
+            </p>
+          </div>
+
+          <i class="bi bi-credit-card"></i>
+
+        </div>
+
+
+        <div class="info-list">
+
+          <div class="info-row">
+            <span>Pedido</span>
+            <strong>#{{ credit.orderId }}</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Precio de contado</span>
+            <strong>
+              {{ credit.precioContado | currency:'COP':'symbol-narrow':'1.0-0' }}
+            </strong>
+          </div>
+
+          <div class="info-row">
+            <span>Incremento</span>
+            <strong>
+              {{ credit.porcentajeIncremento }}%
+            </strong>
+          </div>
+
+          <div class="info-row">
+            <span>Total crédito</span>
+            <strong>
+              {{ credit.totalCredito | currency:'COP':'symbol-narrow':'1.0-0' }}
+            </strong>
+          </div>
+
+          <div class="info-row">
+            <span>Número de cuotas</span>
+            <strong>
+              {{ credit.numeroCuotas }}
+            </strong>
+          </div>
+
+          <div class="info-row">
+            <span>Valor por cuota</span>
+            <strong>
+              {{ credit.valorCuota | currency:'COP':'symbol-narrow':'1.0-0' }}
+            </strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ESTADO DEL PAGO -->
+      <section class="card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>
+              Estado del pago
+            </h2>
+
+            <p>
+              Resumen del avance del crédito.
+            </p>
+          </div>
+
+          <i class="bi bi-bar-chart"></i>
+
+        </div>
+
+
+        <div class="payment-summary">
+
+          <div class="payment-values">
+
+            <div>
+              <span>Pagado</span>
+
+              <strong>
+                {{ credit.totalPagado | currency:'COP':'symbol-narrow':'1.0-0' }}
+              </strong>
+            </div>
+
+            <div class="text-right">
+              <span>Pendiente</span>
+
+              <strong>
+                {{ saldoPendiente | currency:'COP':'symbol-narrow':'1.0-0' }}
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              [style.width.%]="porcentajePagado">
+            </div>
+
+          </div>
+
+
+          <div class="progress-info">
+
+            <span>
+              {{ porcentajePagado | number:'1.0-0' }}% pagado
+            </span>
+
+            <span>
+              {{ cuotasPagadas }} de {{ credit.numeroCuotas }} cuotas
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="next-payment">
+
+          <div class="next-payment-icon">
+            <i class="bi bi-calendar-event"></i>
+          </div>
+
+          <div>
+
+            <span>Próximo pago</span>
+
+            <strong>
+              {{ credit.fechaProximoPago | date:'dd/MM/yyyy' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="pending-installments">
+
+          <span>Cuotas pendientes</span>
+
+          <strong>
+            {{ cuotasPendientes }}
+          </strong>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- ACCIONES -->
+    <div class="actions">
+
+      <button
+        class="btn-secondary"
+        (click)="volver()">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Volver a créditos
+
+      </button>
+
+    @if (credit.estado !== 'Pagado') {
+
+  <button
+    class="btn-primary"
+    (click)="registrarPago()">
+
+    <i class="bi bi-cash-coin"></i>
+
+    Registrar pago
+
+  </button>
+
+}
+
+    </div>
+
+  }
+
+</div>

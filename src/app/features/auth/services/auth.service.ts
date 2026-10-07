@@ -16,32 +16,91 @@ export class AuthService extends BaseService {
 
   private endpoint = `${this.apiUrl}/v1/auth/login`;
 
+  private recoveryEndpoint = `${this.apiUrl}/v1/auth/recovery`;
+
+  private changePasswordEndpoint = `${this.apiUrl}/v1/auth/change-password`;
+
   login(data: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.endpoint, data).pipe(
+
+    return this.http.post<LoginResponse>(
+      this.endpoint,
+      data
+    ).pipe(
+
       tap((response) => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
+
+        localStorage.setItem(
+          'token',
+          response.token
+        );
+
+        localStorage.setItem(
+          'user',
+          JSON.stringify(response.user)
+        );
+
       })
+
     );
+
+  }
+
+  recovery(email: string): Observable<any> {
+
+    return this.http.post(
+      this.recoveryEndpoint,
+      {
+        email
+      }
+    );
+
+  }
+
+  changePassword(
+    token: string,
+    newPassword: string
+  ): Observable<any> {
+
+    return this.http.post(
+      this.changePasswordEndpoint,
+      {
+        token,
+        newPassword
+      }
+    );
+
   }
 
   logout(): void {
+
     localStorage.removeItem('token');
+
     localStorage.removeItem('user');
+
     this.router.navigate(['/login']);
+
   }
 
   isAuthenticated(): boolean {
+
     return !!localStorage.getItem('token');
+
   }
 
   getToken(): string | null {
+
     return localStorage.getItem('token');
+
   }
 
   getCurrentUser() {
+
     const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+
+    return user
+      ? JSON.parse(user)
+      : null;
+
   }
 
 }

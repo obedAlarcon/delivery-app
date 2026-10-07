@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ReactiveFormsModule, FormBuilder, Validators, NgModel } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -10,7 +10,8 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink, 
   ],
   templateUrl: './login.html',
   styleUrl: './login.css'

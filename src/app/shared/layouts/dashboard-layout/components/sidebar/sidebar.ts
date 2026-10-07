@@ -42,6 +42,11 @@ isOpen = this.sidebarService.isOpen;
       label: 'Pedidos',
       route: '/orders'
     },
+{
+  icon: 'bi-credit-card',
+  label: 'Créditos',
+  route: '/credits'
+},
 
     {
       icon: 'bi-people',
